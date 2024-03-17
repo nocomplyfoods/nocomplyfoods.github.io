@@ -16,6 +16,7 @@ const fetchGoogle = async ({ id, gid }) => {
 	try {
 		const response = await fetch(url);
 		const text = await response.text();
+		console.log(text);
 
 		if (gid) return text;
 

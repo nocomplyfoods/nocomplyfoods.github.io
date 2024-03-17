@@ -1,16 +1,20 @@
 <script>
-	import wordmark from "$svg/wordmark.svg";
 </script>
 
 <header>
 	<div class="wordmark">
-		<a href="https://pudding.cool" aria-label="The Pudding" target="_self"
-			>{@html wordmark}</a
+		<a
+			href="https://nocomplyfoods.com"
+			aria-label="No Comply Foods"
+			target="_self">No Comply Foods</a
 		>
 	</div>
 </header>
 
 <style>
+	header {
+		display: none;
+	}
 	.wordmark {
 		max-width: 10em;
 		margin: 0 auto;
