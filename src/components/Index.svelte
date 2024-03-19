@@ -36,15 +36,16 @@
 		margin-top: 16px;
 		text-align: center;
 		overflow: hidden;
+		pointer-events: none;
 	}
 
 	img {
 		display: block;
-		width: 70%;
+		width: 65%;
 		max-width: 320px;
 		margin: 0 auto;
 		transform-origin: 20% 80%;
-		animation: slideAndRotate 2s ease-out forwards;
+		animation: slideAndRotate 1s ease-out forwards;
 	}
 
 	@media only screen and (min-width: 640px) {
@@ -56,6 +57,10 @@
 			transform: translate(-50%, -50%);
 			text-align: center;
 			width: 100%;
+		}
+
+		img {
+			animation: slideAndRotate 2s ease-out forwards;
 		}
 	}
 
