@@ -6,9 +6,9 @@
 /* colors defined in variables.css */
 :root {
 	/* font */
-	--sans: -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
+	--sans: "Londrina Solid", -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
 	--serif: Iowan Old Style, Times New Roman, Times, serif;
-	--mono: Menlo, Consolas, Monaco, monospace;
+	--mono: "SomeType Mono", Menlo, Consolas, Monaco, monospace;
 
 	/* z-index */
 	--z-bottom: -100;
@@ -20,8 +20,8 @@
 	--border-radius: 2px;
 	--font-body: var(--sans);
 	--font-form: var(--sans);
-	--color-bg: var(--color-white);
-	--color-fg: var(--color-gray-900);
+	--color-bg: var(--color-yellow);
+	--color-fg: var(--color-black);
 	--color-primary: var(--color-black);
 	--color-link: var(--color-black);
 	--color-focus: var(--color-red);
@@ -68,7 +68,7 @@
 	}
 }
 
-body {
+main {
 	background-image: linear-gradient(
   160deg,
   hsl(44deg 100% 83%) 0%,
@@ -83,19 +83,31 @@ body {
   hsl(342deg 100% 76%) 100%
 );
 	background-repeat: no-repeat;
-	min-height: 100vw;
+	min-height: 100svh;
 }
 
 h1 {
-	font-size: var(--48px, 48px);
+	font-size: clamp(64px, 8vw, 128px);
+	font-weight: 900;
+	line-height: 0.8;
+	text-transform: uppercase;
+	margin: 0;
 }
 
 h2 {
-	font-size: var(--36px, 36px);
+	line-height: 0.8;
+	font-size: clamp(32px, 4vw, 64px);
+	font-weight: 900;
+	text-transform: uppercase;
+	margin: 0;
 }
 
 h3 {
-	font-size: var(--28px, 28px);
+	line-height: 0.8;
+	font-size: clamp(24px, 2.5vw, 48px);
+	font-weight: 900;
+	text-transform: uppercase;
+	margin: 0;
 }
 
 h4 {
@@ -108,4 +120,13 @@ h5 {
 
 h6 {
 	font-size: var(--20px, 20px);
+}
+
+p, ul, button, input, select, textarea {
+	font-size: clamp(16px, 1.5vw, 24px);
+	font-family: var(--mono);
+}
+
+p{ 
+	margin: 8px auto;
 }
