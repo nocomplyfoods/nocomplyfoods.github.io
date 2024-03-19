@@ -7,7 +7,12 @@
 
 	export let data;
 
-	const preloadFont = [];
+	const preloadFont = [
+		"assets/fonts/londrina/LondrinaSolid-Black.woff2",
+		"assets/fonts/londrina/LondrinaSolid-Regular.woff2",
+		"assets/fonts/sometype/SometypeMono-Bold.woff2",
+		"assets/fonts/sometype/SometypeMono-Regular.woff2"
+	];
 
 	const { title, description, url, keywords } = copy;
 	setContext("copy", copy);

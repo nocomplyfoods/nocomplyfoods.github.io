@@ -17,45 +17,9 @@
 }
 
 @font-face {
-	font-family: "Londrina Solid";
-	src: url("assets/fonts/londrina/LondrinaSolid-Light.woff2") format("woff2");
-	font-weight: 300;
-	font-style: normal;
-	font-stretch: normal;
-	font-display: swap;
-}
-
-@font-face {
-	font-family: "Londrina Solid";
-	src: url("assets/fonts/londrina/LondrinaSolid-Thin.woff2") format("woff2");
-	font-weight: 100;
-	font-style: normal;
-	font-stretch: normal;
-	font-display: swap;
-}
-
-@font-face {
 	font-family: "Sometype Mono";
 	src: url("assets/fonts/sometype/SometypeMono-Bold.woff2") format("woff2");
 	font-weight: 700;
-	font-style: normal;
-	font-stretch: normal;
-	font-display: swap;
-}
-
-@font-face {
-	font-family: "Sometype Mono";
-	src: url("assets/fonts/sometype/SometypeMono-SemiBold.woff2") format("woff2");
-	font-weight: 600;
-	font-style: normal;
-	font-stretch: normal;
-	font-display: swap;
-}
-
-@font-face {
-	font-family: "Sometype Mono";
-	src: url("assets/fonts/sometype/SometypeMono-Medium.woff2") format("woff2");
-	font-weight: 500;
 	font-style: normal;
 	font-stretch: normal;
 	font-display: swap;
