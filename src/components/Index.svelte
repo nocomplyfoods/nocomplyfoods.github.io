@@ -12,7 +12,7 @@
 
 <h1>No<br />Comply<br />Foods</h1>
 
-<Hours></Hours>
+<!-- <Hours></Hours> -->
 
 <div class="coming">
 	<img
