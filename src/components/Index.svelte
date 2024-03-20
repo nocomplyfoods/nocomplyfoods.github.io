@@ -12,7 +12,7 @@
 
 <h1>No<br />Comply<br />Foods</h1>
 
-<!-- <Hours></Hours> -->
+<Hours></Hours>
 
 <div class="coming">
 	<img
@@ -21,6 +21,22 @@
 		aria="hidden"
 	/>
 	<h2>Coming very soon...</h2>
+	<div class="stay">
+		<p>
+			<a
+				target="_blank"
+				rel="noreferrer"
+				href="https://nocomplyfoods.beehiiv.com/subscribe">Newsletter</a
+			>
+		</p>
+		<p>
+			<a
+				target="_blank"
+				rel="noreferrer"
+				href="https://instagram.com/nocomplyfoods">Instagram</a
+			>
+		</p>
+	</div>
 </div>
 
 <Footer />
@@ -37,6 +53,18 @@
 		text-align: center;
 		overflow: hidden;
 		pointer-events: none;
+		position: fixed;
+		bottom: 64px;
+		left: 50%;
+		margin: 0;
+		transform: translate(-50%, 0%);
+		text-align: center;
+		width: 100%;
+	}
+
+	.stay {
+		margin-top: 32px;
+		pointer-events: auto;
 	}
 
 	img {
@@ -49,16 +77,6 @@
 	}
 
 	@media only screen and (min-width: 640px) {
-		.coming {
-			position: fixed;
-			top: 50%;
-			left: 50%;
-			margin: 0;
-			transform: translate(-50%, -50%);
-			text-align: center;
-			width: 100%;
-		}
-
 		img {
 			animation: slideAndRotate 2s ease-out forwards;
 		}

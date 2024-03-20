@@ -3,12 +3,12 @@
 </script>
 
 <div class="hours">
-	<h3>Hours</h3>
+	<!-- <h3>Hours</h3>
 	<ul>
 		<li>FRI: 5pm - 10pm</li>
 		<li>SAT: 5pm - 10pm</li>
 		<li>SUN: 9am - 12pm</li>
-	</ul>
+	</ul> -->
 	<p>
 		<small>
 			<a
@@ -24,7 +24,7 @@
 
 <style>
 	div {
-		padding: 16px;
+		/* padding: 16px; */
 	}
 
 	ul {
@@ -32,6 +32,10 @@
 		margin: 0;
 		padding: 0;
 		margin-top: 8px;
+	}
+
+	p {
+		margin: 0;
 	}
 
 	@media only screen and (min-width: 640px) {
