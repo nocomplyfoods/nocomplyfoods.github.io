@@ -17,5 +17,15 @@
 	];
 </script>
 
-<h1>Menu</h1>
-<p>{w} x {h}</p>
+<div>
+	<h1>Menu</h1>
+	<p>{w} x {h}</p>
+</div>
+
+<style>
+	div {
+		width: 100vw;
+		height: 100vw;
+		border: 10px dashed black;
+	}
+</style>
