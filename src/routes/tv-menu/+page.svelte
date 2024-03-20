@@ -20,12 +20,13 @@
 <div>
 	<h1>Menu</h1>
 	<p>{w} x {h}</p>
+	<p>Stuff</p>
 </div>
 
 <style>
 	div {
 		width: 100vw;
-		height: 100vw;
+		height: 100vh;
 		border: 10px dashed black;
 	}
 </style>
