@@ -41,9 +41,9 @@
 
 	img {
 		display: block;
-		width: 60%;
-		max-width: 300px;
-		margin: 0 auto;
+		width: 50%;
+		max-width: 280px;
+		margin: 0 auto 8px auto;
 		transform-origin: 20% 80%;
 		animation: slideAndRotate 1s ease-out forwards;
 	}
