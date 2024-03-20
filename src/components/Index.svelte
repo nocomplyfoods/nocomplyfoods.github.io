@@ -1,6 +1,6 @@
 <script>
 	import { range } from "d3";
-	import { onMount, getContext } from "svelte";
+	import { getContext } from "svelte";
 	import Hours from "$components/Hours.svelte";
 	import Menu from "$components/Menu.svelte";
 	import Footer from "$components/Footer.svelte";
@@ -8,15 +8,9 @@
 	const items = range(15 * 3);
 	const copy = getContext("copy");
 	const data = getContext("data");
-	let w, h;
-	onMount(() => {
-		w = window.innerWidth;
-		h = window.innerHeight;
-	});
 </script>
 
 <h1>No<br />Comply<br />Foods</h1>
-<p>{w} x {h}</p>
 
 <Hours></Hours>
 
