@@ -1,6 +1,6 @@
 @import "variables.css";
 @import "normalize.css";
-/* @import "font.css"; */
+@import "font.css";
 @import "reset.css";
 
 /* colors defined in variables.css */
@@ -125,6 +125,7 @@ h6 {
 p, ul, button, input, select, textarea {
 	font-size: clamp(16px, 1.5vw, 24px);
 	font-family: var(--mono);
+	font-weight: 500;
 }
 
 p{ 

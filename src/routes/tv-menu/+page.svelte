@@ -2,9 +2,11 @@
 	import { onMount } from "svelte";
 	import { browser } from "$app/environment";
 	import Meta from "$components/Meta.svelte";
+	import Mains from "$components/Mains.svelte";
+	import Sides from "$components/Sides.svelte";
 	import getParam from "$utils/getParam.js";
 	// TODO no meta hide from stuff
-	let w, h;
+
 	let hasData;
 	let mains = [];
 	let sides = [];
@@ -13,16 +15,10 @@
 	let updated;
 	let split;
 
-	onMount(() => {
-		w = window.innerWidth;
-		h = window.innerHeight;
-	});
-
 	const preloadFont = [
 		"assets/fonts/londrina/LondrinaSolid-Black.woff2",
-		"assets/fonts/londrina/LondrinaSolid-Regular.woff2",
-		"assets/fonts/sometype/SometypeMono-Bold.woff2",
-		"assets/fonts/sometype/SometypeMono-Regular.woff2"
+		"assets/fonts/sometype/SometypeMono-Medium.woff2",
+		"assets/fonts/sometype/SometypeMono-Bold.woff2"
 	];
 
 	async function updateMenu() {
@@ -46,82 +42,54 @@
 		}
 	}
 
+	$: sideW = hasData
+		? `${Math.floor((1 / Math.ceil(sides.length / 2)) * 100)}%`
+		: "none";
 	onMount(async () => {
 		split = getParam("split");
 		await updateMenu();
 	});
 </script>
 
-<div class="c" class:split>
+<div class:split style="--side-width: {sideW};">
 	{#if hasData}
 		<p class="updated">{updated}</p>
 		<section class="mains">
-			<div class="items">
-				{#each mains as { item, detail, price }}
-					<div class="item">
-						<div class="text">
-							<p class="name">{item}</p>
-							<p class="detail">{@html detail || "&nbsp;"}</p>
-						</div>
-						<div class="amount">
-							<p class="price">${price}</p>
-						</div>
-					</div>
-				{/each}
-			</div>
+			<Mains {mains} {split}></Mains>
 		</section>
 
 		<section class="sides">
 			<p class="title">Sides{sidesSamePrice ? ` $${sidePrice}` : ""}</p>
-			<div class="items">
-				{#each sides as { item, price }}
-					<div class="item">
-						<div class="text">
-							<p class="name">{item}</p>
-						</div>
-						<div class="amount">
-							<p class="price">
-								{@html sidesSamePrice ? "&nbsp;" : `$${price}`}
-							</p>
-						</div>
-					</div>
-				{/each}
-			</div>
+			<Sides {sides} {sidesSamePrice} {split} />
 		</section>
 	{/if}
 </div>
 
 <style>
-	p {
-		margin: 0;
-		line-height: 1;
-	}
-
-	div.c {
+	div {
 		width: 100vw;
 		height: 100vh;
 		background: #fff;
 		display: flex;
 		flex-direction: column;
+		--fs-big: 3vw;
+		--fs-small: 2vw;
+		--padding: 2vw;
 	}
 
 	div.split {
 		flex-direction: row;
 	}
 
+	p {
+		margin: 0;
+		line-height: 1;
+	}
+
 	section {
 		position: relative;
-		padding: 2vw;
+		padding: var(--padding);
 		flex: 1;
-	}
-
-	.items {
-		position: relative;
-	}
-
-	.item {
-		display: flex;
-		justify-content: space-between;
 	}
 
 	section:before {
@@ -144,9 +112,7 @@
 	}
 
 	.mains {
-		height: 55%;
-		min-height: 55%;
-		max-height: 55%;
+		min-height: 60%;
 	}
 
 	.split .mains {
@@ -158,90 +124,6 @@
 		max-width: 66.6%;
 	}
 
-	.mains .text {
-		display: flex;
-		align-items: baseline;
-		margin-bottom: 2vw;
-	}
-
-	.split .mains .text {
-		flex-direction: column;
-		margin-bottom: 4vw;
-	}
-
-	.split .mains .detail {
-		margin-top: 1vw;
-	}
-
-	.mains .name {
-		flex: 1;
-	}
-
-	.name {
-		text-transform: uppercase;
-		font-weight: 700;
-		font-size: 3.5vw;
-		margin-right: 2vw;
-	}
-
-	.price {
-		font-weight: 700;
-		font-size: 3.5vw;
-	}
-
-	.detail {
-		font-size: 2vw;
-		opacity: 0.7;
-	}
-
-	.sides .items {
-		display: flex;
-		flex-wrap: wrap;
-		justify-content: space-evenly;
-	}
-
-	.split .sides .items {
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-	}
-
-	.sides .text {
-		margin-bottom: 2vw;
-	}
-
-	.sides .title {
-		text-align: center;
-		font-size: 3.5vw;
-		font-weight: 700;
-		text-transform: uppercase;
-		position: relative;
-		margin: 0 auto 4vw auto;
-		/* transform: translateY(-50%); */
-	}
-
-	.sides .name {
-		font-size: 2.5vw;
-		margin: 0;
-	}
-
-	.sides .item {
-		display: flex;
-		align-items: baseline;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		width: 33.33%;
-	}
-
-	.split .sides .item {
-		width: 100%;
-	}
-
-	.sides .price {
-		font-size: 2.5vw;
-	}
-
 	.updated {
 		position: absolute;
 		bottom: 0.5vw;
@@ -250,5 +132,14 @@
 		opacity: 0.5;
 		line-height: 1;
 		margin: 0;
+	}
+
+	.sides .title {
+		text-align: center;
+		font-size: var(--fs-big);
+		font-weight: 700;
+		text-transform: uppercase;
+		position: relative;
+		margin: 0 auto calc(var(--padding) * 1) auto;
 	}
 </style>
