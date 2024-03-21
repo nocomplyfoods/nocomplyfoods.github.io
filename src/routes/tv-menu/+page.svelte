@@ -100,8 +100,6 @@
 	div.c {
 		width: 100vw;
 		height: 100vh;
-		width: 1280px;
-		height: 720px;
 		background: #fff;
 		display: flex;
 		flex-direction: column;
