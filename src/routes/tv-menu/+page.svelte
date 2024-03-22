@@ -39,6 +39,7 @@
 			hasData = valid.length > 0;
 
 			mains = valid.filter((d) => d.section === "main");
+			mains.sort((a, b) => a.order - b.order);
 
 			sides = valid.filter((d) => d.section === "side");
 			hasSides = sides.length > 0;
