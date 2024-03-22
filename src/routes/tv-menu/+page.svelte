@@ -89,6 +89,7 @@
 		--fs-big: 3vw;
 		--fs-small: 2vw;
 		--padding: 2vw;
+		--color-fg: #000;
 	}
 
 	h1 {
@@ -159,6 +160,7 @@
 		text-transform: uppercase;
 		position: relative;
 		margin: 0 auto calc(var(--padding) * 1) auto;
+		text-shadow: 0.15vw 0.15vw var(--color-yellow);
 	}
 
 	.split .sides h1 {

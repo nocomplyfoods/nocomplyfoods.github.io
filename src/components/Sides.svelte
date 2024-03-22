@@ -45,6 +45,8 @@
 	.price {
 		font-weight: 500;
 		font-size: var(--fs-big);
+		opacity: 0.7;
+		text-shadow: 0.15vw 0.15vw var(--color-yellow);
 	}
 
 	.items {
@@ -63,6 +65,7 @@
 		font-size: var(--fs-small);
 		margin: 0;
 		text-align: center;
+		text-shadow: 0.15vw 0.15vw var(--color-yellow);
 	}
 
 	.item {

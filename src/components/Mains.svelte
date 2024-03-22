@@ -11,7 +11,6 @@
 		const maxItem = max(data, (d) => d.item?.length);
 		const maxDetail = max(data, (d) => d.detail?.length);
 		tuck = data.length <= 5;
-		console.log({ maxItem, maxDetail });
 	}
 
 	$: update(data);
@@ -54,8 +53,13 @@
 		flex-direction: column;
 	}
 
+	.tuck .text {
+		align-items: center;
+	}
+
 	.tuck .detail {
 		margin-top: calc(var(--padding) * 0.5);
+		text-align: center;
 	}
 
 	.split .detail {
@@ -76,6 +80,10 @@
 		justify-content: space-between;
 	}
 
+	.tuck .item {
+		justify-content: center;
+	}
+
 	.name {
 		text-transform: uppercase;
 		font-weight: 700;
@@ -86,8 +94,13 @@
 	.price {
 		font-weight: 500;
 		font-size: var(--fs-big);
-		opacity: 0.7;
 		text-shadow: 0.15vw 0.15vw var(--color-pink);
+		opacity: 0.7;
+		/* background: var(--color-yellow); */
+		/* background: var(--color-pink); */
+		/* outline: 0.3vw solid var(--color-pink); */
+		/* padding: 0.3vw; */
+		/* border-bottom: 0.5vw solid var(--color-pink); */
 	}
 
 	.detail {
