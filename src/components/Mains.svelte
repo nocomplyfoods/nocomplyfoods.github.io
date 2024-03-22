@@ -10,7 +10,7 @@
 		console.log(data);
 		const maxItem = max(data, (d) => d.item?.length);
 		const maxDetail = max(data, (d) => d.detail?.length);
-		tuck = data.length <= 5;
+		// tuck = data.length <= 5;
 	}
 
 	$: update(data);
