@@ -7,7 +7,6 @@
 	let tuck = false;
 
 	function update() {
-		console.log(data);
 		const maxItem = max(data, (d) => d.item?.length);
 		const maxDetail = max(data, (d) => d.detail?.length);
 		// tuck = data.length <= 5;
@@ -25,9 +24,11 @@
 				</p>
 				<p class="detail">{@html detail || "&nbsp;"}</p>
 			</div>
-			<div class="amount">
-				<p class="price">${price}</p>
-			</div>
+			{#if price}
+				<div class="amount">
+					<p class="price">${price}</p>
+				</div>
+			{/if}
 		</div>
 	{/each}
 </div>

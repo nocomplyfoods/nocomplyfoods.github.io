@@ -1,6 +1,6 @@
 <script>
 	import { onMount } from "svelte";
-	import { browser } from "$app/environment";
+	import { dev } from "$app/environment";
 	import { timeFormat } from "d3";
 	import Meta from "$components/Meta.svelte";
 	import Mains from "$components/Mains.svelte";
@@ -29,11 +29,16 @@
 				`https://data.nocomplyfoods.com/menu.json?version=${Date.now()}`
 			);
 			const data = await res.json();
-			const valid = data.items.filter((d) => d.price && d.item);
+			const items = data.items.map((d) => ({
+				...d,
+				price: d.price || ""
+			}));
+
+			const valid = data.items.filter((d) => d.item);
+
 			hasData = valid.length > 0;
 
 			mains = valid.filter((d) => d.section === "main");
-			mains.sort((a, b) => b.price - a.price);
 
 			sides = valid.filter((d) => d.section === "side");
 			hasSides = sides.length > 0;
@@ -71,7 +76,11 @@
 
 		{#if hasSides}
 			<section class="sides">
-				<p class="title">Sides{sidesSamePrice ? ` $${sidePrice}` : ""}</p>
+				<p class="title">
+					Sides<span class="price"
+						>{sidesSamePrice ? ` $${sidePrice}` : ""}</span
+					>
+				</p>
 				<Sides data={sides} uniform={sidesSamePrice} {split} />
 				<h1>No<br />Comply<br />Foods</h1>
 			</section>
