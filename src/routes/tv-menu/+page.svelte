@@ -1,6 +1,7 @@
 <script>
 	import { onMount } from "svelte";
 	import { browser } from "$app/environment";
+	import { timeFormat } from "d3";
 	import Meta from "$components/Meta.svelte";
 	import Mains from "$components/Mains.svelte";
 	import Sides from "$components/Sides.svelte";
@@ -34,7 +35,8 @@
 			sides = valid.filter((d) => d.section === "side");
 			sidePrice = sides[0].price;
 			sidesSamePrice = sides.every((d) => d.price === sidePrice);
-			updated = data.updated;
+			const d = new Date(data.updated);
+			updated = timeFormat("%B %d, %I:%M %p")(d);
 		} catch (err) {
 			console.log(err);
 		} finally {
@@ -55,12 +57,14 @@
 	{#if hasData}
 		<p class="updated">{updated}</p>
 		<section class="mains">
+			<h1>No<br />Comply<br />Foods</h1>
 			<Mains {mains} {split}></Mains>
 		</section>
 
 		<section class="sides">
 			<p class="title">Sides{sidesSamePrice ? ` $${sidePrice}` : ""}</p>
 			<Sides {sides} {sidesSamePrice} {split} />
+			<h1>No<br />Comply<br />Foods</h1>
 		</section>
 	{/if}
 </div>
@@ -75,6 +79,12 @@
 		--fs-big: 3vw;
 		--fs-small: 2vw;
 		--padding: 2vw;
+	}
+
+	h1 {
+		font-size: var(--fs-big);
+		margin-bottom: var(--padding);
+		position: relative;
 	}
 
 	div.split {
@@ -111,6 +121,10 @@
 		background-color: var(--color-yellow);
 	}
 
+	.sides h1 {
+		display: none;
+	}
+
 	.mains {
 		min-height: 60%;
 	}
@@ -124,6 +138,27 @@
 		max-width: 66.6%;
 	}
 
+	.split .mains h1 {
+		display: none;
+	}
+
+	.sides .title {
+		text-align: center;
+		font-size: var(--fs-big);
+		font-weight: 700;
+		text-transform: uppercase;
+		position: relative;
+		margin: 0 auto calc(var(--padding) * 1) auto;
+	}
+
+	.split .sides h1 {
+		display: block;
+		position: absolute;
+		bottom: var(--padding);
+		right: var(--padding);
+		margin: 0;
+	}
+
 	.updated {
 		position: absolute;
 		bottom: 0.5vw;
@@ -134,12 +169,8 @@
 		margin: 0;
 	}
 
-	.sides .title {
-		text-align: center;
-		font-size: var(--fs-big);
-		font-weight: 700;
-		text-transform: uppercase;
-		position: relative;
-		margin: 0 auto calc(var(--padding) * 1) auto;
+	.split .updated {
+		right: auto;
+		left: 0.5vw;
 	}
 </style>
