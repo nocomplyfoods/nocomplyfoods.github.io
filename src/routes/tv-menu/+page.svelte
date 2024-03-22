@@ -66,13 +66,13 @@
 		<p class="updated">{updated}</p>
 		<section class="mains">
 			<h1>No<br />Comply<br />Foods</h1>
-			<Mains {mains} {split} {hasSides}></Mains>
+			<Mains data={mains} {split} {hasSides}></Mains>
 		</section>
 
 		{#if hasSides}
 			<section class="sides">
 				<p class="title">Sides{sidesSamePrice ? ` $${sidePrice}` : ""}</p>
-				<Sides {sides} {sidesSamePrice} {split} />
+				<Sides data={sides} uniform={sidesSamePrice} {split} />
 				<h1>No<br />Comply<br />Foods</h1>
 			</section>
 		{/if}

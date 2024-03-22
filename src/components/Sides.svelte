@@ -1,18 +1,18 @@
 <script>
-	export let sides;
-	export let sidesSamePrice;
+	export let data;
+	export let uniform;
 	export let split;
 </script>
 
 <div class="items" class:split>
-	{#each sides as { item, price }}
+	{#each data as { item, price }}
 		<div class="item">
 			<div class="text">
 				<p class="name">{item}</p>
 			</div>
 			<div class="amount">
 				<p class="price">
-					{@html sidesSamePrice ? "" : `$${price}`}
+					{@html uniform ? "" : `$${price}`}
 				</p>
 			</div>
 		</div>
