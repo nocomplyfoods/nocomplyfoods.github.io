@@ -1,6 +1,7 @@
 <script>
 	export let mains;
 	export let split;
+	export let hasSides;
 </script>
 
 <div class="items" class:split>
@@ -34,8 +35,16 @@
 		margin-bottom: calc(var(--padding) * 1.5);
 	}
 
+	.solo .text {
+		flex-direction: column;
+	}
+
+	.solo .detail {
+		margin-top: calc(var(--padding) * 0.5);
+	}
+
 	.split .detail {
-		margin-top: 1vw;
+		margin-top: calc(var(--padding) * 0.5);
 	}
 
 	.name {

@@ -9,6 +9,7 @@
 	// TODO no meta hide from stuff
 
 	let hasData;
+	let hasSides;
 	let mains = [];
 	let sides = [];
 	let sidesSamePrice = false;
@@ -30,11 +31,18 @@
 			const data = await res.json();
 			const valid = data.items.filter((d) => d.price && d.item);
 			hasData = valid.length > 0;
+
 			mains = valid.filter((d) => d.section === "main");
 			mains.sort((a, b) => b.price - a.price);
+
 			sides = valid.filter((d) => d.section === "side");
-			sidePrice = sides[0].price;
-			sidesSamePrice = sides.every((d) => d.price === sidePrice);
+			hasSides = sides.length > 0;
+
+			if (hasSides) {
+				sidePrice = sides[0].price;
+				sidesSamePrice = sides.every((d) => d.price === sidePrice);
+			}
+
 			const d = new Date(data.updated);
 			updated = timeFormat("%B %d, %I:%M %p")(d);
 		} catch (err) {
@@ -58,14 +66,16 @@
 		<p class="updated">{updated}</p>
 		<section class="mains">
 			<h1>No<br />Comply<br />Foods</h1>
-			<Mains {mains} {split}></Mains>
+			<Mains {mains} {split} {hasSides}></Mains>
 		</section>
 
-		<section class="sides">
-			<p class="title">Sides{sidesSamePrice ? ` $${sidePrice}` : ""}</p>
-			<Sides {sides} {sidesSamePrice} {split} />
-			<h1>No<br />Comply<br />Foods</h1>
-		</section>
+		{#if hasSides}
+			<section class="sides">
+				<p class="title">Sides{sidesSamePrice ? ` $${sidePrice}` : ""}</p>
+				<Sides {sides} {sidesSamePrice} {split} />
+				<h1>No<br />Comply<br />Foods</h1>
+			</section>
+		{/if}
 	{/if}
 </div>
 
@@ -110,7 +120,7 @@
 		left: 0;
 		width: 100%;
 		height: 100%;
-		opacity: 0.3;
+		opacity: 0.4;
 	}
 
 	.mains:before {
