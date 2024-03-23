@@ -58,12 +58,23 @@
 		}
 	}
 
+	async function wakeLock() {
+		try {
+			if ("wakeLock" in navigator) {
+				await navigator.wakeLock.request("screen");
+			}
+		} catch (err) {
+			console.log(err);
+		}
+	}
+
 	$: sideW = hasData
 		? `${Math.floor((1 / Math.ceil(sides.length / 2)) * 100)}%`
 		: "none";
 	onMount(async () => {
 		split = getParam("split");
 		await updateMenu();
+		await wakeLock();
 	});
 </script>
 
@@ -103,7 +114,7 @@
 	}
 
 	h1 {
-		font-size: var(--fs-big);
+		font-size: calc(var(--fs-big));
 		margin-bottom: var(--padding);
 		position: relative;
 	}
