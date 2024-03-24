@@ -14,6 +14,7 @@
 	let hasSides;
 	let mains = [];
 	let sides = [];
+	let scale = 1;
 	let sidesSamePrice = false;
 	let sidePrice;
 	let lastUpdate;
@@ -33,11 +34,14 @@
 
 		// TODO remove if google
 		mains.sort((a, b) => a.order - b.order);
-
-		// const scale = mains.length;
-
 		sides = valid.filter((d) => d.section === "side");
+
 		hasSides = sides.length > 0;
+
+		const maxItems = hasSides ? 5 : 8;
+		const overflow = Math.max(0, mains.length - maxItems);
+		const rate = hasSides ? 0.1 : 0.075;
+		scale = 1 - overflow * rate;
 
 		if (hasSides) {
 			sidePrice = sides[0].price;
@@ -89,9 +93,6 @@
 		}
 	}
 
-	$: sideW = hasData
-		? `${Math.floor((1 / Math.ceil(sides.length / 2)) * 100)}%`
-		: "none";
 	onMount(async () => {
 		split = getParam("split");
 		await updateMenu();
@@ -99,7 +100,7 @@
 	});
 </script>
 
-<div class:split style="--side-width: {sideW};">
+<div class:split style="--scale: {scale};">
 	{#if hasData}
 		<p class="updated">{updated}</p>
 		{#if error}<p class="error">
@@ -131,6 +132,7 @@
 		background: #fff;
 		display: flex;
 		flex-direction: column;
+		overflow: hidden;
 		--fs-big: 3vw;
 		--fs-small: 2vw;
 		--padding: 2vw;
@@ -144,10 +146,6 @@
 		font-size: calc(var(--fs-big));
 		margin-bottom: var(--padding);
 		position: relative;
-	}
-
-	div.split {
-		flex-direction: row;
 	}
 
 	p {
@@ -184,39 +182,14 @@
 		display: none;
 	}
 
-	.mains {
-		min-height: 60%;
-	}
-
-	.split .mains {
-		height: auto;
-		min-height: none;
-		max-height: none;
-		width: 66.6%;
-		min-width: 66.6%;
-		max-width: 66.6%;
-	}
-
-	.split .mains h1 {
-		display: none;
-	}
-
 	.sides .title {
 		text-align: center;
-		font-size: var(--fs-big);
+		font-size: calc(var(--fs-big) * var(--scale));
 		font-weight: 700;
 		text-transform: uppercase;
 		position: relative;
-		margin: 0 auto calc(var(--padding) * 1) auto;
+		margin: 0 auto calc(var(--padding) * var(--scale)) auto;
 		text-shadow: var(--shadow) var(--shadow) var(--color-yellow);
-	}
-
-	.split .sides h1 {
-		display: block;
-		position: absolute;
-		bottom: var(--padding);
-		right: var(--padding);
-		margin: 0;
 	}
 
 	.updated {
@@ -245,8 +218,33 @@
 		margin-left: 0.5vw;
 	}
 
-	.split .updated {
+	/* div.split {
+		flex-direction: row;
+	} */
+
+	/* .split .mains {
+		height: auto;
+		min-height: none;
+		max-height: none;
+		width: 66.6%;
+		min-width: 66.6%;
+		max-width: 66.6%;
+	} */
+
+	/* .split .mains h1 {
+		display: none;
+	} */
+
+	/* .split .sides h1 {
+		display: block;
+		position: absolute;
+		bottom: var(--padding);
+		right: var(--padding);
+		margin: 0;
+	} */
+
+	/* .split .updated {
 		right: auto;
 		left: 0.5vw;
-	}
+	} */
 </style>

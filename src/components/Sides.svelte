@@ -2,19 +2,27 @@
 	export let data;
 	export let uniform;
 	export let split;
+
+	$: rows = data.length > 4 ? 2 : 1;
+	$: sideW = data.length
+		? `${Math.floor((1 / Math.ceil(data.length / rows)) * 100)}%`
+		: "none";
 </script>
 
-<div class="items" class:split>
+<div
+	class="items"
+	class:split
+	style="--side-width: {sideW}; --shrink: {rows === 2 ? 0.75 : 1};"
+>
 	{#each data as { item, price }}
 		<div class="item">
 			<div class="text">
 				<p class="name">{item}</p>
 			</div>
-			<div class="amount">
-				<p class="price">
-					{@html uniform ? "" : `$${price}`}
-				</p>
-			</div>
+
+			<p class="price">
+				{@html uniform ? "" : `$${price}`}
+			</p>
 		</div>
 	{/each}
 </div>
@@ -32,19 +40,19 @@
 	.item {
 		display: flex;
 		justify-content: space-between;
-		margin-bottom: var(--padding);
+		margin-bottom: calc(var(--padding) * var(--scale));
 	}
 
 	.name {
 		text-transform: uppercase;
 		font-weight: 700;
-		font-size: var(--fs-big);
-		margin-right: var(--padding);
+		font-size: calc(var(--fs-big) * var(--scale));
+		margin-right: calc(var(--padding) * var(--scale));
 	}
 
 	.price {
-		font-weight: 500;
-		font-size: var(--fs-big);
+		font-weight: 700;
+		font-size: calc(var(--fs-big) * var(--scale));
 		opacity: 0.7;
 		text-shadow: var(--shadow) var(--shadow) var(--color-yellow);
 	}
@@ -53,16 +61,11 @@
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: space-evenly;
-	}
-
-	.items.split {
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
+		align-items: flex-start;
 	}
 
 	.name {
-		font-size: var(--fs-small);
+		font-size: calc(var(--fs-big) * var(--scale));
 		margin: 0;
 		text-align: center;
 		text-shadow: var(--shadow) var(--shadow) var(--color-yellow);
@@ -74,17 +77,24 @@
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
-		padding: 0 var(--padding);
-		min-width: var(--side-width);
+		padding: 0 calc(var(--padding) * var(--scale));
+		width: var(--side-width);
+		transform: scale(var(--shrink));
+	}
+
+	.price {
+		font-weight: 700;
+		font-size: calc(var(--fs-small) * var(--scale));
+		opacity: 0.7;
+	}
+
+	/* .items.split {
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
 	}
 
 	.split .item {
 		width: 100%;
-	}
-
-	.price {
-		font-weight: 500;
-		font-size: var(--fs-small);
-		opacity: 0.7;
-	}
+	} */
 </style>
