@@ -2,10 +2,12 @@
 	import { onMount } from "svelte";
 	import { dev } from "$app/environment";
 	import { timeFormat } from "d3";
+	import { TriangleAlert } from "lucide-svelte";
 	import Meta from "$components/Meta.svelte";
 	import Mains from "$components/Mains.svelte";
 	import Sides from "$components/Sides.svelte";
 	import getParam from "$utils/getParam.js";
+	import storage from "$utils/localStorage.js";
 	// TODO no meta hide from stuff
 
 	let hasData;
@@ -14,8 +16,10 @@
 	let sides = [];
 	let sidesSamePrice = false;
 	let sidePrice;
+	let lastUpdate;
 	let updated;
 	let split;
+	let error;
 
 	const preloadFont = [
 		"assets/fonts/londrina/LondrinaSolid-Black.woff2",
@@ -23,36 +27,53 @@
 		"assets/fonts/sometype/SometypeMono-Bold.woff2"
 	];
 
+	function prepareData(data, backup) {
+		const valid = data.items.filter((d) => d.item);
+		mains = valid.filter((d) => d.section === "main");
+
+		// TODO remove if google
+		mains.sort((a, b) => a.order - b.order);
+
+		// const scale = mains.length;
+
+		sides = valid.filter((d) => d.section === "side");
+		hasSides = sides.length > 0;
+
+		if (hasSides) {
+			sidePrice = sides[0].price;
+			sidesSamePrice = sides.every((d) => d.price === sidePrice);
+		}
+
+		updated = timeFormat("%B %d, %I:%M %p")(new Date(data.updated));
+	}
+
 	async function updateMenu() {
 		try {
 			const res = await fetch(
 				`https://data.nocomplyfoods.com/menu.json?version=${Date.now()}`
 			);
 			const data = await res.json();
-			const items = data.items.map((d) => ({
-				...d,
-				price: d.price || ""
-			}));
 
 			const valid = data.items.filter((d) => d.item);
 
 			hasData = valid.length > 0;
 
-			mains = valid.filter((d) => d.section === "main");
-			mains.sort((a, b) => a.order - b.order);
+			// TODO figure out flow here
 
-			sides = valid.filter((d) => d.section === "side");
-			hasSides = sides.length > 0;
-
-			if (hasSides) {
-				sidePrice = sides[0].price;
-				sidesSamePrice = sides.every((d) => d.price === sidePrice);
+			if (hasData) {
+				if (lastUpdate !== data.updated) {
+					lastUpdate = data.updated;
+					storage.set("nocomply_menu", data);
+					prepareData(data);
+				}
+			} else {
+				throw new Error("no data");
 			}
-
-			const d = new Date(data.updated);
-			updated = timeFormat("%B %d, %I:%M %p")(d);
 		} catch (err) {
-			console.log(err);
+			console.log(err?.message);
+			error = err?.message;
+			const data = storage.get("nocomply_menu");
+			if (data) prepareData(data, true);
 		} finally {
 			setTimeout(updateMenu, 30000);
 		}
@@ -81,6 +102,9 @@
 <div class:split style="--side-width: {sideW};">
 	{#if hasData}
 		<p class="updated">{updated}</p>
+		{#if error}<p class="error">
+				<TriangleAlert></TriangleAlert> <span>{error}</span>
+			</p>{/if}
 		<section class="mains">
 			<h1>No<br />Comply<br />Foods</h1>
 			<Mains data={mains} {split} {hasSides}></Mains>
@@ -110,7 +134,10 @@
 		--fs-big: 3vw;
 		--fs-small: 2vw;
 		--padding: 2vw;
+		--shadow: 0.15vw;
 		--color-fg: #000;
+		--color-pink: #ff8095;
+		--color-yellow: #ffdf80;
 	}
 
 	h1 {
@@ -142,7 +169,7 @@
 		left: 0;
 		width: 100%;
 		height: 100%;
-		opacity: 0.4;
+		opacity: 0.35;
 	}
 
 	.mains:before {
@@ -181,7 +208,7 @@
 		text-transform: uppercase;
 		position: relative;
 		margin: 0 auto calc(var(--padding) * 1) auto;
-		text-shadow: 0.15vw 0.15vw var(--color-yellow);
+		text-shadow: var(--shadow) var(--shadow) var(--color-yellow);
 	}
 
 	.split .sides h1 {
@@ -200,6 +227,22 @@
 		opacity: 0.5;
 		line-height: 1;
 		margin: 0;
+	}
+
+	.error {
+		position: absolute;
+		bottom: 0.5vw;
+		left: 0.5vw;
+		font-size: 1vw;
+		opacity: 0.5;
+		line-height: 1;
+		margin: 0;
+		display: flex;
+		align-items: center;
+	}
+
+	.error span {
+		margin-left: 0.5vw;
 	}
 
 	.split .updated {

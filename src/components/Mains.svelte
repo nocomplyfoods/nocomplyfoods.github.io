@@ -5,30 +5,33 @@
 	export let hasSides;
 
 	let tuck = false;
+	let scale = 1;
 
 	function update() {
 		const maxItem = max(data, (d) => d.item?.length);
 		const maxDetail = max(data, (d) => d.detail?.length);
+		// assuming noSides...
+		// reduce font size once max items > 8
+		const overflow = Math.max(0, data.length - 8);
+		scale = 1 - overflow * 0.075;
+		console.log({ scale });
+
 		// tuck = data.length <= 5;
 	}
 
 	$: update(data);
 </script>
 
-<div class="items" class:split class:tuck>
+<div class="items" class:split class:tuck style="--scale: {scale};">
 	{#each data as { item, detail, price }}
 		<div class="item">
 			<div class="text">
 				<p class="name">
 					{item}
 				</p>
-				<p class="detail">{@html detail || "&nbsp;"}</p>
+				<p class="detail">{detail || ""}</p>
 			</div>
-			{#if price}
-				<div class="amount">
-					<p class="price">${price}</p>
-				</div>
-			{/if}
+			{#if price}<p class="price">${price}</p>{/if}
 		</div>
 	{/each}
 </div>
@@ -42,7 +45,7 @@
 	.text {
 		display: flex;
 		align-items: baseline;
-		margin-bottom: calc(var(--padding) * 1);
+		margin-bottom: calc(var(--padding) * var(--scale));
 	}
 
 	.split .text {
@@ -69,7 +72,7 @@
 
 	.name {
 		flex: 1;
-		text-shadow: 0.15vw 0.15vw var(--color-pink);
+		text-shadow: var(--shadow) var(--shadow) var(--color-pink);
 	}
 
 	.items {
@@ -78,7 +81,7 @@
 
 	.item {
 		display: flex;
-		justify-content: space-between;
+		/* justify-content: space-between; */
 	}
 
 	.tuck .item {
@@ -88,24 +91,29 @@
 	.name {
 		text-transform: uppercase;
 		font-weight: 700;
-		font-size: var(--fs-big);
-		margin-right: var(--padding);
+		font-size: calc(var(--fs-big) * var(--scale));
 	}
 
 	.price {
 		font-weight: 500;
 		font-size: var(--fs-big);
-		text-shadow: 0.15vw 0.15vw var(--color-pink);
+		text-shadow: var(--shadow) var(--shadow) var(--color-pink);
 		opacity: 0.7;
 		/* background: var(--color-yellow); */
 		/* background: var(--color-pink); */
 		/* outline: 0.3vw solid var(--color-pink); */
 		/* padding: 0.3vw; */
 		/* border-bottom: 0.5vw solid var(--color-pink); */
+		margin-left: calc(var(--padding) * var(--scale));
 	}
 
 	.detail {
-		font-size: var(--fs-small);
+		margin-left: calc(var(--padding) * var(--scale));
+		font-size: calc(var(--fs-small) * var(--scale));
 		opacity: 0.7;
+	}
+
+	.detail:empty {
+		display: none;
 	}
 </style>
