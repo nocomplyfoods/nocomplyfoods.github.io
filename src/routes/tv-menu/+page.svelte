@@ -150,7 +150,6 @@
 		--fs-small: 1.75vw;
 		--padding: 2vw;
 		--shadow: 0.15vw;
-		--color-fg: #000;
 	}
 
 	h1 {
