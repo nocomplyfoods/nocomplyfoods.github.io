@@ -21,6 +21,7 @@
 	let updated;
 	let split;
 	let error;
+	let sidesLabel = "sides";
 
 	const preloadFont = [
 		"assets/fonts/LondrinaSolid-Black.woff2",
@@ -28,13 +29,19 @@
 		"assets/fonts/SometypeMono-Bold.woff2"
 	];
 
+	function updateLabel(data) {
+		const sections = data.map((d) => d.section);
+		const unique = [...new Set(sections)];
+		console.log(unique);
+		if (unique.length === 2) sidesLabel = "Apps/Sides";
+		else if (unique.length === 1) sidesLabel = unique[0];
+		else sidesLabel = "Sides";
+	}
+
 	function prepareData(data, backup) {
 		const valid = data.items.filter((d) => d.item);
 		mains = valid.filter((d) => d.section === "main");
-
-		// TODO remove if google
-		mains.sort((a, b) => a.order - b.order);
-		sides = valid.filter((d) => d.section === "side");
+		sides = valid.filter((d) => d.section === "side" || d.section === "app");
 
 		hasSides = sides.length > 0;
 
@@ -44,6 +51,7 @@
 		scale = 1 - overflow * rate;
 
 		if (hasSides) {
+			updateLabel(sides);
 			sidePrice = sides[0].price;
 			sidesSamePrice = sides.every((d) => d.price === sidePrice);
 		}
@@ -57,7 +65,6 @@
 				`https://data.nocomplyfoods.com/menu.json?version=${Date.now()}`
 			);
 			const data = await res.json();
-			console.log(data);
 
 			const valid = data.items.filter((d) => d.item);
 
@@ -105,7 +112,7 @@
 	{#if hasData}
 		<p class="updated">{updated}</p>
 		<p class="allergy">
-			Please inform us of any allergies. Eating raw or undercooked meats,
+			Please inform us of any allergies. Consuming raw or undercooked meats,
 			poultry, seafood, shellfish, or eggs may increase your risk of foodborne
 			illness.
 		</p>
@@ -120,7 +127,7 @@
 		{#if hasSides}
 			<section class="sides">
 				<p class="title">
-					Sides<span class="price"
+					{@html sidesLabel}<span class="price"
 						>{sidesSamePrice ? ` $${sidePrice}` : ""}</span
 					>
 				</p>
@@ -197,6 +204,7 @@
 	}
 
 	.updated {
+		display: none;
 		position: absolute;
 		top: 0.5vw;
 		right: 0.5vw;
@@ -225,11 +233,20 @@
 	.allergy {
 		position: absolute;
 		bottom: var(--padding);
-		left: var(--padding);
-		font-size: 1.1vw;
+		/* left: var(--padding); */
+		left: 0;
+		text-align: center;
+		width: 100%;
+		font-size: 1.075vw;
 		opacity: 0.7;
 		line-height: 1;
 		margin: 0;
+		/* right: var(--padding);
+		top: var(--padding);
+		max-width: 35%;
+		left: auto;
+		text-align: right; */
+
 		/* max-width: 50%; */
 	}
 
