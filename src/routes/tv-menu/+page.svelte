@@ -33,7 +33,7 @@
 		const sections = data.map((d) => d.section);
 		const unique = [...new Set(sections)];
 		console.log(unique);
-		if (unique.length === 2) sidesLabel = "Apps/Sides";
+		if (unique.length === 2) sidesLabel = "Apps & Sides";
 		else if (unique.length === 1) sidesLabel = unique[0];
 		else sidesLabel = "Sides";
 	}
