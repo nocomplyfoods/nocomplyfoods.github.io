@@ -51,7 +51,7 @@
 	}
 
 	.price {
-		font-weight: 700;
+		font-weight: 500;
 		font-size: calc(var(--fs-big) * var(--scale));
 		opacity: 0.7;
 		text-shadow: var(--shadow) var(--shadow) var(--color-yellow);
@@ -83,7 +83,7 @@
 	}
 
 	.price {
-		font-weight: 700;
+		font-weight: 500;
 		font-size: calc(var(--fs-small) * var(--scale));
 		opacity: 0.7;
 	}

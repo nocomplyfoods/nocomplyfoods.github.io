@@ -8,9 +8,9 @@
 	export let data;
 
 	const preloadFont = [
-		"assets/fonts/londrina/LondrinaSolid-Black.woff2",
-		"assets/fonts/sometype/SometypeMono-Medium.woff2",
-		"assets/fonts/sometype/SometypeMono-Bold.woff2"
+		"assets/fonts/LondrinaSolid-Black.woff2",
+		"assets/fonts/SometypeMono-Medium.woff2",
+		"assets/fonts/SometypeMono-Bold.woff2"
 	];
 
 	const { title, description, url, keywords } = copy;

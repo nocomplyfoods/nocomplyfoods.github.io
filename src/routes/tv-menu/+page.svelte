@@ -23,9 +23,9 @@
 	let error;
 
 	const preloadFont = [
-		"assets/fonts/londrina/LondrinaSolid-Black.woff2",
-		"assets/fonts/sometype/SometypeMono-Medium.woff2",
-		"assets/fonts/sometype/SometypeMono-Bold.woff2"
+		"assets/fonts/LondrinaSolid-Black.woff2",
+		"assets/fonts/SometypeMono-Medium.woff2",
+		"assets/fonts/SometypeMono-Bold.woff2"
 	];
 
 	function prepareData(data, backup) {
@@ -57,6 +57,7 @@
 				`https://data.nocomplyfoods.com/menu.json?version=${Date.now()}`
 			);
 			const data = await res.json();
+			console.log(data);
 
 			const valid = data.items.filter((d) => d.item);
 
@@ -103,6 +104,11 @@
 <div class:split style="--scale: {scale};">
 	{#if hasData}
 		<p class="updated">{updated}</p>
+		<p class="allergy">
+			Please inform us of any allergies. Eating raw or undercooked meats,
+			poultry, seafood, shellfish, or eggs may increase your risk of foodborne
+			illness.
+		</p>
 		{#if error}<p class="error">
 				<TriangleAlert></TriangleAlert> <span>{error}</span>
 			</p>{/if}
@@ -133,13 +139,11 @@
 		display: flex;
 		flex-direction: column;
 		overflow: hidden;
-		--fs-big: 3vw;
-		--fs-small: 2vw;
+		--fs-big: 2.75vw;
+		--fs-small: 1.75vw;
 		--padding: 2vw;
 		--shadow: 0.15vw;
 		--color-fg: #000;
-		--color-pink: #ff8095;
-		--color-yellow: #ffdf80;
 	}
 
 	h1 {
@@ -194,7 +198,7 @@
 
 	.updated {
 		position: absolute;
-		bottom: 0.5vw;
+		top: 0.5vw;
 		right: 0.5vw;
 		font-size: 1vw;
 		opacity: 0.5;
@@ -216,6 +220,17 @@
 
 	.error span {
 		margin-left: 0.5vw;
+	}
+
+	.allergy {
+		position: absolute;
+		bottom: var(--padding);
+		left: var(--padding);
+		font-size: 1.1vw;
+		opacity: 0.7;
+		line-height: 1;
+		margin: 0;
+		/* max-width: 50%; */
 	}
 
 	/* div.split {

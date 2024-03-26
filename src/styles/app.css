@@ -8,6 +8,9 @@
 	/* font */
 	--sans: "Londrina Solid", -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
 	--serif: Iowan Old Style, Times New Roman, Times, serif;
+	--mono: "Inconsolata";
+	--mono: "Monaspace";
+	--mono: "Chivo Mono";
 	--mono: "SomeType Mono", Menlo, Consolas, Monaco, monospace;
 
 	/* z-index */
@@ -71,16 +74,16 @@
 main {
 	background-image: linear-gradient(
   160deg,
-  hsl(44deg 100% 83%) 0%,
-  hsl(39deg 100% 81%) 21%,
-  hsl(34deg 100% 80%) 30%,
-  hsl(28deg 100% 79%) 39%,
-  hsl(22deg 100% 79%) 46%,
-  hsl(15deg 100% 79%) 54%,
-  hsl(7deg 100% 80%) 61%,
-  hsl(358deg 100% 80%) 69%,
-  hsl(349deg 100% 78%) 79%,
-  hsl(342deg 100% 76%) 100%
+  hsl(40deg 100% 75%) 0%,
+  hsl(36deg 100% 74%) 21%,
+  hsl(32deg 100% 74%) 30%,
+  hsl(28deg 100% 74%) 39%,
+  hsl(24deg 100% 74%) 46%,
+  hsl(19deg 100% 74%) 54%,
+  hsl(14deg 100% 74%) 61%,
+  hsl(8deg 100% 75%) 69%,
+  hsl(2deg 100% 76%) 79%,
+  hsl(355deg 100% 75%) 100%
 );
 	background-repeat: no-repeat;
 	min-height: 100svh;

@@ -60,7 +60,7 @@
 	}
 
 	.price {
-		font-weight: 500;
+		font-weight: 400;
 		font-size: var(--fs-big);
 		text-shadow: var(--shadow) var(--shadow) var(--color-pink);
 		opacity: 0.7;
@@ -71,6 +71,7 @@
 		margin-left: calc(var(--padding) * var(--scale));
 		font-size: calc(var(--fs-small) * var(--scale));
 		opacity: 0.7;
+		font-weight: 400;
 	}
 
 	.detail:empty {
