@@ -32,7 +32,6 @@
 	function updateLabel(data) {
 		const sections = data.map((d) => d.section);
 		const unique = [...new Set(sections)];
-		console.log(unique);
 		if (unique.length === 2) sidesLabel = "Apps & Sides";
 		else if (unique.length === 1) sidesLabel = `${unique[0]}s`;
 		else sidesLabel = "Sides";
@@ -69,8 +68,6 @@
 			const valid = data.items.filter((d) => d.item);
 
 			hasData = valid.length > 0;
-
-			// TODO figure out flow here
 
 			if (hasData) {
 				if (lastUpdate !== data.updated) {
