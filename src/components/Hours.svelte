@@ -3,28 +3,20 @@
 </script>
 
 <div class="hours">
-	<!-- <h3>Hours</h3>
+	<h3>Hours</h3>
 	<ul>
-		<li>FRI: 5pm - 10pm</li>
-		<li>SAT: 5pm - 10pm</li>
-		<li>SUN: 9am - 12pm</li>
-	</ul> -->
-	<p>
-		<small>
-			<a
-				href="https://maps.app.goo.gl/nqZa8FxQR6jP5Ltm7"
-				target="_blank"
-				rel="noreferrer"
-			>
-				258 Stockbridge Rd<br />Great Barrington, MA</a
-			>
-		</small>
-	</p>
+		<li>FRI: &nbsp;5 - 9 DINNER</li>
+		<li>SAT: 11 - 3 BRUNCH</li>
+		<li>SAT: &nbsp;5 - 9 DINNER</li>
+		<li>SUN: 11 - 3 BRUNCH</li>
+		<li>MON: &nbsp;5 - 9 DINNER</li>
+	</ul>
 </div>
 
 <style>
 	div {
-		padding: 0 16px;
+		padding: 16px;
+		margin-top: 32px;
 	}
 
 	ul {
@@ -34,20 +26,29 @@
 		margin-top: 8px;
 	}
 
-	p {
-		margin: 0;
+	li {
+		text-align: center;
+	}
+
+	h3 {
+		text-align: center;
 	}
 
 	@media only screen and (min-width: 640px) {
 		div {
 			position: absolute;
-			top: 16px;
-			right: 16px;
+			top: 0;
+			right: 0;
 			text-align: right;
+			margin-top: 0;
 		}
 
 		h3 {
 			text-align: right;
+		}
+
+		li {
+			text-align: center;
 		}
 	}
 </style>

@@ -1,7 +1,6 @@
 <script>
 	export let data;
 	export let uniform;
-	export let split;
 
 	$: rows = data.length > 4 ? 2 : 1;
 	$: sideW = data.length
@@ -11,7 +10,6 @@
 
 <div
 	class="items"
-	class:split
 	style="--side-width: {sideW}; --shrink: {rows === 2 ? 0.75 : 1};"
 >
 	{#each data as { item, price }}
@@ -53,8 +51,8 @@
 	.price {
 		font-weight: 500;
 		font-size: calc(var(--fs-big) * var(--scale));
-		opacity: 0.7;
-		text-shadow: var(--shadow) var(--shadow) var(--color-yellow);
+		opacity: var(--opacity);
+		/* text-shadow: var(--shadow) var(--shadow) var(--color-yellow); */
 	}
 
 	.items {
@@ -68,7 +66,7 @@
 		font-size: calc(var(--fs-big) * var(--scale));
 		margin: 0;
 		text-align: center;
-		text-shadow: var(--shadow) var(--shadow) var(--color-yellow);
+		/* text-shadow: var(--shadow) var(--shadow) var(--color-yellow); */
 	}
 
 	.item {
@@ -85,16 +83,6 @@
 	.price {
 		font-weight: 500;
 		font-size: calc(var(--fs-small) * var(--scale));
-		opacity: 0.7;
+		opacity: var(--opacity);
 	}
-
-	/* .items.split {
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-	}
-
-	.split .item {
-		width: 100%;
-	} */
 </style>

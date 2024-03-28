@@ -31,9 +31,9 @@
 	--color-mark: var(--color-yellow);
 	--color-selection: var(--color-gray-300);
 	--color-border: var(--color-gray-300);
-	--color-button-bg: var(--color-gray-300);
-	--color-button-fg: var(--color-gray-900);
-	--color-button-hover: var(--color-gray-400);
+	--color-button-bg: var(--color-fg);
+	--color-button-fg: var(--color-white);
+	--color-button-hover: var(--color-black);
 	--color-input-bg: var(--color-gray-50);
 	--color-input-fg: var(--color-gray-900);
 	--color-placeholder: var(--color-gray-500);
@@ -90,7 +90,7 @@ main {
 }
 
 h1 {
-	font-size: clamp(64px, 8vw, 128px);
+	font-size: clamp(64px, 8vw, 96px);
 	font-weight: 900;
 	line-height: 0.8;
 	text-transform: uppercase;
@@ -125,12 +125,17 @@ h6 {
 	font-size: var(--20px, 20px);
 }
 
-p, ul, button, input, select, textarea {
+p, ul, button, input, select, textarea, a[role="button"] {
 	font-size: clamp(16px, 1.5vw, 24px);
 	font-family: var(--mono);
 	font-weight: 500;
 }
 
-p{ 
+p { 
 	margin: 8px auto;
+}
+
+button, a[role="button"] {
+	padding: 16px;
+	text-transform: uppercase;
 }

@@ -1,10 +1,8 @@
 <script>
 	import { max } from "d3";
 	export let data;
-	export let split;
-	export let hasSides;
+	export let web;
 
-	let tuck = false;
 	function update() {
 		// const maxItem = max(data, (d) => d.item?.length);
 		// const maxDetail = max(data, (d) => d.detail?.length);
@@ -12,9 +10,10 @@
 	}
 
 	$: update(data);
+	$: tuck = web;
 </script>
 
-<div class="items" class:split class:tuck>
+<div class="items" class:tuck>
 	{#each data as { item, detail, price }}
 		<div class="item">
 			<div class="text">
@@ -37,12 +36,11 @@
 	.text {
 		display: flex;
 		align-items: baseline;
-		margin-bottom: calc(var(--padding) * var(--scale));
 	}
 
 	.name {
 		flex: 1;
-		text-shadow: var(--shadow) var(--shadow) var(--color-pink);
+		/* text-shadow: var(--shadow) var(--shadow) var(--color-pink); */
 	}
 
 	.items {
@@ -51,6 +49,8 @@
 
 	.item {
 		display: flex;
+		justify-content: space-between;
+		margin-bottom: calc(var(--padding) * var(--scale));
 	}
 
 	.name {
@@ -60,48 +60,32 @@
 	}
 
 	.price {
-		font-weight: 400;
+		font-weight: 500;
 		font-size: var(--fs-big);
-		text-shadow: var(--shadow) var(--shadow) var(--color-pink);
-		opacity: 0.7;
+		opacity: var(--opacity);
 		margin-left: calc(var(--padding) * var(--scale));
+		/* text-shadow: var(--shadow) var(--shadow) var(--color-pink); */
 	}
 
 	.detail {
 		margin-left: calc(var(--padding) * var(--scale));
 		font-size: calc(var(--fs-small) * var(--scale));
-		opacity: 0.7;
-		font-weight: 400;
+		opacity: var(--opacity);
+		font-weight: 500;
 	}
 
 	.detail:empty {
 		display: none;
 	}
 
-	/* .split .text {
-		flex-direction: column;
-		margin-bottom: calc(var(--padding) * 1.5);
-	} */
-
-	/* .split .detail {
-		margin-top: calc(var(--padding) * 0.5);
-	} */
-
-	/* .tuck .item {
-		justify-content: center;
-	} */
-
-	/*
 	.tuck .text {
 		flex-direction: column;
-	}
-
-	.tuck .text {
-		align-items: center;
+		align-items: flex-start;
 	}
 
 	.tuck .detail {
+		margin: 0;
 		margin-top: calc(var(--padding) * 0.5);
-		text-align: center;
-	} */
+		text-align: left;
+	}
 </style>
