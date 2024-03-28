@@ -35,7 +35,7 @@
 	h1 {
 		padding: 16px;
 		text-align: center;
-		margin-top: 32px;
+		padding-top: 32px;
 	}
 
 	p.location {
@@ -47,7 +47,7 @@
 	@media only screen and (min-width: 640px) {
 		h1 {
 			text-align: left;
-			margin-top: 0;
+			padding-top: 16px;
 		}
 
 		p.location {

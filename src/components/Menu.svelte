@@ -10,6 +10,7 @@
 
 	// TODO no meta hide from stuff for
 	export let web;
+	export let updated;
 
 	let hasData;
 	let hasSides;
@@ -19,9 +20,9 @@
 	let sidesSamePrice = false;
 	let sidePrice;
 	let lastUpdate;
-	let updated;
 	let error;
 	let sidesLabel = "sides";
+	let updatedDisplay = "";
 
 	function updateLabel(data) {
 		const sections = data.map((d) => d.section);
@@ -49,16 +50,19 @@
 			sidesSamePrice = sides.every((d) => d.price === sidePrice);
 		}
 
-		updated = timeFormat("%B %d, %I:%M %p")(new Date(data.updated));
+		updated = data.updated;
+		updatedDisplay = timeFormat("%B %d, %I:%M %p")(new Date(data.updated));
 	}
 
 	async function updateMenu() {
 		try {
-			// const res = await fetch(
-			// 	`https://data.nocomplyfoods.com/menu.json?version=${Date.now()}`
-			// );
-			// const data = await res.json();
-			const data = { updated: "test", items: testMenu };
+			// TODO test a fail
+			// TODO test no data
+			const res = await fetch(
+				`https://data.nocomplyfoods.com/menu.json?version=${Date.now()}`
+			);
+			const data = await res.json();
+			// const data = { updated: "test", items: testMenu };
 
 			const valid = data.items.filter((d) => d.item);
 
@@ -90,7 +94,7 @@
 
 <div class:web style="--scale: {scale};">
 	{#if hasData}
-		<p class="updated">{updated}</p>
+		<p class="updated">{updatedDisplay}</p>
 		{#if error}<p class="error">
 				<TriangleAlert></TriangleAlert> <span>{error}</span>
 			</p>{/if}

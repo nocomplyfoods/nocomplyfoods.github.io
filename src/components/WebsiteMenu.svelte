@@ -1,16 +1,22 @@
 <script>
+	import { timeFormat } from "d3";
 	import Menu from "$components/Menu.svelte";
+
+	let updated;
+
+	$: visible = !!updated;
+	$: dateDisplay = visible ? timeFormat("%B %d")(new Date(updated)) : "";
 </script>
 
-<div class="menu">
+<div class="menu" class:visible>
 	<div class="h">
 		<h3>Menu</h3>
-		<time>March 28</time>
+		{#if dateDisplay}<time>{dateDisplay}</time>{/if}
 	</div>
 	<img src="assets/images/keanu.png" alt="keanu eating" aria="hidden" />
 
 	<div class="c">
-		<Menu web={true}></Menu>
+		<Menu bind:updated web={true}></Menu>
 	</div>
 </div>
 
@@ -19,8 +25,15 @@
 		--border: 8px;
 		position: relative;
 		max-width: 720px;
+		min-height: 420px;
 		margin: 96px auto;
 		width: 90%;
+		opacity: 0;
+		transition: opacity 0.5s;
+	}
+
+	.visible {
+		opacity: 1;
 	}
 
 	.h {
