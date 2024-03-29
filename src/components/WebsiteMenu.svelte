@@ -3,20 +3,21 @@
 	import Menu from "$components/Menu.svelte";
 
 	let updated;
+	let error;
 
 	$: visible = !!updated;
 	$: dateDisplay = visible ? timeFormat("%B %d")(new Date(updated)) : "";
 </script>
 
-<div class="menu" class:visible>
+<div class="menu" class:visible class:error={!!error}>
 	<div class="h">
 		<h3>Menu</h3>
-		{#if dateDisplay}<time>{dateDisplay}</time>{/if}
+		<!-- {#if dateDisplay}<time>{dateDisplay}</time>{/if} -->
 	</div>
 	<img src="assets/images/keanu.png" alt="keanu eating" aria="hidden" />
 
 	<div class="c">
-		<Menu bind:updated web={true}></Menu>
+		<Menu bind:updated bind:error web={true}></Menu>
 	</div>
 </div>
 
@@ -34,6 +35,10 @@
 
 	.visible {
 		opacity: 1;
+	}
+
+	.error {
+		display: none;
 	}
 
 	.h {

@@ -11,6 +11,7 @@
 	// TODO no meta hide from stuff for
 	export let web;
 	export let updated;
+	export let error;
 
 	let hasData;
 	let hasSides;
@@ -20,7 +21,6 @@
 	let sidesSamePrice = false;
 	let sidePrice;
 	let lastUpdate;
-	let error;
 	let sidesLabel = "sides";
 	let updatedDisplay = "";
 
@@ -95,9 +95,9 @@
 <div class:web style="--scale: {scale};">
 	{#if hasData}
 		<p class="updated">{updatedDisplay}</p>
-		{#if error}<p class="error">
+		<!-- {#if error}<p class="error">
 				<TriangleAlert></TriangleAlert> <span>{error}</span>
-			</p>{/if}
+			</p>{/if} -->
 		<section class="mains">
 			<Mains {web} data={mains} {hasSides}></Mains>
 		</section>

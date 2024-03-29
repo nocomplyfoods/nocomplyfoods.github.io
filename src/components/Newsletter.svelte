@@ -17,7 +17,7 @@
 <style>
 	div {
 		width: 90%;
-		margin: 0 auto;
+		margin: 32px auto;
 	}
 
 	h3,
