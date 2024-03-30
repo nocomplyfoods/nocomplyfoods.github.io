@@ -20,7 +20,7 @@
 				<p class="name">
 					{item}
 				</p>
-				<p class="detail">{detail || ""}</p>
+				<p class="detail">{@html detail || "&nbsp;"}</p>
 			</div>
 			{#if price}<p class="price">${price}</p>{/if}
 		</div>
@@ -51,6 +51,10 @@
 		display: flex;
 		justify-content: space-between;
 		margin-bottom: calc(var(--padding) * var(--scale));
+	}
+
+	.item:last-of-type {
+		margin-bottom: 0;
 	}
 
 	.name {

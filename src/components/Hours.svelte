@@ -1,17 +1,71 @@
 <script>
-	import { MapPin } from "lucide-svelte";
+	import { format } from "d3";
+	import { onMount } from "svelte";
+
+	const backup = [
+		{ day: "friday", time: "5 - 9", service: "dinner" },
+		{ day: "saturday", time: "11 - 3", service: "brunch" },
+		{ day: "saturday", time: "5 - 9", service: "dinner" },
+		{ day: "sunday", time: "11 - 3", service: "brunch" },
+		{ day: "sunday", time: "5 - 9", service: "dinner" }
+	];
+
+	let hours;
+
+	function cleanTime(str) {
+		const [a, b] = str.split("-");
+		const at = +a.trim();
+		const bt = +b.trim();
+		const start = format(" >2")(at);
+		const end = bt;
+		return `${start} - ${end}`;
+	}
+
+	async function updateHours() {
+		try {
+			// TODO test a fail
+			// TODO test no data
+			const res = await fetch(
+				`https://data.nocomplyfoods.com/hours.json?version=${Date.now()}`
+			);
+			const data = await res.json();
+
+			const valid = data.items
+				.filter((d) => d.day && d.time && d.service)
+				.map((d) => ({
+					...d,
+					day: d.day.substring(0, 3),
+					time: cleanTime(d.time)
+				}));
+
+			const hasData = valid.length > 0;
+			if (hasData) hours = valid;
+			else throw new Error("no data");
+		} catch (err) {
+			console.log(err);
+			hours = backup;
+		}
+	}
+
+	onMount(async () => {
+		await updateHours();
+	});
 </script>
 
-<div class="hours">
-	<h3>Hours</h3>
-	<ul>
-		<li>FRI: &nbsp;5 - 9 DINNER</li>
-		<li>SAT: 11 - 3 BRUNCH</li>
-		<li>SAT: &nbsp;5 - 9 DINNER</li>
-		<li>SUN: 11 - 3 BRUNCH</li>
-		<li>MON: &nbsp;5 - 9 DINNER</li>
-	</ul>
-</div>
+{#if hours}
+	<div class="hours">
+		<h3>Hours</h3>
+		<ul>
+			{#each hours as { day, time, service }}
+				<li>
+					<span class="day">{day}:</span><span class="time">{time}</span><span
+						class="service">{service}</span
+					>
+				</li>
+			{/each}
+		</ul>
+	</div>
+{/if}
 
 <style>
 	div {
@@ -28,6 +82,15 @@
 
 	li {
 		text-align: center;
+		text-transform: uppercase;
+	}
+
+	span {
+		margin-left: 0.5em;
+	}
+
+	span:first-of-type {
+		margin-left: 0;
 	}
 
 	h3 {
@@ -48,7 +111,7 @@
 		}
 
 		li {
-			text-align: center;
+			text-align: right;
 		}
 	}
 </style>
