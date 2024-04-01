@@ -21,21 +21,24 @@
 	let sidesSamePrice = false;
 	let sidePrice;
 	let lastUpdate;
-	let sidesLabel = "sides";
+	let sidesTitle = "sides";
 	let updatedDisplay = "";
 
 	function updateLabel(data) {
 		const sections = data.map((d) => d.section);
 		const unique = [...new Set(sections)];
-		if (unique.length === 2) sidesLabel = "Apps & Sides";
-		else if (unique.length === 1) sidesLabel = `${unique[0]}s`;
-		else sidesLabel = "Sides";
+		if (unique.length === 2) sidesTitle = "Apps & Sides";
+		else if (unique.length === 1) sidesTitle = `${unique[0]}s`;
+		else sidesTitle = "Sides";
 	}
 
 	function prepareData(data, backup) {
 		const valid = data.items.filter((d) => d.item);
 		mains = valid.filter((d) => d.section === "main");
-		sides = valid.filter((d) => d.section === "side" || d.section === "app");
+		sides = valid.filter(
+			(d) =>
+				d.section === "side" || d.section === "app" || d.section === "dessert"
+		);
 
 		hasSides = sides.length > 0;
 
@@ -105,7 +108,7 @@
 		{#if hasSides}
 			<section class="sides">
 				<p class="title">
-					{@html sidesLabel}<span class="price"
+					{@html sidesTitle}<span class="price"
 						>{sidesSamePrice ? ` $${sidePrice}` : ""}</span
 					>
 				</p>
@@ -201,6 +204,7 @@
 		flex-direction: column;
 		justify-content: center;
 		flex: 1;
+		min-height: 60%;
 	}
 
 	.allergy {
