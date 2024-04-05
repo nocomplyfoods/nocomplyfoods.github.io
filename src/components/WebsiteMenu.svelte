@@ -115,8 +115,6 @@
 
 	button {
 		opacity: 0.5;
-		font-family: var(--sans);
-		letter-spacing: 0.05em;
 		padding: 8px 16px;
 	}
 
