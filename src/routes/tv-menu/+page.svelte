@@ -33,9 +33,10 @@
 				updated = data.updated;
 				// convert current hours to 12 hour time
 				const hours = new Date().getHours();
+				const minutes = new Date().getMinutes();
 				// brunch ends at 3pm, dinner starts at 5pm
-				// show dinner from 3pm-10pm
-				const isBrunch = hours < 15 || hours >= 22;
+				// show dinner from 3:30pm-12pm
+				const isBrunch = hours < 15 || (hours === 15 && minutes < 30);
 				const service = isBrunch ? "brunch" : "dinner";
 				items = data.items.filter((d) => d.item && d.service === service);
 				// if nothing, use the other service
