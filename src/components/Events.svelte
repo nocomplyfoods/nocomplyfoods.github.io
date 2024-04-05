@@ -25,7 +25,7 @@
 					.replace("image-", "")
 					.replace("-png", ".png")
 					.replace("-jpg", ".jpg");
-				const image = `https://cdn.sanity.io/images/r8gkc5c9/production/${img}`;
+				const image = `https://apicdn.sanity.io/images/r8gkc5c9/production/${img}`;
 				const dateDisplay = timeFormat("%B %e, %Y")(date);
 				return {
 					title,
