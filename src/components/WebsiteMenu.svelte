@@ -12,7 +12,7 @@
 	let active;
 
 	$: visible = !!updated;
-	$: dateDisplay = visible ? timeFormat("%B %d")(new Date(updated)) : "";
+	$: dateDisplay = visible ? timeFormat("%B %e")(new Date(updated)) : "";
 
 	function toggle(a) {
 		active = a;
