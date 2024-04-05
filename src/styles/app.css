@@ -27,13 +27,13 @@
 	--color-fg: var(--color-black2);
 	--color-primary: var(--color-black2);
 	--color-link: var(--color-black2);
-	--color-focus: var(--color-red);
+	--color-focus: var(--color-purple);
 	--color-mark: var(--color-yellow);
-	--color-selection: var(--color-gray-300);
-	--color-border: var(--color-gray-300);
+	--color-selection: var(--color-white);
+	--color-border: var(--color-fg);
 	--color-button-bg: var(--color-fg);
 	--color-button-fg: var(--color-white);
-	--color-button-hover: var(--color-black);
+	--color-button-hover: var(--color-gray-700);
 	--color-input-bg: var(--color-gray-50);
 	--color-input-fg: var(--color-gray-900);
 	--color-placeholder: var(--color-gray-500);
@@ -107,14 +107,18 @@ h2 {
 
 h3 {
 	line-height: 0.8;
-	font-size: clamp(24px, 2.5vw, 48px);
+	font-size: clamp(28px, 2.5vw, 48px);
 	font-weight: 900;
 	text-transform: uppercase;
 	margin: 0;
 }
 
 h4 {
-	font-size: var(--24px, 24px);
+	line-height: 0.8;
+	font-size: clamp(22px, 2vw, 36px);
+	font-weight: 900;
+	text-transform: uppercase;
+	margin: 0;
 }
 
 h5 {
@@ -137,7 +141,12 @@ p {
 
 button, a[role="button"] {
 	letter-spacing: 0.05em;
+	line-height: 1;
 	padding: 16px;
 	text-transform: uppercase;
 	font-family: var(--sans);
+}
+
+a {
+	border-bottom: 2px dashed var(--color-border);
 }

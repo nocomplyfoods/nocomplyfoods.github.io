@@ -1,6 +1,5 @@
 <script>
 	import { onMount } from "svelte";
-	import { timeFormat, groups } from "d3";
 	import Mains from "$components/Mains.svelte";
 	import Sides from "$components/Sides.svelte";
 

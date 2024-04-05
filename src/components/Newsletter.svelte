@@ -1,5 +1,11 @@
 <div>
-	<h3>Newsletter</h3>
+	<h3>
+		<img
+			src="assets/images/koolaid.png"
+			alt="skateboarder"
+			aria="hidden"
+		/>Newsletter
+	</h3>
 	<p>
 		Join our newsletter to stay up to date on special events and happenings.
 	</p>
@@ -16,19 +22,25 @@
 
 <style>
 	div {
-		width: 90%;
-		margin: 32px auto;
+		margin-top: 154px;
 	}
 
-	h3,
+	h3 {
+		text-align: center;
+		position: relative;
+	}
+
+	img {
+		position: absolute;
+		bottom: 0;
+		left: 50%;
+		width: 128px;
+		transform: translate(-150%, 0);
+	}
+
 	p {
 		text-align: center;
-		max-width: 540px;
-		margin: 0 auto;
-	}
-
-	p {
-		text-align: left;
+		max-width: 25em;
 		margin: 16px auto;
 	}
 

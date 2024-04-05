@@ -159,10 +159,6 @@
 	}
 
 	@media only screen and (min-width: 640px) {
-		.menu {
-			margin: 128px auto;
-		}
-
 		time.mobile {
 			display: none;
 		}
