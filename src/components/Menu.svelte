@@ -32,8 +32,6 @@
 				d.section === "side" || d.section === "app" || d.section === "dessert"
 		);
 
-		console.log(mains);
-
 		hasSides = sides.length > 0;
 
 		const maxItems = hasSides ? 5 : 8;

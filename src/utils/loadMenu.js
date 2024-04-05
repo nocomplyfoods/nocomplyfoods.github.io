@@ -15,7 +15,6 @@ export default async function loadMenu(lastUpdate) {
 		data = await res.json();
 		// data = { updated: "test", items: testMenu };
 
-		console.log(data);
 		const valid = data.items.filter((d) => d.item);
 
 		const hasData = valid.length > 0;
