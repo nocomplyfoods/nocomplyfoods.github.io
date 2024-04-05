@@ -102,7 +102,7 @@
 
 	.h {
 		position: absolute;
-		top: 0;
+		top: 1px;
 		left: 0;
 		transform: translate(0, -100%);
 		display: flex;
