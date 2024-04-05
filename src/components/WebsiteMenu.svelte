@@ -38,8 +38,8 @@
 	});
 </script>
 
-{#if visible}
-	<div class="menu" class:visible class:error={!!error}>
+<div class="menu" class:visible class:error={!!error}>
+	{#if visible}
 		<div class="h">
 			<!-- <h3>Menu</h3> -->
 			<div class="buttons">
@@ -68,8 +68,8 @@
 		{#if dateDisplay}<time class="mobile"
 				><small>updated on {dateDisplay}</small></time
 			>{/if}
-	</div>
-{/if}
+	{/if}
+</div>
 
 <style>
 	.menu {
