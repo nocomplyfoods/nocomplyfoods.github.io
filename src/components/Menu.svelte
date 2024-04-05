@@ -1,19 +1,13 @@
 <script>
-	import testMenu from "$data/menu.csv";
 	import { onMount } from "svelte";
-	import { timeFormat } from "d3";
-	import { TriangleAlert } from "lucide-svelte";
+	import { timeFormat, groups } from "d3";
 	import Mains from "$components/Mains.svelte";
 	import Sides from "$components/Sides.svelte";
-	import getParam from "$utils/getParam.js";
-	import storage from "$utils/localStorage.js";
 
 	// TODO no meta hide from stuff for
 	export let web;
-	export let updated;
-	export let error;
+	export let items;
 
-	let hasData;
 	let hasSides;
 	let mains = [];
 	let sides = [];
@@ -32,13 +26,14 @@
 		else sidesTitle = "Sides";
 	}
 
-	function prepareData(data, backup) {
-		const valid = data.items.filter((d) => d.item);
-		mains = valid.filter((d) => d.section === "main");
-		sides = valid.filter(
+	function prepareMenu(items) {
+		mains = items.filter((d) => d.section === "main");
+		sides = items.filter(
 			(d) =>
 				d.section === "side" || d.section === "app" || d.section === "dessert"
 		);
+
+		console.log(mains);
 
 		hasSides = sides.length > 0;
 
@@ -52,79 +47,35 @@
 			sidePrice = sides[0].price;
 			sidesSamePrice = sides.every((d) => d.price === sidePrice);
 		}
-
-		updated = data.updated;
-		updatedDisplay = timeFormat("%B %d, %I:%M %p")(new Date(data.updated));
 	}
 
-	async function updateMenu() {
-		try {
-			// TODO test a fail
-			// TODO test no data
-			const res = await fetch(
-				`https://data.nocomplyfoods.com/menu.json?version=${Date.now()}`
-			);
-			const data = await res.json();
-			// const data = { updated: "test", items: testMenu };
-
-			const valid = data.items.filter((d) => d.item);
-
-			hasData = valid.length > 0;
-
-			if (hasData) {
-				if (lastUpdate !== data.updated) {
-					lastUpdate = data.updated;
-					storage.set("nocomply_menu", data);
-					prepareData(data);
-				}
-			} else {
-				throw new Error("no data");
-			}
-		} catch (err) {
-			console.log(err?.message);
-			error = err?.message;
-			const data = storage.get("nocomply_menu");
-			if (data) prepareData(data, true);
-		} finally {
-			if (!web) setTimeout(updateMenu, 30000);
-		}
-	}
-
-	onMount(async () => {
-		await updateMenu();
-	});
+	$: prepareMenu(items);
 </script>
 
 <div class:web style="--scale: {scale};">
-	{#if hasData}
-		<p class="updated">{updatedDisplay}</p>
-		<!-- {#if error}<p class="error">
-				<TriangleAlert></TriangleAlert> <span>{error}</span>
-			</p>{/if} -->
-		<section class="mains">
-			<Mains {web} data={mains} {hasSides}></Mains>
+	<section class="mains">
+		<Mains {web} data={mains} {hasSides}></Mains>
+	</section>
+
+	{#if hasSides}
+		<section class="sides">
+			<p class="title">
+				{@html sidesTitle}<span class="price"
+					>{sidesSamePrice ? ` $${sidePrice}` : ""}</span
+				>
+			</p>
+			<Sides data={sides} uniform={sidesSamePrice} />
 		</section>
+	{/if}
 
-		{#if hasSides}
-			<section class="sides">
-				<p class="title">
-					{@html sidesTitle}<span class="price"
-						>{sidesSamePrice ? ` $${sidePrice}` : ""}</span
-					>
-				</p>
-				<Sides data={sides} uniform={sidesSamePrice} />
-			</section>
-		{/if}
-
-		{#if !web}
-			<section class="allergy" class:sides={hasSides}>
-				<p>
-					Please inform us of any allergies. Consuming raw or undercooked meats,
-					poultry, seafood, shellfish, or eggs may increase your risk of
-					foodborne illness.
-				</p>
-			</section>
-		{/if}
+	{#if !web}
+		<section class="allergy" class:sides={hasSides}>
+			<p>
+				Please inform us of any allergies. Consuming raw or undercooked meats,
+				poultry, seafood, shellfish, or eggs may increase your risk of foodborne
+				illness.
+			</p>
+		</section>
 	{/if}
 </div>
 
@@ -239,7 +190,7 @@
 		line-height: 1;
 		margin: 0;
 	}
-
+	/* 
 	.error {
 		position: absolute;
 		bottom: 0.5vw;
@@ -254,5 +205,5 @@
 
 	.error span {
 		margin-left: 0.5vw;
-	}
+	} */
 </style>

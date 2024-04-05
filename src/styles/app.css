@@ -20,7 +20,7 @@
 	--z-overlay: 1000;
 
 	/* presets (used in reset.css) */
-	--border-radius: 2px;
+	--border-radius: 0px;
 	--font-body: var(--sans);
 	--font-form: var(--sans);
 	--color-bg: var(--color-yellow);
@@ -125,7 +125,7 @@ h6 {
 	font-size: var(--20px, 20px);
 }
 
-p, ul, button, input, select, textarea, a[role="button"] {
+p, ul, button, input, select, textarea, time, a[role="button"] {
 	font-size: clamp(16px, 1.5vw, 24px);
 	font-family: var(--mono);
 	font-weight: 500;

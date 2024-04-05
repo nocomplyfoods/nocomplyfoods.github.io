@@ -1,25 +1,75 @@
 <script>
+	import { onMount } from "svelte";
 	import { timeFormat } from "d3";
+	import loadMenu from "$utils/loadMenu.js";
 	import Menu from "$components/Menu.svelte";
 
 	let updated;
 	let error;
+	let brunch = [];
+	let dinner = [];
+	let items = [];
+	let active;
 
 	$: visible = !!updated;
 	$: dateDisplay = visible ? timeFormat("%B %d")(new Date(updated)) : "";
+
+	function toggle(a) {
+		active = a;
+		items = active === "brunch" ? brunch : dinner;
+	}
+
+	onMount(async () => {
+		try {
+			const { data, backup, error } = await loadMenu();
+			if (data?.items) {
+				updated = data.updated;
+				brunch = data.items.filter((d) => d.item && d.service === "brunch");
+				dinner = data.items.filter((d) => d.item && d.service === "dinner");
+				if (brunch.length) toggle("brunch");
+				else if (dinner.length) toggle("dinner");
+			} else {
+				// TODO
+				throw new Error("no data");
+			}
+		} catch (err) {
+			error = err?.message;
+		}
+	});
 </script>
 
-<div class="menu" class:visible class:error={!!error}>
-	<div class="h">
-		<h3>Menu</h3>
-		<!-- {#if dateDisplay}<time>{dateDisplay}</time>{/if} -->
-	</div>
-	<img src="assets/images/keanu.png" alt="keanu eating" aria="hidden" />
+{#if visible}
+	<div class="menu" class:visible class:error={!!error}>
+		<div class="h">
+			<!-- <h3>Menu</h3> -->
+			<div class="buttons">
+				{#if brunch.length}
+					<button
+						class:active={active === "brunch"}
+						on:click={() => toggle("brunch")}>Brunch</button
+					>
+				{/if}
+				{#if dinner.length}
+					<button
+						class:active={active === "dinner"}
+						on:click={() => toggle("dinner")}>Dinner</button
+					>
+				{/if}
+			</div>
+			{#if dateDisplay}<time class="desktop"
+					><small>updated on {dateDisplay}</small></time
+				>{/if}
+		</div>
+		<img src="assets/images/keanu.png" alt="keanu eating" aria="hidden" />
 
-	<div class="c">
-		<Menu bind:updated bind:error web={true}></Menu>
+		<div class="c">
+			<Menu web={true} {items}></Menu>
+		</div>
+		{#if dateDisplay}<time class="mobile"
+				><small>updated on {dateDisplay}</small></time
+			>{/if}
 	</div>
-</div>
+{/if}
 
 <style>
 	.menu {
@@ -41,21 +91,54 @@
 		display: none;
 	}
 
+	h3 {
+		display: none;
+		/* position: absolute;
+		top: 50%;
+		left: 0;
+		transform-origin: 0 0;
+		transform: rotate(-90deg) translate(-200%, -100%); */
+	}
+
 	.h {
 		position: absolute;
 		top: 0;
 		left: 0;
 		transform: translate(0, -100%);
 		display: flex;
+		align-items: center;
+	}
+
+	.buttons {
+		display: flex;
+	}
+
+	button {
+		opacity: 0.5;
+		font-family: var(--sans);
+		letter-spacing: 0.05em;
+		padding: 8px 16px;
+	}
+
+	button.active {
+		opacity: 1;
 	}
 
 	time {
-		font-size: clamp(18px, 1.75vw, 32px);
-		font-weight: 900;
+		font-family: var(--mono);
+		font-weight: 700;
 		text-transform: uppercase;
 		margin: 0;
+		opacity: 0.7;
+		text-align: center;
+		width: 100%;
+		display: block;
+	}
+
+	time.desktop {
+		display: none;
 		margin-left: 16px;
-		opacity: 0.5;
+		text-align: left;
 	}
 
 	img {
@@ -66,7 +149,7 @@
 		z-index: 0;
 		width: 20vw;
 		max-width: 128px;
-		transform: translate(-24px, -80%);
+		transform: translate(-8px, -80%);
 	}
 
 	.c {
@@ -80,6 +163,14 @@
 	@media only screen and (min-width: 640px) {
 		.menu {
 			margin: 128px auto;
+		}
+
+		time.mobile {
+			display: none;
+		}
+
+		time.desktop {
+			display: block;
 		}
 	}
 </style>

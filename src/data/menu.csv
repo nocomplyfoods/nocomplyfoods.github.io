@@ -1,11 +1,15 @@
-section,item,detail,price
-main,cheeseburger club sandwich,fries,18
-main,bean and cheese pupusa,"pickled cabbage, jalapeño labne",12
-main,roasted japanese sweet potato,"tahini, chile crisp",10
-main,lentils and samosas,"tomato chutney, date chutney",18
-side,fried potatos,,10
-side,greek salad,,10
-side,fried cauliflower,,10
-side,falafel,,10
-side,grilled cabbage,,10
-side,panzanella,,10
+section,item,detail,price,service,
+main,cheeseburger club sandwich,fries,18,dinner
+main,bean and cheese pupusa,"pickled cabbage, jalapeño labne",12,dinner
+main,roasted japanese sweet potato,"tahini, chile crisp",10,dinner
+main,lentils and samosas,"tomato chutney, date chutney",18,dinner
+side,fried potatos,,10,dinner
+side,greek salad,,10,dinner
+side,fried cauliflower,,10,dinner
+side,falafel,,10,dinner
+side,grilled cabbage,,10,dinner
+side,panzanella,,10,dinner
+main,testing,,10,brunch
+main,testing,,10,brunch
+main,testing,,10,brunch
+main,testing,,10,brunch
