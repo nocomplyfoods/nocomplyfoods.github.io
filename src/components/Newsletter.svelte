@@ -35,7 +35,7 @@
 		bottom: 0;
 		left: 50%;
 		width: 128px;
-		transform: translate(-125%, 0);
+		transform: translate(-135%, 0);
 	}
 
 	p {
