@@ -35,7 +35,7 @@
 		bottom: 0;
 		left: 50%;
 		width: 128px;
-		transform: translate(-150%, 0);
+		transform: translate(-125%, 0);
 	}
 
 	p {
@@ -47,5 +47,11 @@
 	p.join {
 		text-align: center;
 		margin: 32px auto;
+	}
+
+	@media only screen and (min-width: 640px) {
+		img {
+			transform: translate(-150%, 0);
+		}
 	}
 </style>
