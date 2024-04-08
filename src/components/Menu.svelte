@@ -152,7 +152,7 @@
 		flex-direction: column;
 		justify-content: center;
 		flex: 1;
-		min-height: 60%;
+		min-height: 75%;
 	}
 
 	.allergy {
