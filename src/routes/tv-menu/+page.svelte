@@ -50,7 +50,7 @@
 		} catch (err) {
 			error = err?.message;
 		} finally {
-			// setTimeout(update, 30000);
+			setTimeout(update, 30000);
 		}
 	}
 	onMount(async () => {
