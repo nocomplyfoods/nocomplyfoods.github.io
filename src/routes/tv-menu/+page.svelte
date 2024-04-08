@@ -54,7 +54,7 @@
 		}
 	}
 	onMount(async () => {
-		await wakeLock();
+		// await wakeLock();
 		await update();
 	});
 </script>
