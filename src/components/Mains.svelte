@@ -17,10 +17,8 @@
 	{#each data as { item, detail, price }}
 		<div class="item">
 			<div class="text">
-				<p class="name">
-					{item}
-				</p>
-				<p class="detail">{@html detail || "&nbsp;"}</p>
+				<p class="name">{item}</p>
+				<p class="detail">{@html detail}</p>
 			</div>
 			{#if price}<p class="price">${price}</p>{/if}
 		</div>
@@ -35,12 +33,16 @@
 
 	.text {
 		display: flex;
-		align-items: baseline;
+		align-items: flex-end;
 	}
 
 	.name {
 		flex: 1;
-		/* text-shadow: var(--shadow) var(--shadow) var(--color-pink); */
+		margin-right: calc(var(--padding) * var(--scale));
+	}
+
+	.name:empty {
+		display: none;
 	}
 
 	.items {
@@ -72,7 +74,6 @@
 	}
 
 	.detail {
-		margin-left: calc(var(--padding) * var(--scale));
 		font-size: calc(var(--fs-small) * var(--scale));
 		opacity: var(--opacity);
 		font-weight: 500;

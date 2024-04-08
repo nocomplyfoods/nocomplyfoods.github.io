@@ -51,7 +51,7 @@
 
 <div class:web style="--scale: {scale};">
 	<section class="mains">
-		<Mains {web} data={mains} {hasSides}></Mains>
+		<Mains {web} data={mains}></Mains>
 	</section>
 
 	{#if hasSides}
@@ -152,7 +152,10 @@
 		flex-direction: column;
 		justify-content: center;
 		flex: 1;
-		min-height: 70%;
+	}
+
+	.sides {
+		flex: 0;
 	}
 
 	.allergy {

@@ -14,17 +14,7 @@
 		"../assets/fonts/SometypeMono-Bold.woff2"
 	];
 
-	async function wakeLock() {
-		try {
-			if ("wakeLock" in navigator) {
-				await navigator.wakeLock.request("screen");
-			}
-		} catch (err) {
-			console.log(err);
-		}
-	}
-
-	async function update() {
+	async function update(isFirstLoad) {
 		try {
 			const { data, backup, error } = await loadMenu();
 			// TODO
@@ -50,12 +40,17 @@
 		} catch (err) {
 			error = err?.message;
 		} finally {
-			setTimeout(update, 30000);
+			// reload the page at 10am
+			const now = new Date();
+			const hours = now.getHours();
+			const minutes = now.getMinutes();
+			if (!isFirstLoad && hours === 10 && minutes === 0)
+				window.location.reload();
+			else setTimeout(update, 30000);
 		}
 	}
 	onMount(async () => {
-		// await wakeLock();
-		await update();
+		await update(true);
 	});
 </script>
 
