@@ -26,7 +26,12 @@
 				updated = data.updated;
 				brunch = data.items.filter((d) => d.item && d.service === "brunch");
 				dinner = data.items.filter((d) => d.item && d.service === "dinner");
-				if (brunch.length) toggle("brunch");
+
+				const hours = new Date().getHours();
+				const isBrunch = hours < 15;
+				if (isBrunch && brunch.length) toggle("brunch");
+				else if (!isBrunch && dinner.length) toggle("dinner");
+				else if (brunch.length) toggle("brunch");
 				else if (dinner.length) toggle("dinner");
 			} else {
 				// TODO
