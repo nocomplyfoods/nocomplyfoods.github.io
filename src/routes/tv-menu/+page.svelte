@@ -44,7 +44,7 @@
 			const now = new Date();
 			const hours = now.getHours();
 			const minutes = now.getMinutes();
-			if (!isFirstLoad && hours === 10 && minutes === 0)
+			if (!isFirstLoad && (hours === 10 || hours === 16) && minutes === 0)
 				window.location.reload();
 			else setTimeout(update, 30000);
 		}
