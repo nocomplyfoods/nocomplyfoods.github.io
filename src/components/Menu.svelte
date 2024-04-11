@@ -36,7 +36,7 @@
 
 		const maxItems = hasSides ? 5 : 8;
 		const overflow = Math.max(0, mains.length - maxItems);
-		const rate = hasSides ? 0.1 : 0.075;
+		const rate = hasSides ? 0.065 : 0.065;
 		scale = web ? 1 : 1 - overflow * rate;
 
 		if (hasSides) {

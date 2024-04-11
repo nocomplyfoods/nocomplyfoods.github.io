@@ -67,7 +67,7 @@
 
 	.price {
 		font-weight: 500;
-		font-size: var(--fs-big);
+		font-size: calc(var(--fs-big) * var(--scale));
 		opacity: var(--opacity);
 		margin-left: calc(var(--padding) * var(--scale));
 		/* text-shadow: var(--shadow) var(--shadow) var(--color-pink); */
