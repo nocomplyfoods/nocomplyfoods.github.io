@@ -17,10 +17,10 @@
 			const data = await response.json();
 			events = data.result.map((d) => {
 				const date = new Date(d.date);
-				const link = d.link.trim();
-				const time = d.time.trim();
-				const title = d.title.trim();
-				const location = d.location.trim();
+				const link = d.link?.trim();
+				const time = d.time?.trim();
+				const title = d.title?.trim();
+				const location = d.location?.trim();
 				const img = d.image.asset._ref
 					.replace("image-", "")
 					.replace("-png", ".png")
