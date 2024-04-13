@@ -49,6 +49,8 @@
 			else setTimeout(update, 30000);
 		}
 	}
+
+	$: v = __UPDATED__;
 	onMount(async () => {
 		await update(true);
 	});
@@ -56,3 +58,16 @@
 
 <Meta {preloadFont}></Meta>
 <Menu web={false} {items}></Menu>
+<p>{v}</p>
+
+<style>
+	p {
+		margin: 0;
+		padding: 0;
+		font-size: 12px;
+		position: absolute;
+		top: 4px;
+		right: 4px;
+		opacity: 0.2;
+	}
+</style>
