@@ -7,13 +7,11 @@ import dsv from "@rollup/plugin-dsv";
 
 const { version } = JSON.parse(readFileSync("package.json", "utf8"));
 const timestamp = timeFormat("%Y-%m-%d-%H:%M")(new Date());
-const updated = timeFormat("v%m.%d")(new Date());
 
 const config = {
 	define: {
 		__VERSION__: JSON.stringify(version),
-		__TIMESTAMP__: JSON.stringify(timestamp),
-		__UPDATED__: JSON.stringify(updated)
+		__TIMESTAMP__: JSON.stringify(timestamp)
 	},
 	plugins: [sveltekit(), dsv(), svg()],
 	resolve: {
