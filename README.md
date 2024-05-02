@@ -16,3 +16,8 @@ Notes:
 Notes:
 * Images should be 800px wide
 * To remove an item from appearing you must unpublish it.
+
+## Deploy
+* `npm run build`
+* `gac build`
+* `git push`
