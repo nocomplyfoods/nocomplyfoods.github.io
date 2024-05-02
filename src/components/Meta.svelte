@@ -5,10 +5,14 @@
 	export let url = "https://nocomplyfoods.com";
 	export let keywords = "";
 	export let preloadFont = [];
+	export let hide;
 </script>
 
 <svelte:head>
 	<title>{title}</title>
+	{#if hide}
+		<meta name="robots" content="noindex, nofollow" />
+	{/if}
 	<meta name="description" content={description} />
 	<meta name="author" content="No Comply Foods" />
 	<meta name="news_keywords" content={keywords} />
