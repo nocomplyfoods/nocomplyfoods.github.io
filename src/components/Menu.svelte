@@ -145,11 +145,6 @@
 		background-color: var(--color-yellow-lighter);
 	}
 
-	.allergy p {
-		position: relative;
-		opacity: 0.6;
-	}
-
 	.web section:before {
 		background: transparent;
 	}
@@ -166,9 +161,6 @@
 	}
 
 	.allergy {
-		/* position: absolute;
-		bottom: 0;
-		left: 0; */
 		flex: 0;
 	}
 
@@ -177,6 +169,8 @@
 		line-height: 1;
 		margin: 0;
 		text-align: center;
+		position: relative;
+		opacity: 0.6;
 	}
 
 	.sides .title {
