@@ -33,7 +33,6 @@
 				header: !d.price
 			}));
 
-		console.log(mains);
 		sides = items.filter(
 			(d) =>
 				d.section === "side" || d.section === "app" || d.section === "dessert"
@@ -43,7 +42,7 @@
 
 		const maxItems = hasSides ? 5 : 8;
 		const overflow = Math.max(0, mains.length - maxItems);
-		const rate = hasSides ? 0.065 : 0.065;
+		const rate = hasSides ? 0.065 : 0.06;
 		scale = web ? 1 : 1 - overflow * rate;
 
 		if (hasSides) {
@@ -146,6 +145,11 @@
 		background-color: var(--color-yellow-lighter);
 	}
 
+	.allergy p {
+		position: relative;
+		opacity: 0.6;
+	}
+
 	.web section:before {
 		background: transparent;
 	}
@@ -162,6 +166,9 @@
 	}
 
 	.allergy {
+		/* position: absolute;
+		bottom: 0;
+		left: 0; */
 		flex: 0;
 	}
 
