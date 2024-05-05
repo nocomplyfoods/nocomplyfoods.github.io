@@ -22,8 +22,12 @@
     "gray-800": "rgb(55, 55, 55)",
     "gray-900": "rgb(38, 38, 38)",
     "gray-1000": "rgb(25, 25, 25)",
-    "yellow": "#ffca80",
+    "yellow": "#ffd480",
+    "yellow-light": "#ffd59a",
+    "yellow-lighter": "#ffeacc",
     "pink": "#ff808a",
+    "pink-light": "#ff9ba2",
+    "pink-lighter": "#ffd3d6",
     "black2": "#030303",
     "green": "#00d9c0",
     "purple": "#9381ff"

@@ -26,7 +26,14 @@
 	}
 
 	function prepareMenu(items) {
-		mains = items.filter((d) => d.section === "main");
+		mains = items
+			.filter((d) => d.section === "main")
+			.map((d) => ({
+				...d,
+				header: !d.price
+			}));
+
+		console.log(mains);
 		sides = items.filter(
 			(d) =>
 				d.section === "side" || d.section === "app" || d.section === "dessert"
@@ -124,23 +131,19 @@
 	}
 
 	.mains:before {
-		background-color: var(--color-pink);
-		opacity: 0.35;
+		background-color: var(--color-pink-lighter);
 	}
 
 	.sides:before {
-		background-color: var(--color-yellow);
-		opacity: 0.4;
+		background-color: var(--color-yellow-lighter);
 	}
 
 	.allergy:before {
-		background-color: var(--color-pink);
-		opacity: 0.35;
+		background-color: var(--color-pink-lighter);
 	}
 
 	.allergy.sides:before {
-		background-color: var(--color-yellow);
-		opacity: 0.4;
+		background-color: var(--color-yellow-lighter);
 	}
 
 	.web section:before {

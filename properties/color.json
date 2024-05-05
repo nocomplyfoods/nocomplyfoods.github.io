@@ -42,8 +42,20 @@
 		"yellow": {
 			"value": "#ffd480"
 		},
+		"yellow-light": {
+			"value": "#ffd59a"
+		},
+		"yellow-lighter": {
+			"value": "#ffeacc"
+		},
 		"pink": {
 			"value": "#ff808a"
+		},
+		"pink-light": {
+			"value": "#ff9ba2"
+		},
+		"pink-lighter": {
+			"value": "#ffd3d6"
 		},
 		"black2": {
 			"value": "#030303"

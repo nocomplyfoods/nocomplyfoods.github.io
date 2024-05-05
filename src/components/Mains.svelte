@@ -14,13 +14,13 @@
 </script>
 
 <div class="items" class:tuck>
-	{#each data as { item, detail, price }}
-		<div class="item">
+	{#each data as { item, detail, price, header }}
+		<div class="item" class:header>
 			<div class="text">
-				<p class="name">{item}</p>
-				<p class="detail">{@html detail}</p>
+				<p class="name">{item?.trim()}</p>
+				<p class="detail">{@html detail?.trim()}</p>
 			</div>
-			{#if price}<p class="price">${price}</p>{/if}
+			{#if price}<p class="price">${price?.trim()}</p>{/if}
 		</div>
 	{/each}
 </div>
@@ -36,9 +36,19 @@
 		align-items: flex-end;
 	}
 
+	.header .text {
+		background: var(--color-fg);
+		color: var(--color-pink-light);
+		padding: 0.25em;
+	}
+
 	.name {
 		flex: 1;
 		margin-right: calc(var(--padding) * var(--scale));
+	}
+
+	.header .name {
+		margin-right: 0;
 	}
 
 	.name:empty {
@@ -70,7 +80,6 @@
 		font-size: calc(var(--fs-big) * var(--scale));
 		opacity: var(--opacity);
 		margin-left: calc(var(--padding) * var(--scale));
-		/* text-shadow: var(--shadow) var(--shadow) var(--color-pink); */
 	}
 
 	.detail {
