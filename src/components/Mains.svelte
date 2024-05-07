@@ -36,7 +36,7 @@
 		align-items: flex-end;
 	}
 
-	.header .text {
+	.header .name {
 		background: var(--color-fg);
 		color: var(--color-pink-light);
 		padding: 0.25em;
@@ -49,6 +49,14 @@
 
 	.header .name {
 		margin-right: 0;
+	}
+
+	.header .detail {
+		display: none;
+	}
+
+	.header .price {
+		display: none;
 	}
 
 	.name:empty {
