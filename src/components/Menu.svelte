@@ -27,10 +27,10 @@
 
 	function prepareMenu(items) {
 		mains = items
-			.filter((d) => d.section === "main")
+			.filter((d) => d.section === "main" || d.section === "header")
 			.map((d) => ({
 				...d,
-				header: !d.price
+				header: d.section === "header"
 			}));
 
 		sides = items.filter(
