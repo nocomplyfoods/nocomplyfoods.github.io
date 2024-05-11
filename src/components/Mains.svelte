@@ -94,6 +94,7 @@
 		font-size: calc(var(--fs-small) * var(--scale));
 		opacity: var(--opacity);
 		font-weight: 500;
+		line-height: 1.15;
 	}
 
 	.detail:empty {
