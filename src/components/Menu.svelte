@@ -30,7 +30,11 @@
 			.filter((d) => d.section === "main" || d.section === "header")
 			.map((d) => ({
 				...d,
-				header: d.section === "header"
+				header: d.section === "header",
+				price: d.price?.replace(
+					" per person",
+					"<span class='per'>per person</span>"
+				)
 			}));
 
 		sides = items.filter(

@@ -3,13 +3,6 @@
 	export let data;
 	export let web;
 
-	function update() {
-		// const maxItem = max(data, (d) => d.item?.length);
-		// const maxDetail = max(data, (d) => d.detail?.length);
-		// tuck = data.length <= 5;
-	}
-
-	$: update(data);
 	$: tuck = web;
 </script>
 
@@ -20,7 +13,7 @@
 				<p class="name">{item?.trim()}</p>
 				<p class="detail">{@html detail?.trim()}</p>
 			</div>
-			{#if price}<p class="price">${price?.trim()}</p>{/if}
+			{#if price}<p class="price">${@html price?.trim()}</p>{/if}
 		</div>
 	{/each}
 </div>
@@ -70,6 +63,7 @@
 	.item {
 		display: flex;
 		justify-content: space-between;
+		align-items: flex-start;
 		margin-bottom: calc(var(--padding) * var(--scale));
 	}
 
@@ -88,6 +82,17 @@
 		font-size: calc(var(--fs-big) * var(--scale));
 		opacity: var(--opacity);
 		margin-left: calc(var(--padding) * var(--scale));
+		text-align: right;
+		/* flex: 0; */
+	}
+
+	:global(.price span) {
+		font-size: calc(var(--fs-small) * var(--scale));
+		display: block;
+	}
+
+	:global(.tuck .price span) {
+		margin-top: calc(var(--padding) * 0.5);
 	}
 
 	.detail {
