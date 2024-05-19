@@ -11,6 +11,7 @@
 	let mains = [];
 	let sides = [];
 	let scale = 1;
+	let scaleDetail = 1;
 	let sidesSamePrice = false;
 	let sidePrice;
 	let lastUpdate;
@@ -46,8 +47,10 @@
 
 		const maxItems = hasSides ? 5 : 8;
 		const overflow = Math.max(0, mains.length - maxItems);
-		const rate = hasSides ? 0.065 : 0.06;
-		scale = web ? 1 : 1 - overflow * rate;
+		const rateName = hasSides ? 0.065 : 0.06;
+		const rateDetail = 0.05;
+		scale = web ? 1 : 1 - overflow * rateName;
+		scaleDetail = web ? 1 : 1 - overflow * rateDetail;
 
 		if (hasSides) {
 			updateLabel(sides);
@@ -59,7 +62,7 @@
 	$: prepareMenu(items);
 </script>
 
-<div class:web style="--scale: {scale};">
+<div class:web style="--scale: {scale}; --scale-detail: {scaleDetail};">
 	<section class="mains">
 		<Mains {web} data={mains}></Mains>
 	</section>
