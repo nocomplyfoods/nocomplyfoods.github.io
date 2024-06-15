@@ -1,5 +1,5 @@
 <script>
-	import { descending, timeFormat } from "d3";
+	import { descending } from "d3";
 	import { onMount } from "svelte";
 	import { ExternalLink } from "lucide-svelte";
 
@@ -16,29 +16,25 @@
 			const response = await fetch(url);
 			const data = await response.json();
 			events = data.result.map((d) => {
-				const date = new Date(d.date);
 				const link = d.link?.trim();
-				const time = d.time?.trim();
-				const title = d.title?.trim();
-				const location = d.location?.trim();
+				const when = d.when?.trim();
+				const what = d.what?.trim();
+				const where = d.where?.trim();
 				const img = d.image.asset._ref
 					.replace("image-", "")
 					.replace("-png", ".png")
 					.replace("-jpg", ".jpg");
 				const image = `https://apicdn.sanity.io/images/r8gkc5c9/production/${img}`;
-				const dateDisplay = timeFormat("%B %e, %Y")(date);
 				return {
-					title,
-					location,
-					date,
-					dateDisplay,
-					time,
+					what,
+					where,
+					when,
 					link,
 					image
 				};
 			});
 
-			events.sort((a, b) => descending(a.date, b.date));
+			// events.sort((a, b) => descending(a.date, b.date));
 			visible = events.length > 0;
 		} catch (err) {
 			// TODO
@@ -50,25 +46,27 @@
 <div class="c" class:visible>
 	<h3>Events</h3>
 	<ul>
-		{#each events as { title, location, dateDisplay, time, link, image }}
+		{#each events as { what, where, when, link, image }}
 			<li>
-				<img src={image} alt={title} />
+				<img src={image} alt={what} />
 
 				<div class="info">
 					<div>
 						<h4>What</h4>
-						<p>{title}</p>
+						<p>{what}</p>
 					</div>
 					<div>
 						<h4>Where</h4>
-						<p>{location}</p>
+						<p>{where}</p>
 					</div>
-					<div>
-						<h4>When</h4>
-						<p>
-							{dateDisplay}{#if time}&nbsp;at {time}{/if}
-						</p>
-					</div>
+					{#if when}
+						<div>
+							<h4>When</h4>
+							<p>
+								{@html when}
+							</p>
+						</div>
+					{/if}
 					{#if link}
 						<div>
 							<p>
