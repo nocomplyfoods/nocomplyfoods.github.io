@@ -19,9 +19,9 @@
 </div>
 
 <style>
-	.items {
+	/* .items {
 		--scale: 0.72;
-	}
+	} */
 
 	p {
 		margin: 0;

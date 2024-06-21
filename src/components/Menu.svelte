@@ -1,4 +1,5 @@
 <script>
+	import { max } from "d3";
 	import { onMount } from "svelte";
 	import Mains from "$components/Mains.svelte";
 	import Sides from "$components/Sides.svelte";
@@ -51,6 +52,11 @@
 		const rateDetail = 0.05;
 		scale = web ? 1 : 1 - overflow * rateName;
 		scaleDetail = web ? 1 : 1 - overflow * rateDetail;
+
+		const maxItemLen = max(mains.map((d) => d.item.length));
+		const maxDetailLen = max(mains.map((d) => d.detail?.length || 0));
+		if (scale > 0.9 && maxItemLen > 20) scale = 20 / maxItemLen;
+		if (scaleDetail > 0.9 && maxDetailLen > 40) scaleDetail = 44 / maxDetailLen;
 
 		if (hasSides) {
 			updateLabel(sides);
