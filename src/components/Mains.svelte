@@ -19,6 +19,10 @@
 </div>
 
 <style>
+	.items {
+		--scale: 0.72;
+	}
+
 	p {
 		margin: 0;
 		line-height: 1;
