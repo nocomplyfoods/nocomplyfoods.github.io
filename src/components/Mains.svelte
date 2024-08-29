@@ -8,12 +8,14 @@
 
 <div class="items" class:tuck>
 	{#each data as { item, detail, price, header }}
-		<div class="item" class:header>
+		<div class="item" class:header class:noDetail={!detail}>
 			<div class="text">
 				<p class="name">{item?.trim()}</p>
 				<p class="detail">{@html detail?.trim()}</p>
 			</div>
-			{#if price}<p class="price">${@html price?.trim()}</p>{/if}
+			{#if price}<p class="price">
+					<span class="dots"></span>${@html price?.trim()}
+				</p>{/if}
 		</div>
 	{/each}
 </div>
@@ -37,11 +39,6 @@
 		background: var(--color-fg);
 		color: var(--color-pink-light);
 		padding: 0.25em;
-	}
-
-	.name {
-		flex: 1;
-		margin-right: calc(var(--padding) * var(--scale));
 	}
 
 	.header .name {
@@ -79,15 +76,27 @@
 		text-transform: uppercase;
 		font-weight: 700;
 		font-size: calc(var(--fs-big) * var(--scale));
+		flex: 1;
+		margin-right: calc(var(--padding) * var(--scale));
+	}
+
+	.noDetail .name {
+		margin-right: 0;
 	}
 
 	.price {
 		font-weight: 500;
 		font-size: calc(var(--fs-big) * var(--scale));
 		opacity: var(--opacity);
-		margin-left: calc(var(--padding) * var(--scale));
+		/* margin-left: calc(var(--padding) * var(--scale)); */
 		text-align: right;
-		/* flex: 0; */
+		flex: 1;
+		display: flex;
+		align-items: flex-end;
+	}
+
+	.tuck .price {
+		flex: 0;
 	}
 
 	:global(.price span) {
@@ -119,5 +128,23 @@
 		margin: 0;
 		margin-top: calc(var(--padding) * 0.5);
 		text-align: left;
+	}
+
+	.dots {
+		flex: 1;
+		height: 1em;
+		margin: 0 0.5em;
+		background-image: radial-gradient(
+			circle,
+			var(--color-fg) 1px,
+			transparent 1px
+		);
+		background-size: 8px 8px;
+		background-position: bottom;
+		background-repeat: repeat-x;
+	}
+
+	.tuck .dots {
+		display: none;
 	}
 </style>
