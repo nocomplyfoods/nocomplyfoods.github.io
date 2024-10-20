@@ -2,20 +2,34 @@
 	import { max } from "d3";
 	export let data;
 	export let web;
-
-	$: tuck = web;
 </script>
 
-<div class="items" class:tuck>
+<div class="items" class:web>
 	{#each data as { item, detail, price, header }}
-		<div class="item haha" class:header class:noDetail={!detail}>
-			<div class="text">
-				<p class="name">{item?.trim()}</p>
-				<p class="detail">{@html detail?.trim()}</p>
-			</div>
-			{#if price}<p class="price">
-					<span class="dots"></span>${@html price?.trim()}
-				</p>{/if}
+		<div class="item" class:header class:noDetail={!detail}>
+			{#if web}
+				<div class="top">
+					<p class="name">{item?.trim()}</p>
+					{#if price}
+						<p class="price">
+							<span class="dots"></span>${@html price?.trim()}
+						</p>
+					{/if}
+				</div>
+				<div class="bottom">
+					<p class="detail">{@html detail?.trim()}</p>
+				</div>
+			{:else}
+				<div class="text">
+					<p class="name">{item?.trim()}</p>
+					<p class="detail">{@html detail?.trim()}</p>
+				</div>
+				{#if price}
+					<p class="price">
+						<span class="dots"></span>${@html price?.trim()}
+					</p>
+				{/if}
+			{/if}
 		</div>
 	{/each}
 </div>
@@ -72,6 +86,12 @@
 		margin-bottom: 0;
 	}
 
+	.web .item {
+		flex-direction: column;
+		justify-content: flex-start;
+		align-items: stretch;
+	}
+
 	.name {
 		text-transform: uppercase;
 		font-weight: 700;
@@ -81,6 +101,11 @@
 	}
 
 	.noDetail .name {
+		margin-right: 0;
+	}
+
+	.web .name {
+		flex: none;
 		margin-right: 0;
 	}
 
@@ -95,16 +120,12 @@
 		align-items: flex-end;
 	}
 
-	.tuck .price {
-		flex: 0;
-	}
-
 	:global(.price span) {
 		font-size: calc(var(--fs-small) * var(--scale));
 		display: block;
 	}
 
-	:global(.tuck .price span) {
+	:global(.web .price span) {
 		margin-top: calc(var(--padding) * 0.5);
 	}
 
@@ -119,15 +140,18 @@
 		display: none;
 	}
 
-	.tuck .text {
-		flex-direction: column;
-		align-items: flex-start;
+	.web .top {
+		display: flex;
+		justify-content: space-between;
+		/* flex-direction: column;
+		align-items: flex-start; */
 	}
 
-	.tuck .detail {
+	.web .detail {
 		margin: 0;
 		margin-top: calc(var(--padding) * 0.5);
 		margin-bottom: calc(var(--padding) * 0.25);
+		margin-right: calc(var(--padding) * 2);
 		text-align: left;
 	}
 
@@ -143,9 +167,5 @@
 		background-size: 8px 8px;
 		background-position: bottom;
 		background-repeat: repeat-x;
-	}
-
-	.tuck .dots {
-		display: none;
 	}
 </style>
