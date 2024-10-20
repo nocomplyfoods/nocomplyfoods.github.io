@@ -8,7 +8,7 @@
 
 <div class="items" class:tuck>
 	{#each data as { item, detail, price, header }}
-		<div class="item" class:header class:noDetail={!detail}>
+		<div class="item haha" class:header class:noDetail={!detail}>
 			<div class="text">
 				<p class="name">{item?.trim()}</p>
 				<p class="detail">{@html detail?.trim()}</p>
@@ -127,6 +127,7 @@
 	.tuck .detail {
 		margin: 0;
 		margin-top: calc(var(--padding) * 0.5);
+		margin-bottom: calc(var(--padding) * 0.25);
 		text-align: left;
 	}
 

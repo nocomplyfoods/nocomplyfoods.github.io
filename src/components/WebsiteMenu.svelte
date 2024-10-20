@@ -61,18 +61,17 @@
 					>
 				{/if}
 			</div>
-			{#if dateDisplay}<time class="desktop"
+			<!-- {#if dateDisplay}<time class="desktop"
 					><small>updated on {dateDisplay}</small></time
-				>{/if}
+				>{/if} -->
 		</div>
+		<p class="alcohol"><small>alcohol-free restaurant</small></p>
 		<img src="assets/images/keanu.png" alt="keanu eating" aria="hidden" />
 
 		<div class="c">
 			<Menu web={true} {items}></Menu>
 		</div>
-		{#if dateDisplay}<time class="mobile"
-				><small>updated on {dateDisplay}</small></time
-			>{/if}
+		{#if dateDisplay}<time><small>updated on {dateDisplay}</small></time>{/if}
 	{/if}
 </div>
 
@@ -132,7 +131,7 @@
 		font-weight: 700;
 		text-transform: uppercase;
 		margin: 0;
-		opacity: 0.7;
+		opacity: 0.65;
 		text-align: center;
 		width: 100%;
 		display: block;
@@ -145,7 +144,7 @@
 	}
 
 	img {
-		display: block;
+		display: none;
 		position: absolute;
 		top: 0;
 		right: 0;
@@ -153,6 +152,20 @@
 		width: 20vw;
 		max-width: 128px;
 		transform: translate(-8px, -80%);
+	}
+
+	p.alcohol {
+		position: absolute;
+		top: -12px;
+		right: 0;
+		z-index: 0;
+		transform: translateY(-100%);
+		/* max-width: 12em; */
+		line-height: 0.9;
+		text-transform: uppercase;
+		opacity: 0.65;
+		font-weight: 700;
+		text-align: right;
 	}
 
 	.c {
@@ -170,6 +183,10 @@
 
 		time.desktop {
 			display: block;
+		}
+
+		img {
+			display: none;
 		}
 	}
 </style>

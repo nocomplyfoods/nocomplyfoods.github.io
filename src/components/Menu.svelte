@@ -55,8 +55,9 @@
 
 		const maxItemLen = max(mains.map((d) => d.item.length));
 		const maxDetailLen = max(mains.map((d) => d.detail?.length || 0));
-		if (scale > 0.9 && maxItemLen > 20) scale = 20 / maxItemLen;
-		if (scaleDetail > 0.9 && maxDetailLen > 40) scaleDetail = 44 / maxDetailLen;
+		if (scale > 0.9 && maxItemLen > 20) scale = web ? 0.9 : 20 / maxItemLen;
+		if (scaleDetail > 0.9 && maxDetailLen > 40)
+			web ? 0.9 : (scaleDetail = 44 / maxDetailLen);
 
 		if (hasSides) {
 			updateLabel(sides);
@@ -194,33 +195,5 @@
 		position: relative;
 		margin: 0 auto calc(var(--padding) * var(--scale)) auto;
 		opacity: var(--opacity);
-		/* text-shadow: var(--shadow) var(--shadow) var(--color-yellow); */
 	}
-
-	.updated {
-		display: none;
-		position: absolute;
-		top: 0.5vw;
-		right: 0.5vw;
-		font-size: 1vw;
-		opacity: 0.5;
-		line-height: 1;
-		margin: 0;
-	}
-	/* 
-	.error {
-		position: absolute;
-		bottom: 0.5vw;
-		left: 0.5vw;
-		font-size: 1vw;
-		opacity: 0.5;
-		line-height: 1;
-		margin: 0;
-		display: flex;
-		align-items: center;
-	}
-
-	.error span {
-		margin-left: 0.5vw;
-	} */
 </style>
