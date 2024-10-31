@@ -111,7 +111,7 @@
 		display: flex;
 		flex-direction: column;
 		max-width: 720px;
-		margin: 0 auto;
+		margin: 32px auto;
 		align-items: flex-start;
 		justify-content: center;
 	}
