@@ -49,7 +49,7 @@
 		const maxItems = hasSides ? 5 : 8;
 		const overflow = Math.max(0, mains.length - maxItems);
 		const rateName = hasSides ? 0.065 : 0.06;
-		const rateDetail = 0.05;
+		const rateDetail = 0.07;
 		scale = web ? 1 : 1 - overflow * rateName;
 		scaleDetail = web ? 1 : 1 - overflow * rateDetail;
 
