@@ -1,5 +1,6 @@
 <script>
 	import Hours from "$components/Hours.svelte";
+	import Phone from "$components/Phone.svelte";
 	import WebsiteMenu from "$components/WebsiteMenu.svelte";
 	import Newsletter from "$components/Newsletter.svelte";
 	import Events from "$components/Events.svelte";
@@ -18,7 +19,6 @@
 			258 Stockbridge Rd<br />Great Barrington, MA</a
 		>
 	</p>
-
 	<Hours></Hours>
 
 	<WebsiteMenu></WebsiteMenu>
@@ -29,6 +29,10 @@
 
 	<section>
 		<Events></Events>
+	</section>
+
+	<section>
+		<Phone></Phone>
 	</section>
 </div>
 

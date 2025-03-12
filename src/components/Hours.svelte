@@ -53,22 +53,24 @@
 </script>
 
 {#if hours}
-	<div class="hours">
-		<h3>Hours</h3>
-		<ul>
-			{#each hours as { day, time, service }}
-				<li>
-					<span class="day">{day}:</span><span class="time">{time}</span><span
-						class="service">{service}</span
-					>
-				</li>
-			{/each}
-		</ul>
+	<div class="info">
+		<div class="hours">
+			<h3>Hours</h3>
+			<ul>
+				{#each hours as { day, time, service }}
+					<li>
+						<span class="day">{day}:</span><span class="time">{time}</span><span
+							class="service">{service}</span
+						>
+					</li>
+				{/each}
+			</ul>
+		</div>
 	</div>
 {/if}
 
 <style>
-	div {
+	div.info {
 		padding: 16px;
 		margin-top: 32px;
 	}
@@ -98,7 +100,7 @@
 	}
 
 	@media only screen and (min-width: 640px) {
-		div {
+		div.info {
 			position: absolute;
 			top: 0;
 			right: 0;
