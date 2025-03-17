@@ -22,6 +22,7 @@
 	onMount(async () => {
 		try {
 			const { data, backup, error } = await loadMenu();
+			console.log(data);
 			if (data?.items) {
 				updated = data.updated;
 				brunch = data.items.filter((d) => d.item && d.service === "brunch");

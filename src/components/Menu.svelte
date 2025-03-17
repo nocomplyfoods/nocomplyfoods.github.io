@@ -20,8 +20,8 @@
 	let updatedDisplay = "";
 
 	function updateLabel(data) {
-		const sections = data.map((d) => d.section);
-		const unique = [...new Set(sections)];
+		const types = data.map((d) => d.type);
+		const unique = [...new Set(types)];
 		if (unique.length === 2) sidesTitle = "Apps & Sides";
 		else if (unique.length === 1) sidesTitle = `${unique[0]}s`;
 		else sidesTitle = "Sides";
@@ -29,10 +29,10 @@
 
 	function prepareMenu(items) {
 		mains = items
-			.filter((d) => d.section === "main" || d.section === "header")
+			.filter((d) => d.type === "main" || d.type === "header")
 			.map((d) => ({
 				...d,
-				header: d.section === "header",
+				header: d.type === "header",
 				price: d.price?.replace(
 					" per person",
 					"<span class='per'>per person</span>"
@@ -40,8 +40,7 @@
 			}));
 
 		sides = items.filter(
-			(d) =>
-				d.section === "side" || d.section === "app" || d.section === "dessert"
+			(d) => d.type === "side" || d.type === "app" || d.type === "dessert"
 		);
 
 		hasSides = sides.length > 0;
