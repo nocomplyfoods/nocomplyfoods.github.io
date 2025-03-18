@@ -8,6 +8,7 @@
 	let error;
 	let brunch = [];
 	let dinner = [];
+	let drinks = [];
 	let items = [];
 	let active;
 
@@ -16,7 +17,9 @@
 
 	function toggle(a) {
 		active = a;
-		items = active === "brunch" ? brunch : dinner;
+		if (a === "brunch") items = brunch;
+		else if (a === "dinner") items = dinner;
+		else if (a === "drinks") items = drinks;
 	}
 
 	onMount(async () => {
@@ -26,6 +29,7 @@
 				updated = data.updated;
 				brunch = data.items.filter((d) => d.item && d.service === "brunch");
 				dinner = data.items.filter((d) => d.item && d.service === "dinner");
+				drinks = data.items.filter((d) => d.item && d.service === "drinks");
 
 				const hours = new Date().getHours();
 				const isBrunch = hours < 15;
@@ -45,6 +49,7 @@
 
 <div class="menu" class:visible class:error={!!error}>
 	{#if visible}
+		<p class="alcohol"><small>alcohol-free restaurant</small></p>
 		<div class="h">
 			<!-- <h3>Menu</h3> -->
 			<div class="buttons">
@@ -60,12 +65,18 @@
 						on:click={() => toggle("dinner")}>Dinner</button
 					>
 				{/if}
+				{#if drinks.length}
+					<button
+						class:active={active === "drinks"}
+						on:click={() => toggle("drinks")}>Drinks</button
+					>
+				{/if}
 			</div>
 			<!-- {#if dateDisplay}<time class="desktop"
 					><small>updated on {dateDisplay}</small></time
 				>{/if} -->
 		</div>
-		<p class="alcohol"><small>alcohol-free restaurant</small></p>
+
 		<img src="assets/images/keanu.png" alt="keanu eating" aria="hidden" />
 
 		<div class="c">
@@ -156,16 +167,15 @@
 
 	p.alcohol {
 		position: absolute;
-		top: -12px;
-		right: 0;
-		z-index: 0;
-		transform: translateY(-100%);
-		/* max-width: 12em; */
+		top: 0;
+		left: 0;
+		width: 100%;
+		text-align: center;
+		transform: translateY(-72px);
 		line-height: 0.9;
 		text-transform: uppercase;
 		opacity: 0.65;
 		font-weight: 700;
-		text-align: right;
 	}
 
 	.c {
@@ -187,6 +197,15 @@
 
 		img {
 			display: none;
+		}
+
+		p.alcohol {
+			position: absolute;
+			top: -12px;
+			right: 0;
+			z-index: 0;
+			transform: translateY(-100%);
+			text-align: right;
 		}
 	}
 </style>
