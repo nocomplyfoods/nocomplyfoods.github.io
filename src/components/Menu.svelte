@@ -58,6 +58,9 @@
 		if (scaleDetail > 0.9 && maxDetailLen > 40)
 			web ? 0.9 : (scaleDetail = 44 / maxDetailLen);
 
+		scale = Math.max(scale, 0.5);
+		scaleDetail = Math.max(scaleDetail, 0.5);
+
 		if (hasSides) {
 			updateLabel(sides);
 			sidePrice = sides[0].price;
