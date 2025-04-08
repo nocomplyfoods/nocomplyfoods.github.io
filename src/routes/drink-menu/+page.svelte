@@ -26,7 +26,7 @@
 				const minutes = new Date().getMinutes();
 
 				const service = "drinks";
-				items = data.items.filter((d) => d.item && d.service === service);
+				items = data.items.filter((d) => d.name && d.service === service);
 			} else {
 				// TODO
 				throw new Error("no data");
@@ -43,4 +43,4 @@
 </script>
 
 <Meta {preloadFont} hide={true}></Meta>
-<Menu web={false} {items}></Menu>
+<Menu web={false} {items} drinks={true}></Menu>

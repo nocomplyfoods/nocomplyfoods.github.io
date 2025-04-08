@@ -1,15 +1,21 @@
 <script>
 	import { max } from "d3";
+	import convertToCurly from "$utils/convertToCurly.js";
+	import convertApostrophe from "$utils/convertApostrophe.js";
 	export let data;
 	export let web;
+
+	function clean(text) {
+		return convertApostrophe(convertToCurly(text.trim()));
+	}
 </script>
 
 <div class="items" class:web>
-	{#each data as { item, detail, price, header }}
-		<div class="item" class:header class:noDetail={!detail}>
+	{#each data as { name, detail, price, header, note }}
+		<div class="item" class:header class:note class:noDetail={!detail}>
 			{#if web}
 				<div class="top">
-					<p class="name">{item?.trim()}</p>
+					<p class="name">{clean(name)}</p>
 					{#if price}
 						<p class="price">
 							<span class="dots"></span>${@html price?.trim()}
@@ -17,12 +23,12 @@
 					{/if}
 				</div>
 				<div class="bottom">
-					<p class="detail">{@html detail?.trim()}</p>
+					<p class="detail">{@html clean(detail)}</p>
 				</div>
 			{:else}
 				<div class="text">
-					<p class="name">{item?.trim()}</p>
-					<p class="detail">{@html detail?.trim()}</p>
+					<p class="name">{clean(name)}</p>
+					<p class="detail">{@html clean(detail)}</p>
 				</div>
 				{#if price}
 					<p class="price">
@@ -49,9 +55,14 @@
 		align-items: flex-end;
 	}
 
+	/* everything but first .header */
+	.header:not(:first-of-type) {
+		margin-top: calc(var(--padding) * var(--scale) * 1);
+	}
+
 	.header .name {
 		background: var(--color-fg);
-		color: var(--color-pink-light);
+		color: var(--color-fg-light);
 		padding: 0.25em;
 	}
 
@@ -65,6 +76,20 @@
 
 	.header .price {
 		display: none;
+	}
+
+	.web .note {
+		display: none;
+	}
+
+	.note .name {
+		font-style: italic;
+		font-weight: normal;
+	}
+
+	/* if last .item and of class note */
+	.item:last-of-type.note {
+		margin-top: calc(var(--padding) * var(--scale) * 2);
 	}
 
 	.name:empty {

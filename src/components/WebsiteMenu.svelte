@@ -27,9 +27,9 @@
 			const { data, backup, error } = await loadMenu();
 			if (data?.items) {
 				updated = data.updated;
-				brunch = data.items.filter((d) => d.item && d.service === "brunch");
-				dinner = data.items.filter((d) => d.item && d.service === "dinner");
-				drinks = data.items.filter((d) => d.item && d.service === "drinks");
+				brunch = data.items.filter((d) => d.service === "brunch");
+				dinner = data.items.filter((d) => d.service === "dinner");
+				drinks = data.items.filter((d) => d.service === "drinks");
 
 				const hours = new Date().getHours();
 				const isBrunch = hours < 15;

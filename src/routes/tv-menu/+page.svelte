@@ -29,10 +29,10 @@
 				const target = 15;
 				const isBrunch = hours < target || (hours === target && minutes < 30);
 				const service = isBrunch ? "brunch" : "dinner";
-				items = data.items.filter((d) => d.item && d.service === service);
+				items = data.items.filter((d) => d.name && d.service === service);
 				// if nothing, use the other service
 				if (!items.length) {
-					items = data.items.filter((d) => d.item && d.service !== service);
+					items = data.items.filter((d) => d.name && d.service !== service);
 				}
 			} else {
 				// TODO

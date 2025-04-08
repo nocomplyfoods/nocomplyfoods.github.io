@@ -2,93 +2,70 @@
 	import { max } from "d3";
 	import { onMount } from "svelte";
 	import Mains from "$components/Mains.svelte";
-	import Sides from "$components/Sides.svelte";
 
 	// TODO no meta hide from stuff for
 	export let web;
 	export let items;
+	export let drinks;
 
-	let hasSides;
 	let mains = [];
-	let sides = [];
 	let scale = 1;
 	let scaleDetail = 1;
-	let sidesSamePrice = false;
-	let sidePrice;
 	let lastUpdate;
-	let sidesTitle = "sides";
 	let updatedDisplay = "";
 
 	function updateLabel(data) {
 		const types = data.map((d) => d.type);
 		const unique = [...new Set(types)];
-		if (unique.length === 2) sidesTitle = "Apps & Sides";
-		else if (unique.length === 1) sidesTitle = `${unique[0]}s`;
-		else sidesTitle = "Sides";
 	}
 
 	function prepareMenu(items) {
 		mains = items
-			.filter((d) => d.type === "main" || d.type === "header")
+			.filter(
+				(d) => d.type === "item" || d.type === "header" || d.type === "note"
+			)
 			.map((d) => ({
 				...d,
 				header: d.type === "header",
+				note: d.type === "note",
 				price: d.price?.replace(
 					" per person",
-					"<span class='per'>per person</span>"
+					"<span class=per>per person</span>"
 				)
 			}));
 
-		sides = items.filter(
-			(d) => d.type === "side" || d.type === "app" || d.type === "dessert"
-		);
-
-		hasSides = sides.length > 0;
-
-		const maxItems = hasSides ? 5 : 8;
+		const maxItems = 8;
 		const overflow = Math.max(0, mains.length - maxItems);
-		const rateName = hasSides ? 0.065 : 0.06;
-		const rateDetail = 0.07;
-		scale = web ? 1 : 1 - overflow * rateName;
-		scaleDetail = web ? 1 : 1 - overflow * rateDetail;
+		const rate = 0.07;
+		const decrease = 1 - overflow * rate;
+		scale = web ? 1 : decrease;
+		scaleDetail = web ? 1 : decrease;
 
-		const maxItemLen = max(mains.map((d) => d.item.length));
+		const maxItemLen = max(mains.map((d) => d.name.length));
 		const maxDetailLen = max(mains.map((d) => d.detail?.length || 0));
-		if (scale > 0.9 && maxItemLen > 20) scale = web ? 0.9 : 20 / maxItemLen;
-		if (scaleDetail > 0.9 && maxDetailLen > 40)
-			web ? 0.9 : (scaleDetail = 44 / maxDetailLen);
 
-		scale = Math.max(scale, 0.5);
-		scaleDetail = Math.max(scaleDetail, 0.5);
+		if (maxItemLen > 20) scale = Math.min(scale, web ? 0.8 : 20 / maxItemLen);
+		if (maxDetailLen > 40)
+			scaleDetail = Math.min(scaleDetail, web ? 0.9 : 40 / maxDetailLen);
 
-		if (hasSides) {
-			updateLabel(sides);
-			sidePrice = sides[0].price;
-			sidesSamePrice = sides.every((d) => d.price === sidePrice);
-		}
+		scale = Math.max(scale, drinks ? 0.55 : 0.6);
+		scaleDetail = Math.max(scaleDetail, drinks ? 0.7 : 0.5);
 	}
 
 	$: prepareMenu(items);
 </script>
 
-<div class:web style="--scale: {scale}; --scale-detail: {scaleDetail};">
+<div
+	class:drinks
+	class:web
+	style="--scale: {scale}; --scale-detail: {scaleDetail};"
+>
 	<section class="mains">
 		<Mains {web} data={mains}></Mains>
 	</section>
 
-	{#if hasSides}
-		<section class="sides">
-			<p class="title">
-				{@html sidesTitle}<span class="price"
-					>{sidesSamePrice ? ` $${sidePrice}` : ""}</span
-				>
-			</p>
-			<Sides data={sides} uniform={sidesSamePrice} />
-		</section>
-	{/if}
-
-	{#if !web}
-		<section class="allergy" class:sides={hasSides}>
+	{#if !web && !drinks}
+		<section class="allergy">
 			<p>
 				Please inform us of any allergies. Consuming raw or undercooked meats,
 				poultry, seafood, shellfish, or eggs may increase your risk of foodborne
@@ -107,6 +84,7 @@
 		--opacity: 0.65;
 		width: 100vw;
 		height: 100vh;
+		--color-fg-light: var(--color-pink);
 		background: #fff;
 		display: flex;
 		flex-direction: column;
@@ -122,6 +100,10 @@
 		width: auto;
 		height: auto;
 		background: transparent;
+	}
+
+	div.drinks {
+		--color-fg-light: var(--color-yellow);
 	}
 
 	p {
@@ -149,16 +131,12 @@
 		background-color: var(--color-pink-lighter);
 	}
 
-	.sides:before {
+	.drinks .mains:before {
 		background-color: var(--color-yellow-lighter);
 	}
 
 	.allergy:before {
 		background-color: var(--color-pink-lighter);
-	}
-
-	.allergy.sides:before {
-		background-color: var(--color-yellow-lighter);
 	}
 
 	.web section:before {
@@ -172,10 +150,6 @@
 		flex: 1;
 	}
 
-	.sides {
-		flex: 0;
-	}
-
 	.allergy {
 		flex: 0;
 	}
@@ -187,15 +161,5 @@
 		text-align: center;
 		position: relative;
 		opacity: 0.6;
-	}
-
-	.sides .title {
-		text-align: center;
-		font-size: calc(var(--fs-big) * var(--scale));
-		font-weight: 700;
-		text-transform: uppercase;
-		position: relative;
-		margin: 0 auto calc(var(--padding) * var(--scale)) auto;
-		opacity: var(--opacity);
 	}
 </style>
