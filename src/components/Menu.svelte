@@ -103,7 +103,7 @@
 	}
 
 	div.drinks {
-		--color-fg-light: #ffb168;
+		--color-fg-light: var(--color-yellow-light);
 	}
 
 	p {
@@ -132,7 +132,7 @@
 	}
 
 	.drinks .mains:before {
-		background-color: #ffb168;
+		background-color: var(--color-yellow-light);
 	}
 
 	.allergy:before {
