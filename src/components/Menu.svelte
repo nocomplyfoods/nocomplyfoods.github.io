@@ -132,7 +132,7 @@
 	}
 
 	.drinks .mains:before {
-		background-color: var(--color-yellow-lighter);
+		background-color: var(--color-yellow-light);
 	}
 
 	.allergy:before {
