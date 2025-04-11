@@ -13,6 +13,16 @@
 	let scaleDetail = 1;
 	let lastUpdate;
 	let updatedDisplay = "";
+	let visible = [false, false];
+	let durs = [930, 3000];
+
+	export function egg() {
+		const r = Math.floor(Math.random() * visible.length);
+		visible[r] = true;
+		setTimeout(() => {
+			visible[r] = false;
+		}, durs[r]);
+	}
 
 	function updateLabel(data) {
 		const types = data.map((d) => d.type);
@@ -73,6 +83,21 @@
 			</p>
 		</section>
 	{/if}
+
+	{#if !web}
+		<img
+			class:visible={visible[0]}
+			class="skate"
+			src="/assets/images/skate.gif"
+			alt="tk"
+		/>
+		<img
+			class:visible={visible[1]}
+			class="steve"
+			src="/assets/images/steve.png"
+			alt="tk"
+		/>
+	{/if}
 </div>
 
 <style>
@@ -91,6 +116,7 @@
 		overflow: hidden;
 		pointer-events: none;
 		user-select: none;
+		position: relative;
 	}
 
 	div.web {
@@ -161,5 +187,36 @@
 		text-align: center;
 		position: relative;
 		opacity: 0.6;
+	}
+
+	.skate {
+		display: block;
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		z-index: var(--z-top);
+		opacity: 0;
+		transition: opacity 0.2s;
+	}
+
+	.skate.visible {
+		opacity: 1;
+	}
+
+	.steve {
+		display: block;
+		position: absolute;
+		bottom: 0;
+		right: 10%;
+		width: 25%;
+		z-index: var(--z-top);
+		transform: translateY(100%);
+		transition: transform 1.5s ease-in-out;
+	}
+
+	.steve.visible {
+		opacity: 1;
+		transform: translateY(40%);
 	}
 </style>

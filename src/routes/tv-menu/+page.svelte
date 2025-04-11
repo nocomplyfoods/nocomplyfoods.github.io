@@ -7,6 +7,7 @@
 	// TODO no meta hide from stuff
 	let updated;
 	let items = [];
+	let menuComponent;
 
 	const preloadFont = [
 		"../assets/fonts/LondrinaSolid-Black.woff2",
@@ -45,6 +46,11 @@
 			const now = new Date();
 			const hours = now.getHours();
 			const minutes = now.getMinutes();
+
+			if (hours === 17 && minutes === 7) menuComponent.egg();
+			if (hours === 19 && minutes === 32) menuComponent.egg();
+			// menuComponent.egg();
+
 			if (!isFirstLoad && (hours === 10 || hours === 16) && minutes === 0)
 				window.location.reload();
 			else setTimeout(update, 30000);
@@ -56,4 +62,4 @@
 </script>
 
 <Meta {preloadFont} hide={true}></Meta>
-<Menu web={false} {items}></Menu>
+<Menu web={false} {items} bind:this={menuComponent}></Menu>
