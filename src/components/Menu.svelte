@@ -13,8 +13,8 @@
 	let scaleDetail = 1;
 	let lastUpdate;
 	let updatedDisplay = "";
-	let visible = [false, false];
-	let durs = [930, 3000];
+	let visible = [false, false, false];
+	let durs = [930, 3000, 4500];
 
 	export function egg() {
 		const r = Math.floor(Math.random() * visible.length);
@@ -97,6 +97,16 @@
 			src="/assets/images/steve.png"
 			alt="tk"
 		/>
+		<div class="brothers" class:visible={visible[2]}>
+			<img src="/assets/images/dimitri.png" alt="tk" />
+			<img src="/assets/images/kosta.png" alt="tk" />
+		</div>
+		<!-- <img
+			class:visible={visible[3]}
+			class="koolaid"
+			src="/assets/images/koolaid.png"
+			alt="tk"
+		/> -->
 	{/if}
 </div>
 
@@ -209,7 +219,7 @@
 		position: absolute;
 		bottom: 0;
 		right: 10%;
-		width: 25%;
+		width: 20%;
 		z-index: var(--z-top);
 		transform: translateY(100%);
 		transition: transform 1.5s ease-in-out;
@@ -218,5 +228,69 @@
 	.steve.visible {
 		opacity: 1;
 		transform: translateY(40%);
+	}
+
+	.brothers {
+		display: block;
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index: var(--z-top);
+		transition: all 0.5s ease-in-out;
+		opacity: 0;
+		background: transparent;
+	}
+
+	.brothers.visible {
+		opacity: 1;
+	}
+
+	.brothers img:first-of-type {
+		position: absolute;
+		bottom: 0;
+		left: 40%;
+		width: 10%;
+		animation: swap1 1.5s ease-in-out infinite alternate;
+	}
+
+	.brothers img:last-of-type {
+		position: absolute;
+		bottom: 0;
+		right: 40%;
+		width: 10%;
+		transform: translateY(5%);
+		animation: swap2 1.5s ease-in-out infinite alternate;
+	}
+
+	@keyframes swap1 {
+		0% {
+			left: 40%;
+		}
+		10% {
+			left: 40%;
+		}
+		90% {
+			left: 50%;
+		}
+		100% {
+			left: 50%;
+		}
+	}
+
+	@keyframes swap2 {
+		0% {
+			right: 40%;
+		}
+		10% {
+			right: 40%;
+		}
+		90% {
+			right: 50%;
+		}
+		100% {
+			right: 50%;
+		}
 	}
 </style>
