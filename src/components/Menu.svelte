@@ -101,6 +101,8 @@
 			<img src="/assets/images/dimitri.png" alt="tk" />
 			<img src="/assets/images/kosta.png" alt="tk" />
 		</div>
+
+		<!-- <div class="pacman" class:visible={visible[3]}></div> -->
 		<!-- <img
 			class:visible={visible[3]}
 			class="koolaid"
@@ -262,6 +264,40 @@
 		width: 10%;
 		transform: translateY(5%);
 		animation: swap2 1.5s ease-in-out infinite alternate;
+	}
+
+	/* spritesheet with 3 images horizontally */
+	.pacman {
+		display: block;
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 25%;
+		aspect-ratio: 1/1;
+		z-index: var(--z-top);
+		transition: all 0.5s ease-in-out;
+		opacity: 0;
+		background-image: url("/assets/images/pacman.png");
+		background-repeat: no-repeat;
+		background-size: 300%;
+		background-position: 0% 0%;
+		animation: pacman 0.5s steps(3) infinite;
+	}
+
+	.pacman.visible {
+		opacity: 1;
+	}
+
+	@keyframes pacman {
+		0% {
+			background-position: 0% 0%;
+		}
+		50% {
+			background-position: -100% 0%;
+		}
+		100% {
+			background-position: -200% 0%;
+		}
 	}
 
 	@keyframes swap1 {
