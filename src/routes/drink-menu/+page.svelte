@@ -31,7 +31,7 @@
 				const hours = now.getHours();
 				const minutes = now.getMinutes();
 
-				if (minutes === 0) menuComponent.egg();
+				// if (minutes === 0) menuComponent.egg();
 
 				if (!isFirstLoad && (hours === 10 || hours === 16) && minutes === 0)
 					window.location.reload();
