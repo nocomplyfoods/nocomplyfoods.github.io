@@ -13,6 +13,7 @@
 	{#if hide}
 		<meta name="robots" content="noindex, nofollow" />
 	{/if}
+	<meta name="robots" content="nosnippet" />
 	<meta name="description" content={description} />
 	<meta name="author" content="No Comply Foods" />
 	<meta name="news_keywords" content={keywords} />
