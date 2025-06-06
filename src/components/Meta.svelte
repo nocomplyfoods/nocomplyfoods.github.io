@@ -1,7 +1,7 @@
 <script>
 	export let title = "No Comply Foods";
 	export let description =
-		"A restaurant and small batch food company in Great Barrington, Mass";
+		"Post-farm to table restaurant in Great Barrington, MA. Dinner: Wednesday - Saturday 5pm-9pm. Brunch: Saturday 11am-3pm Sunday 10am-2pm.";
 	export let url = "https://nocomplyfoods.com";
 	export let keywords = "";
 	export let preloadFont = [];
@@ -13,7 +13,6 @@
 	{#if hide}
 		<meta name="robots" content="noindex, nofollow" />
 	{/if}
-	<meta name="robots" content="nosnippet" />
 	<meta name="description" content={description} />
 	<meta name="author" content="No Comply Foods" />
 	<meta name="news_keywords" content={keywords} />
@@ -25,17 +24,17 @@
 	<meta property="og:type" content="article" />
 	<meta property="og:locale" content="en_US" />
 
-	<meta property="og:image" content="{url}/assets/social-facebook.jpg" />
+	<meta property="og:image" content="{url}/assets/social.jpg" />
 	<meta property="og:image:type" content="image/jpeg" />
 	<meta property="og:image:width" content="1200" />
-	<meta property="og:image:height" content="600" />
+	<meta property="og:image:height" content="630" />
 
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:site" content="https://nocomplyfoods.com" />
 	<meta name="twitter:creator" content="@nocomplyfoods" />
 	<meta name="twitter:title" content={title} />
 	<meta name="twitter:description" content={description} />
-	<meta name="twitter:image:src" content="{url}/assets/social-twitter.jpg" />
+	<meta name="twitter:image:src" content="{url}/assets/social.jpg" />
 
 	<meta name="robots" content="max-image-preview:large" />
 
