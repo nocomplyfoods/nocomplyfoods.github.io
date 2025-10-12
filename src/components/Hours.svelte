@@ -6,7 +6,7 @@
 		{ day: "friday", time: "5 - 9", service: "dinner" },
 		{ day: "saturday", time: "11 - 3", service: "brunch" },
 		{ day: "saturday", time: "5 - 9", service: "dinner" },
-		{ day: "sunday", time: "11 - 3", service: "brunch" },
+		{ day: "sunday", time: "10 - 2", service: "brunch" },
 		{ day: "sunday", time: "5 - 9", service: "dinner" }
 	];
 

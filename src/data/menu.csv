@@ -1,15 +1,52 @@
-section,item,detail,price,service,
-main,cheeseburger club sandwich,fries,18,dinner
-main,bean and cheese pupusa,"pickled cabbage, jalapeño labne",12,dinner
-main,roasted japanese sweet potato,"tahini, chile crisp",10,dinner
-main,lentils and samosas,"tomato chutney, date chutney",18,dinner
-side,fried potatos,,10,dinner
-side,greek salad,,10,dinner
-side,fried cauliflower,,10,dinner
-side,falafel,,10,dinner
-side,grilled cabbage,,10,dinner
-side,panzanella,,10,dinner
-main,testing,,10,brunch
-main,testing,,10,brunch
-main,testing,,10,brunch
-main,testing,,10,brunch
+name,detail,price,type,,,,,
+dinner saturday 10/11,,,header,,,,,
+,,,item,,days off,,,
+,,,item,,,,,
+french fries,tzatziki,10,item,,,,,
+vegetable orzo minestrone,"carrots, grana padano, leeks,celery, tomato & scarlet runner beans",12,item,russian salad,,,ely internship,
+sweet potato,"labne, tahini & chili crisp",15,item,arugula pesto,,,,
+grilled cabbage,paprika yogurt & chimichurri,16,item,egg kedgeree with kefir,,,11-2:30-3,wed- frid
+,,,,stuffed cabbage,,,11 hrs a week,
+,,,item,,,,sean flynn internship coordinator,
+napa salad,"curry cashew dressing, shaved carrots, cilantro & candied pumpkin seeds",16,item,,,,,sean.flynn@bhrsd.org
+curry kabocha squash,"red curry, cilantro & fried shallots",16,item,,,,,
+chorizo & radicchio salad,"apples, roasted delicata, chipotle lime dressing",18,item,,,,,
+,,,item,,,,ely intern,
+,,,item,,,,,
+hot dog & fries,"chipotle aioli, cabbage curtido",16,item,,,,,
+rice & scarlet runner beans,"roasted beets, sumac onions, grilled bok choy & salsa macha",20,item,,,,,
+pork souvlaki,"tomato braised eggplant, oregano, tzatziki & pita",22,item,,,,,
+braised pepper chicken,"hungarian hot peppers, basmati rice & romesco",24,item,,,,,
+,,,item,,,9/12,friday- 11-3,
+fried skate fish,"remoulade sauce, arugula, sweet pepper dressing & lemon",24,item,,,6/18,thur 12-2:45,
+,,,,,,,,
+,,,,,,,,
+,,,item,,,6/19,fri 12-2:45,12.25- 6.5 hours
+apple crumble,"vanilla ice cream, oat crumble",12,item,,,,paid,
+olive oil ricotta cake,"candied delicata squash, orange peel & orange ice cream",12,item,,,6/24,wed 11-2:30,
+,,,item,,,6/26,fri 12- 2:30,
+,,,,,,,paid,
+,,,item, ,,10/1,12-3,
+,,,item,,,10/2,12-2;30,
+,,,item,,,10/3,11-2:30,
+,,,item,,,,paid,
+,,,item,sweet potato,,,,
+,,,,squash,,,,
+,,,item,,,,,
+,,,,,,,,
+,,,,,,,,
+,,,item,chris & lindsay couple,,,,
+,,,item,montessori,,,,
+,,,,,,,,
+,,,item,,,,,
+,,,,,,,,
+,,,,,,,,
+,,,,,,,,
+,,,,,,,,
+,,,,,,,,
+,,,,,,,,
+,,,,,,,,
+,,,,,,,,
+,,,,,,,,
+,,,,,,,,
+,,,,, ,,,

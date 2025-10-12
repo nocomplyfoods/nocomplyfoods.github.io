@@ -17,7 +17,7 @@
 
 	async function update(isFirstLoad) {
 		try {
-			const { data, backup, error } = await loadMenu();
+			const { data, error } = await loadMenu();
 			// TODO
 			// const hours = await loadHours();
 			if (data?.items) {
