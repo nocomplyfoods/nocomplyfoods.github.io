@@ -1,5 +1,6 @@
 <script>
 	import { onMount } from "svelte";
+	import { descending } from "d3";
 	import Meta from "$components/Meta.svelte";
 	import loadArchive from "$utils/loadArchive.js";
 	import loadCsv from "$utils/loadCsv.js";
@@ -32,6 +33,7 @@
 			delete d.type;
 			delete d.service;
 		});
+
 		tableData = [...tempData];
 	}
 
@@ -60,6 +62,8 @@
 			if (data) {
 				brunch = data.brunch;
 				dinner = data.dinner;
+				brunch.sort(descending);
+				dinner.sort(descending);
 				// Initialize the view to show the first brunch menu
 				setService("brunch");
 			} else {
