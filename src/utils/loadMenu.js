@@ -4,9 +4,7 @@ export default async function loadMenu(lastUpdate) {
 	let data;
 	let error;
 	try {
-		const res = await fetch(
-			`https://data.nocomplyfoods.com/menu.json?version=${Date.now()}`
-		);
+		const res = await fetch("https://data.nocomplyfoods.com/menu.json");
 
 		data = await res.json();
 		const valid = data.items.filter((d) => d.name || (d.detail && d.section));

@@ -25,9 +25,7 @@
 		try {
 			// TODO test a fail
 			// TODO test no data
-			const res = await fetch(
-				`https://data.nocomplyfoods.com/hours.json?version=${Date.now()}`
-			);
+			const res = await fetch("https://data.nocomplyfoods.com/hours.json");
 			const data = await res.json();
 
 			const valid = data.items
