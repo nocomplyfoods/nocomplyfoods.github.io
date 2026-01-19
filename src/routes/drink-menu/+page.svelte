@@ -34,7 +34,6 @@
 
 				if (!isFirstLoad && (hours === 10 || hours === 16) && minutes === 0)
 					window.location.reload();
-				else setTimeout(update, 30000);
 			} else {
 				// TODO
 				throw new Error("no data");
@@ -42,7 +41,7 @@
 		} catch (err) {
 			error = err?.message;
 		} finally {
-			setTimeout(update, 30000);
+			setTimeout(update, 90000);
 		}
 	}
 

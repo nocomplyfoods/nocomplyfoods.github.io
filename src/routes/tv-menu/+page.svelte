@@ -51,7 +51,7 @@
 
 			if (!isFirstLoad && (hours === 10 || hours === 16) && minutes === 0)
 				window.location.reload();
-			else setTimeout(update, 30000);
+			else setTimeout(update, 60000);
 		}
 	}
 	onMount(async () => {
