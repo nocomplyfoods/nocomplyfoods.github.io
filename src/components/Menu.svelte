@@ -46,7 +46,7 @@
 
 		const maxItems = 8;
 		const overflow = Math.max(0, mains.length - maxItems);
-		const rate = 0.07;
+		const rate = 0.05;
 		const decrease = 1 - overflow * rate;
 		scale = web ? 1 : decrease;
 		scaleDetail = web ? 1 : decrease;
@@ -54,9 +54,9 @@
 		const maxItemLen = max(mains.map((d) => d.name.length));
 		const maxDetailLen = max(mains.map((d) => d.detail?.length || 0));
 
-		if (maxItemLen > 20) scale = Math.min(scale, web ? 0.8 : 20 / maxItemLen);
+		if (maxItemLen > 20) scale = Math.min(scale, web ? 1 : 20 / maxItemLen);
 		if (maxDetailLen > 40)
-			scaleDetail = Math.min(scaleDetail, web ? 0.9 : 40 / maxDetailLen);
+			scaleDetail = Math.min(scaleDetail, web ? 1 : 40 / maxDetailLen);
 
 		scale = Math.max(scale, drinks ? 0.55 : 0.6);
 		scaleDetail = Math.max(scaleDetail, drinks ? 0.7 : 0.5);
@@ -114,14 +114,15 @@
 
 <style>
 	div {
-		--fs-big: 3vw;
-		--fs-small: 2vw;
+		--fs-big: 3.25vw;
+		--fs-small: 2.15vw;
 		--padding: 2vw;
 		--shadow: 0.15vw;
 		--opacity: 0.65;
+		--color-fg-light: var(--color-pink);
+		--font-family: "Londrina Solid", sans-serif;
 		width: 100vw;
 		height: 100vh;
-		--color-fg-light: var(--color-pink);
 		background: #fff;
 		display: flex;
 		flex-direction: column;
@@ -135,6 +136,7 @@
 		--fs-big: clamp(16px, 1.5vw, 24px);
 		--fs-small: clamp(14px, 1.25vw, 20px);
 		--padding: 16px;
+		/* --font-family: var(--mono); */
 		width: auto;
 		height: auto;
 		background: transparent;
@@ -151,7 +153,7 @@
 
 	section {
 		position: relative;
-		padding: var(--padding);
+		padding: var(--padding) calc(var(--padding) * 2);
 		flex: 1;
 	}
 
@@ -163,6 +165,10 @@
 		left: 0;
 		width: 100%;
 		height: 100%;
+	}
+
+	.web section {
+		padding: var(--padding);
 	}
 
 	.mains:before {
@@ -193,12 +199,15 @@
 	}
 
 	.allergy p {
-		font-size: 1.075vw;
+		font-size: 1.25vw;
+		letter-spacing: 0.05em;
+		font-weight: 300;
 		line-height: 1;
 		margin: 0;
 		text-align: center;
 		position: relative;
 		opacity: 0.6;
+		font-family: var(--sans);
 	}
 
 	.skate {

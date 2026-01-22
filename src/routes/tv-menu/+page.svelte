@@ -11,6 +11,7 @@
 
 	const preloadFont = [
 		"../assets/fonts/LondrinaSolid-Black.woff2",
+		"../assets/fonts/LondrinaSolid-Regular.woff2",
 		"../assets/fonts/SometypeMono-Medium.woff2",
 		"../assets/fonts/SometypeMono-Bold.woff2"
 	];
@@ -25,6 +26,7 @@
 				// convert current hours to 12 hour time
 				const hours = new Date().getHours();
 				const minutes = new Date().getMinutes();
+				// const hours = 16;
 				// brunch ends at 3pm, dinner starts at 5pm
 				// show dinner from 3:30pm-12pm
 				const target = 15;
