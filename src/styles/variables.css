@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Thu, 10 Apr 2025 19:59:37 GMT
+ * Generated on Fri, 23 Jan 2026 02:24:34 GMT
  */
 
 :root {
@@ -24,12 +24,18 @@
   --color-gray-800: #373737;
   --color-gray-900: #262626;
   --color-gray-1000: #191919;
-  --color-yellow: #ffd480;
-  --color-yellow-light: #ffd28b;
+  --color-yellow-black: #3d3529;
+  --color-yellow-dark: #605039;
+  --color-yellow-medium: #996f33;
+  --color-yellow: #ffca80;
+  --color-yellow-light: #ffdfb3;
   --color-yellow-lighter: #ffeacc;
+  --color-pink-black: #3d292a;
+  --color-pink-dark: #60393d;
+  --color-pink-medium: #bf404a;
   --color-pink: #ff808a;
-  --color-pink-light: #ff9ba2;
-  --color-pink-lighter: #ffd3d6;
+  --color-pink-light: #ffb3b9;
+  --color-pink-lighter: #ffccd0;
   --color-black2: #030303;
   --color-green: #00d9c0;
   --color-purple: #9381ff;

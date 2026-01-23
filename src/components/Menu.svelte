@@ -1,15 +1,15 @@
 <script>
 	import { max } from "d3";
 	import { onMount } from "svelte";
-	import Mains from "$components/Mains.svelte";
+	import Items from "$components/Items.svelte";
 
 	// TODO no meta hide from stuff for
 	export let web;
 	export let items;
 	export let drinks;
 
-	let mains = [];
-	let scale = 1;
+	let data = [];
+	let scaleName = 1;
 	let scaleDetail = 1;
 	let lastUpdate;
 	let updatedDisplay = "";
@@ -30,7 +30,7 @@
 	}
 
 	function prepareMenu(items) {
-		mains = items
+		data = items
 			.filter(
 				(d) => d.type === "item" || d.type === "header" || d.type === "note"
 			)
@@ -45,21 +45,35 @@
 			}));
 
 		const maxItems = 8;
-		const overflow = Math.max(0, mains.length - maxItems);
-		const rate = 0.05;
-		const decrease = 1 - overflow * rate;
-		scale = web ? 1 : decrease;
-		scaleDetail = web ? 1 : decrease;
+		const overflow = Math.max(0, data.length - maxItems);
+		const rateName = 0.04;
+		const rateDetail = 0.04;
+		const decreaseName = 1 - overflow * rateName;
+		const decreaseDetail = 1 - overflow * rateDetail;
 
-		const maxItemLen = max(mains.map((d) => d.name.length));
-		const maxDetailLen = max(mains.map((d) => d.detail?.length || 0));
+		scaleName = web ? 1 : decreaseName;
+		scaleDetail = web ? 1 : decreaseDetail;
 
-		if (maxItemLen > 20) scale = Math.min(scale, web ? 1 : 20 / maxItemLen);
-		if (maxDetailLen > 40)
-			scaleDetail = Math.min(scaleDetail, web ? 1 : 40 / maxDetailLen);
+		const maxNameLen = max(data.map((d) => d.name?.length || 0));
+		const maxDetailLen = max(data.map((d) => d.detail?.length || 0));
+		// console.log({
+		// 	overflow,
+		// 	decrease,
+		// 	scaleName,
+		// 	scaleDetail,
+		// 	maxNameLen,
+		// 	maxDetailLen
+		// });
 
-		scale = Math.max(scale, drinks ? 0.55 : 0.6);
-		scaleDetail = Math.max(scaleDetail, drinks ? 0.7 : 0.5);
+		// alternatively, bump down in size if the names/details are long
+		// if (!web && maxNameLen > 30)
+		// 	scaleName = Math.min(scaleName, 30 / maxNameLen);
+		// if (!web && maxDetailLen > 50)
+		// 	scaleDetail = Math.min(scaleDetail, 50 / maxDetailLen);
+
+		// scale down drinks menus more?
+		// scaleName = web ? 1 : Math.max(scaleName, drinks ? 0.55 : 0.6);
+		// scaleDetail = web ? 1 : Math.max(scaleDetail, drinks ? 0.7 : 0.5);
 	}
 
 	$: prepareMenu(items);
@@ -68,19 +82,23 @@
 <div
 	class:drinks
 	class:web
-	style="--scale: {scale}; --scale-detail: {scaleDetail};"
+	style="--scale-name: {scaleName}; --scale-detail: {scaleDetail};"
 >
-	<section class="mains">
-		<Mains {web} data={mains}></Mains>
+	<section class="items">
+		<Items {web} {data}></Items>
 	</section>
 
-	{#if !web && !drinks}
+	{#if !web}
 		<section class="allergy">
-			<p>
-				Please inform us of any allergies. Consuming raw or undercooked meats,
-				poultry, seafood, shellfish, or eggs may increase your risk of foodborne
-				illness.
-			</p>
+			{#if drinks}
+				<p>We are an alcohol free restaurant.</p>
+			{:else}
+				<p>
+					Please inform us of any allergies. Consuming raw or undercooked meats,
+					poultry, seafood, shellfish, or eggs may increase your risk of
+					foodborne illness.
+				</p>
+			{/if}
 		</section>
 	{/if}
 
@@ -101,25 +119,19 @@
 			<img src="/assets/images/dimitri.png" alt="tk" />
 			<img src="/assets/images/kosta.png" alt="tk" />
 		</div>
-
-		<!-- <div class="pacman" class:visible={visible[3]}></div> -->
-		<!-- <img
-			class:visible={visible[3]}
-			class="koolaid"
-			src="/assets/images/koolaid.png"
-			alt="tk"
-		/> -->
 	{/if}
 </div>
 
 <style>
 	div {
-		--fs-big: 3.25vw;
+		--fs-big: 3.5vw;
 		--fs-small: 2.15vw;
 		--padding: 2vw;
-		--shadow: 0.15vw;
-		--opacity: 0.65;
+		--color-fg-lighter: var(--color-pink-lighter);
 		--color-fg-light: var(--color-pink);
+		--color-fg-medium: var(--color-pink-medium);
+		--color-fg-black: var(--color-pink-black);
+		--color-fg-dark: var(--color-pink-dark);
 		--font-family: "Londrina Solid", sans-serif;
 		width: 100vw;
 		height: 100vh;
@@ -143,7 +155,11 @@
 	}
 
 	div.drinks {
-		--color-fg-light: var(--color-yellow-light);
+		--color-fg-lighter: var(--color-pink-lighter);
+		--color-fg-light: var(--color-yellow);
+		--color-fg-medium: var(--color-yellow-medium);
+		--color-fg-dark: var(--color-yellow-black);
+		--color-fg-black: var(--color-yellow-dark);
 	}
 
 	p {
@@ -171,23 +187,19 @@
 		padding: var(--padding);
 	}
 
-	.mains:before {
+	.items:before {
 		background-color: var(--color-pink-lighter);
 	}
 
-	.drinks .mains:before {
-		background-color: var(--color-yellow-light);
-	}
-
-	.allergy:before {
-		background-color: var(--color-pink-lighter);
+	.drinks .items:before {
+		background-color: var(--color-yellow-lighter);
 	}
 
 	.web section:before {
 		background: transparent;
 	}
 
-	.mains {
+	.items {
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
@@ -196,18 +208,26 @@
 
 	.allergy {
 		flex: 0;
+		position: absolute;
+		bottom: 0.75em;
+		left: 0;
+		z-index: var(--z-top);
+		width: 100%;
+		padding: 0;
 	}
 
 	.allergy p {
-		font-size: 1.25vw;
-		letter-spacing: 0.05em;
-		font-weight: 300;
+		font-size: 1.62vw;
 		line-height: 1;
 		margin: 0;
 		text-align: center;
 		position: relative;
-		opacity: 0.6;
-		font-family: var(--sans);
+		text-align: center;
+		color: var(--color-fg-dark);
+		opacity: 0.75;
+		margin: 0;
+		font-family: var(--font-family);
+		font-weight: 300;
 	}
 
 	.skate {
@@ -273,40 +293,6 @@
 		width: 10%;
 		transform: translateY(5%);
 		animation: swap2 1.5s ease-in-out infinite alternate;
-	}
-
-	/* spritesheet with 3 images horizontally */
-	.pacman {
-		display: block;
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 25%;
-		aspect-ratio: 1/1;
-		z-index: var(--z-top);
-		transition: all 0.5s ease-in-out;
-		opacity: 0;
-		background-image: url("/assets/images/pacman.png");
-		background-repeat: no-repeat;
-		background-size: 300%;
-		background-position: 0% 0%;
-		animation: pacman 0.5s steps(3) infinite;
-	}
-
-	.pacman.visible {
-		opacity: 1;
-	}
-
-	@keyframes pacman {
-		0% {
-			background-position: 0% 0%;
-		}
-		50% {
-			background-position: -100% 0%;
-		}
-		100% {
-			background-position: -200% 0%;
-		}
 	}
 
 	@keyframes swap1 {

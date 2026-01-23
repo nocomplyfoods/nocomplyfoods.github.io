@@ -27,7 +27,10 @@
 				<p class="name">{clean(name)}</p>
 				{#if price}
 					<p class="price">
-						<span class="dots"></span>${@html price?.trim()}
+						<span class="dots"></span><span
+							class="value {web ? '' : 'text-outline'}"
+							>{@html price?.trim()}</span
+						>
 					</p>
 				{/if}
 			</div>
@@ -40,7 +43,7 @@
 
 <style>
 	.items {
-		margin-top: calc(var(--item-height) * 2);
+		margin-top: calc(var(--item-height) * 1.25);
 		position: relative;
 		column-count: 2;
 		column-gap: calc(var(--padding) * 2);
@@ -49,13 +52,14 @@
 	p {
 		margin: 0;
 		line-height: 1;
-		font-weight: 300;
+		font-weight: 400;
+		letter-spacing: 0.05em;
 		font-family: var(--font-family);
 	}
 
 	/* everything but first .header */
 	/* .header:not(:first-of-type) {
-		margin-top: calc(var(--padding) * var(--scale) * 1);
+		margin-top: calc(var(--padding) * var(--scale-name) * 1);
 	} */
 
 	.header:nth-child(1 of .header) {
@@ -78,14 +82,10 @@
 	}
 
 	.header .name {
-		background: var(--color-fg);
+		background: var(--color-fg-black);
 		color: var(--color-fg-light);
 		padding: 0.25em;
 		border-radius: 0.25em;
-	}
-
-	.header .name {
-		margin-right: 0;
 	}
 
 	.header .detail {
@@ -106,23 +106,15 @@
 	}
 
 	.item {
-		/* display: flex; */
-		/* justify-content: space-between; */
-		/* align-items: flex-start; */
-		margin-bottom: calc(var(--padding) * var(--scale));
+		margin-bottom: calc(var(--scale-name) * var(--padding) * 0.75);
 		break-inside: avoid;
 		page-break-inside: avoid;
 		width: 100%;
 	}
 
-	.item .top {
+	.top {
 		display: flex;
 		justify-content: space-between;
-	}
-
-	.item .top .name {
-		flex: none;
-		margin: 0;
 	}
 
 	.item .bottom {
@@ -139,42 +131,40 @@
 
 	.name {
 		text-transform: lowercase;
-		/* text-transform: capitalize; */
-		letter-spacing: 0.05em;
-		font-weight: 400;
-		/* font-weight: 700; */
-		font-size: calc(var(--fs-big) * var(--scale));
-		flex: 1;
-		margin-right: calc(var(--padding) * var(--scale));
-	}
-
-	.noDetail .name {
-		/* margin-right: 0; */
+		font-size: calc(var(--fs-big) * var(--scale-name));
+		flex: none;
+		margin: 0;
+		color: var(--color-fg-black);
 	}
 
 	.price {
-		font-weight: 500;
-		letter-spacing: 0.05em;
-		font-size: calc(var(--fs-big) * var(--scale));
-		opacity: var(--opacity);
-		/* margin-left: calc(var(--padding) * var(--scale)); */
-		text-align: right;
 		flex: 1;
 		display: flex;
 		align-items: flex-end;
 	}
 
-	:global(.price span) {
-		font-size: calc(var(--fs-small) * var(--scale));
+	.price span.value {
+		color: var(--color-fg-dark);
+		--stroke-width: 0;
+
+		color: var(--color-fg-light);
+		--color-text-outline: var(--color-fg-dark);
+		--stroke-width: 0.1vw;
+
+		font-size: calc(var(--fs-big) * var(--scale-name));
+		letter-spacing: 0.15em;
+	}
+
+	:global(.price span.dots) {
 		display: block;
 	}
 
 	.detail {
+		color: var(--color-fg-dark);
 		font-size: calc(var(--fs-small) * var(--scale-detail));
-		opacity: var(--opacity);
-		/* font-weight: 500; */
-		line-height: 1.15;
-		letter-spacing: 0.05em;
+		font-weight: 300;
+		margin-top: 0.325em;
+		letter-spacing: 0.075em;
 	}
 
 	.detail:empty {
@@ -183,19 +173,9 @@
 
 	.dots {
 		flex: 1;
-		/* height: 0.5em; */
-		/* background-image: radial-gradient(
-			circle,
-			var(--color-fg) 1.5px,
-			transparent 1.5px
-		);
-		background-size: 8px 8px;
-		background-position: bottom;
-		background-repeat: repeat-x; */
 		margin: 0 0.5em;
-		border-bottom: 2px dotted var(--color-fg);
-		opacity: var(--opacity);
-		opacity: 0.5;
+		border-bottom: 0.25vw dotted var(--color-fg-dark);
+		opacity: 0.75;
 	}
 
 	.web.items {
@@ -213,8 +193,6 @@
 	.web .top {
 		display: flex;
 		justify-content: space-between;
-		/* flex-direction: column;
-		align-items: flex-start; */
 	}
 
 	.web .name {
@@ -250,7 +228,11 @@
 		display: none;
 	}
 
-	:global(.web .price span) {
-		margin-top: calc(var(--padding) * 0.5);
+	.web .price span.value {
+		color: var(--color-fg-dark);
 	}
+
+	/* :global(.web .price span) {
+		margin-top: calc(var(--padding) * 0.5);
+	} */
 </style>

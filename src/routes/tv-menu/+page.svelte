@@ -12,8 +12,7 @@
 	const preloadFont = [
 		"../assets/fonts/LondrinaSolid-Black.woff2",
 		"../assets/fonts/LondrinaSolid-Regular.woff2",
-		"../assets/fonts/SometypeMono-Medium.woff2",
-		"../assets/fonts/SometypeMono-Bold.woff2"
+		"../assets/fonts/LondrinaSolid-Light.woff2"
 	];
 
 	async function update(isFirstLoad) {
