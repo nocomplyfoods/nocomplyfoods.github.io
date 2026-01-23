@@ -31,7 +31,6 @@
 
 	function prepareMenu(items) {
 		data = items
-			// .slice(0, 10)
 			.filter(
 				(d) => d.type === "item" || d.type === "header" || d.type === "note"
 			)

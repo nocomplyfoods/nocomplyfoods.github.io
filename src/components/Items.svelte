@@ -63,7 +63,7 @@
 	} */
 
 	.header:nth-child(1 of .header),
-	.header:nth-of-type(1) {
+	.header:first-of-type {
 		flex: 0;
 		position: absolute;
 		top: 0;
