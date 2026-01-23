@@ -157,8 +157,8 @@
 		--color-fg-lighter: var(--color-pink-lighter);
 		--color-fg-light: var(--color-yellow);
 		--color-fg-medium: var(--color-yellow-medium);
-		--color-fg-dark: var(--color-yellow-black);
-		--color-fg-black: var(--color-yellow-dark);
+		--color-fg-dark: var(--color-yellow-dark);
+		--color-fg-black: var(--color-yellow-black);
 	}
 
 	p {
