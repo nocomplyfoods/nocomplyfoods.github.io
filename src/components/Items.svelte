@@ -7,8 +7,11 @@
 
 	let itemHeight = 0;
 
-	$: headers = data.filter((d) => d.header);
-	$: items = data.filter((d) => !d.header);
+	$: headers = data.filter((d) => (web ? false : d.header));
+	$: items = data.filter((d) => (web ? true : !d.header));
+
+	// $: console.log(drinks);
+	// $: console.log(headers);
 
 	function clean(text) {
 		return convertApostrophe(convertToCurly(text.trim()));
@@ -23,8 +26,8 @@
 	{/each}
 
 	<div class="inner">
-		{#each items as { name, detail, price, note }, i}
-			<div class="item" class:note class:noDetail={!detail}>
+		{#each items as { name, detail, price, note, header }, i}
+			<div class="item" class:header class:note class:noDetail={!detail}>
 				<div class="top">
 					<p class="name">{clean(name)}</p>
 					{#if price}
