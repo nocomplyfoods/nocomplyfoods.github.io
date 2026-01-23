@@ -32,7 +32,7 @@
 				const isBrunch = hours < target || (hours === target && minutes < 30);
 				const service = isBrunch ? "brunch" : "dinner";
 				items = data.items.filter((d) => d.name && d.service === service);
-				console.log(items);
+
 				// add an item to first item in array
 				items.unshift({
 					name: "dinner friday 1/23",
@@ -41,6 +41,9 @@
 					detail: "",
 					price: ""
 				});
+
+				// delete last item
+				items.pop();
 				// if nothing, use the other service
 				if (!items.length) {
 					items = data.items.filter((d) => d.name && d.service !== service);
