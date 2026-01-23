@@ -62,6 +62,15 @@
 		margin-top: calc(var(--padding) * var(--scale-name) * 1);
 	} */
 
+	.header:nth-child(0 of .header) {
+		flex: 0;
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: auto;
+		transform: translate(0, -150%);
+	}
+
 	.header:nth-child(1 of .header) {
 		flex: 0;
 		position: absolute;
