@@ -9,6 +9,7 @@
 
 	const preloadFont = [
 		"assets/fonts/LondrinaSolid-Black.woff2",
+		"assets/fonts/LondrinaSolid-Regular.woff2",
 		"assets/fonts/SometypeMono-Medium.woff2",
 		"assets/fonts/SometypeMono-Bold.woff2"
 	];
@@ -19,4 +20,5 @@
 </script>
 
 <Meta {title} {description} {url} {preloadFont} {keywords} />
+<a href="#content" class="skip-to-main">Skip to main content</a>
 <Index />

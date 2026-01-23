@@ -39,23 +39,41 @@
 		"gray-1000": {
 			"value": "rgb(25, 25, 25)"
 		},
+		"yellow-black": {
+			"value": "#3d3529"
+		},
+		"yellow-dark": {
+			"value": "#605039"
+		},
+		"yellow-medium": {
+			"value": "#996f33"
+		},
 		"yellow": {
-			"value": "#ffd480"
+			"value": "#ffca80"
 		},
 		"yellow-light": {
-			"value": "#ffd28b"
+			"value": "#ffdfb3"
 		},
 		"yellow-lighter": {
 			"value": "#ffeacc"
+		},
+		"pink-black": {
+			"value": "#3d292a"
+		},
+		"pink-dark": {
+			"value": "#60393d"
+		},
+		"pink-medium": {
+			"value": "#bf404a"
 		},
 		"pink": {
 			"value": "#ff808a"
 		},
 		"pink-light": {
-			"value": "#ff9ba2"
+			"value": "#ffb3b9"
 		},
 		"pink-lighter": {
-			"value": "#ffd3d6"
+			"value": "#ffccd0"
 		},
 		"black2": {
 			"value": "#030303"
