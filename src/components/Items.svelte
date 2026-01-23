@@ -5,46 +5,52 @@
 	export let data;
 	export let web;
 
-	let itemHeights = [0];
+	let itemHeight = 0;
 
-	$: maxHeight = max(itemHeights);
+	$: headers = data.filter((d) => d.header);
+	$: items = data.filter((d) => !d.header);
 
 	function clean(text) {
 		return convertApostrophe(convertToCurly(text.trim()));
 	}
 </script>
 
-<div class="items" class:web style="--item-height: {maxHeight}px;">
-	{#each data as { name, detail, price, header, note }, i}
-		<div
-			class="item"
-			class:header
-			class:note
-			class:noDetail={!detail}
-			bind:clientHeight={itemHeights[i]}
-		>
-			<div class="top">
-				<p class="name">{clean(name)}</p>
-				{#if price}
-					<p class="price">
-						<span class="dots"></span><span
-							class="value {web ? '' : 'text-outline'}"
-							>{@html price?.trim()}</span
-						>
-					</p>
-				{/if}
-			</div>
-			<div class="bottom">
-				<p class="detail">{@html clean(detail) || "&nbsp;"}</p>
-			</div>
+<div class="items" class:web style="--item-height: {itemHeight}px;">
+	{#each headers as { name }, i}
+		<div class="item header" bind:clientHeight={itemHeight}>
+			<p class="name">{clean(name)}</p>
 		</div>
 	{/each}
+
+	<div class="inner">
+		{#each items as { name, detail, price, note }, i}
+			<div class="item" class:note class:noDetail={!detail}>
+				<div class="top">
+					<p class="name">{clean(name)}</p>
+					{#if price}
+						<p class="price">
+							<span class="dots"></span><span
+								class="value {web ? '' : 'text-outline'}"
+								>{@html price?.trim()}</span
+							>
+						</p>
+					{/if}
+				</div>
+				<div class="bottom">
+					<p class="detail">{@html clean(detail) || "&nbsp;"}</p>
+				</div>
+			</div>
+		{/each}
+	</div>
 </div>
 
 <style>
 	.items {
-		margin-top: calc(var(--item-height) * 1.25);
 		position: relative;
+	}
+
+	.inner {
+		margin-top: calc(var(--item-height) * 1.25);
 		column-count: 2;
 		column-gap: calc(var(--padding) * 2);
 	}
@@ -57,28 +63,22 @@
 		font-family: var(--font-family);
 	}
 
-	/* everything but first .header */
-	/* .header:not(:first-of-type) {
-		margin-top: calc(var(--padding) * var(--scale-name) * 1);
-	} */
-
-	.header:nth-child(1 of .header),
-	.header:first-of-type {
+	.header:nth-of-type(1) {
 		flex: 0;
 		position: absolute;
 		top: 0;
 		left: 0;
 		width: auto;
-		transform: translate(0, -150%);
+		transform: translate(0, -50%);
 	}
 
-	.header:nth-child(2 of .header) {
+	.header:nth-of-type(2) {
 		flex: 0;
 		position: absolute;
 		top: 0;
 		left: calc(50% + var(--padding));
 		width: auto;
-		transform: translate(0, -150%);
+		transform: translate(0, -50%);
 		break-before: column;
 	}
 
@@ -173,7 +173,7 @@
 		opacity: 0.75;
 	}
 
-	.web.items {
+	.web .inner {
 		column-count: 1;
 		column-gap: 0;
 		margin-top: 0.5em;
@@ -211,8 +211,8 @@
 		display: none;
 	}
 
-	.web .header:nth-child(1 of .header),
-	.web .header:nth-child(2 of .header) {
+	.web .header:nth-of-type(1),
+	.web .header:nth-of-type(2) {
 		break-before: auto;
 		position: relative;
 		transform: translate(0, 0);
