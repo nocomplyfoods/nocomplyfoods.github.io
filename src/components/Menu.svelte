@@ -31,6 +31,7 @@
 
 	function prepareMenu(items) {
 		data = items
+			// .slice(0, 10)
 			.filter(
 				(d) => d.type === "item" || d.type === "header" || d.type === "note"
 			)
@@ -44,10 +45,10 @@
 				)
 			}));
 
-		const maxItems = 8;
+		const maxItems = 9;
 		const overflow = Math.max(0, data.length - maxItems);
-		const rateName = 0.04;
-		const rateDetail = 0.04;
+		const rateName = 0.05;
+		const rateDetail = 0.05;
 		const decreaseName = 1 - overflow * rateName;
 		const decreaseDetail = 1 - overflow * rateDetail;
 
@@ -66,14 +67,12 @@
 		// });
 
 		// alternatively, bump down in size if the names/details are long
-		// if (!web && maxNameLen > 30)
-		// 	scaleName = Math.min(scaleName, 30 / maxNameLen);
-		// if (!web && maxDetailLen > 50)
-		// 	scaleDetail = Math.min(scaleDetail, 50 / maxDetailLen);
+		if (!web && maxNameLen > 30) scaleName -= 0.05;
+		if (!web && maxDetailLen > 50) scaleDetail -= 0.05;
 
 		// scale down drinks menus more?
-		// scaleName = web ? 1 : Math.max(scaleName, drinks ? 0.55 : 0.6);
-		// scaleDetail = web ? 1 : Math.max(scaleDetail, drinks ? 0.7 : 0.5);
+		scaleName = web ? 1 : Math.max(scaleName, drinks ? 0.6 : 0.7);
+		scaleDetail = web ? 1 : Math.max(scaleDetail, drinks ? 0.5 : 0.7);
 	}
 
 	$: prepareMenu(items);
@@ -124,7 +123,7 @@
 
 <style>
 	div {
-		--fs-big: 3.5vw;
+		--fs-big: 3.25vw;
 		--fs-small: 2.15vw;
 		--padding: 2vw;
 		--color-fg-lighter: var(--color-pink-lighter);

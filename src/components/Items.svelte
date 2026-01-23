@@ -146,13 +146,7 @@
 	.price span.value {
 		color: var(--color-fg-dark);
 		--stroke-width: 0;
-
-		color: var(--color-fg-light);
-		--color-text-outline: var(--color-fg-dark);
-		--stroke-width: 0.1vw;
-
 		font-size: calc(var(--fs-big) * var(--scale-name));
-		letter-spacing: 0.15em;
 	}
 
 	:global(.price span.dots) {
