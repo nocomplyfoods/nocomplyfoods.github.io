@@ -4,35 +4,48 @@
 	import WebsiteMenu from "$components/WebsiteMenu.svelte";
 	import Newsletter from "$components/Newsletter.svelte";
 	import Events from "$components/Events.svelte";
+	import Instagram from "$components/Instagram.svelte";
 	import Footer from "$components/Footer.svelte";
+	// import ig from "$svg/instagram.svg";
 </script>
 
 <div class="c">
 	<h1>No<br />Comply<br />Foods</h1>
 
-	<p class="location">
-		<a
-			href="https://maps.app.goo.gl/nqZa8FxQR6jP5Ltm7"
-			target="_blank"
-			rel="noreferrer"
-		>
-			258 Stockbridge Rd<br />Great Barrington, MA</a
-		>
-	</p>
-	<Hours></Hours>
+	<section id="location">
+		<p>
+			<a
+				href="https://maps.app.goo.gl/nqZa8FxQR6jP5Ltm7"
+				target="_blank"
+				rel="noreferrer"
+			>
+				258 Stockbridge Rd<br />Great Barrington, MA</a
+			>
+		</p>
+	</section>
 
-	<WebsiteMenu></WebsiteMenu>
+	<section id="hours">
+		<Hours></Hours>
+	</section>
 
-	<section>
+	<section id="menu">
+		<WebsiteMenu></WebsiteMenu>
+	</section>
+
+	<section id="newsletter">
 		<Newsletter></Newsletter>
 	</section>
 
-	<section>
+	<section id="events">
 		<Events></Events>
 	</section>
 
-	<section>
+	<section id="phone">
 		<Phone></Phone>
+	</section>
+
+	<section id="instagram">
+		<Instagram></Instagram>
 	</section>
 </div>
 
@@ -40,34 +53,20 @@
 
 <style>
 	.c {
-		padding-bottom: 128px;
+		padding: 2rem 1rem;
 	}
 
-	h1 {
-		padding: 16px;
-		text-align: center;
-		padding-top: 32px;
+	#location {
+		margin-top: 2rem;
 	}
 
-	p.location {
+	#location p {
 		margin: 0;
-		padding: 0 16px;
 		text-align: center;
 	}
 
 	section {
-		width: 90%;
-		margin: 96px auto;
-	}
-
-	@media only screen and (min-width: 640px) {
-		h1 {
-			text-align: left;
-			padding-top: 16px;
-		}
-
-		p.location {
-			text-align: left;
-		}
+		width: 100%;
+		margin: 4rem auto;
 	}
 </style>

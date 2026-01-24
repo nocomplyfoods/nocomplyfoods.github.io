@@ -50,8 +50,7 @@
 <div class="menu" class:visible class:error={!!error}>
 	{#if visible}
 		<p class="alcohol"><small>alcohol-free restaurant</small></p>
-		<div class="h">
-			<!-- <h3>Menu</h3> -->
+		<div class="ui">
 			<div class="buttons">
 				{#if brunch.length}
 					<button
@@ -72,9 +71,6 @@
 					>
 				{/if}
 			</div>
-			<!-- {#if dateDisplay}<time class="desktop"
-					><small>updated on {dateDisplay}</small></time
-				>{/if} -->
 		</div>
 
 		<img src="assets/images/keanu.png" alt="keanu eating" aria="hidden" />
@@ -92,8 +88,8 @@
 		position: relative;
 		max-width: 720px;
 		min-height: 420px;
-		margin: 96px auto;
-		width: 90%;
+		margin: 0 auto;
+		width: 100%;
 		opacity: 0;
 		transition: opacity 0.5s;
 	}
@@ -106,31 +102,29 @@
 		display: none;
 	}
 
-	h3 {
-		display: none;
-		/* position: absolute;
-		top: 50%;
-		left: 0;
-		transform-origin: 0 0;
-		transform: rotate(-90deg) translate(-200%, -100%); */
-	}
-
-	.h {
-		position: absolute;
-		top: 1px;
-		left: 0;
-		transform: translate(0, -100%);
-		display: flex;
-		align-items: center;
-	}
-
 	.buttons {
 		display: flex;
+		align-items: center;
+		justify-content: center;
 	}
 
 	button {
 		opacity: 0.5;
-		padding: 8px 16px;
+		padding: 0.5rem 1rem;
+		border-radius: 0;
+	}
+
+	button:hover {
+		opacity: 0.75;
+		background: var(--color-button-bg);
+	}
+
+	button:first-of-type {
+		border-top-left-radius: 0.5rem;
+	}
+
+	button:last-of-type {
+		border-top-right-radius: 0.5rem;
 	}
 
 	button.active {
@@ -148,12 +142,6 @@
 		display: block;
 	}
 
-	time.desktop {
-		display: none;
-		margin-left: 16px;
-		text-align: left;
-	}
-
 	img {
 		display: none;
 		position: absolute;
@@ -166,16 +154,13 @@
 	}
 
 	p.alcohol {
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100%;
 		text-align: center;
-		transform: translateY(-72px);
-		line-height: 0.9;
+		line-height: 1;
 		text-transform: uppercase;
 		opacity: 0.65;
 		font-weight: 700;
+		letter-spacing: 0;
+		margin: 1rem auto;
 	}
 
 	.c {
@@ -183,29 +168,6 @@
 		margin: 0;
 		padding: 0;
 		background: var(--color-pink);
-		border: var(--border) solid var(--color-fg);
-	}
-
-	@media only screen and (min-width: 640px) {
-		time.mobile {
-			display: none;
-		}
-
-		time.desktop {
-			display: block;
-		}
-
-		img {
-			display: none;
-		}
-
-		p.alcohol {
-			position: absolute;
-			top: -12px;
-			right: 0;
-			z-index: 0;
-			transform: translateY(-100%);
-			text-align: right;
-		}
+		border-radius: 1rem;
 	}
 </style>

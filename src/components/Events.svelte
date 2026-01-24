@@ -44,7 +44,7 @@
 </script>
 
 <div class="c" class:visible>
-	<h3>Events</h3>
+	<h2>Events</h2>
 	<ul>
 		{#each events as { what, where, when, link, image }}
 			<li>
@@ -96,7 +96,7 @@
 		margin: 16px auto;
 	}
 
-	h3 {
+	h2 {
 		text-align: center;
 	}
 

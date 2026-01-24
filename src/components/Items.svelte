@@ -87,7 +87,7 @@
 
 	.header .name {
 		background: var(--color-fg-black);
-		color: var(--color-fg-light);
+		color: var(--color-fg-regular);
 		padding: 0.25em;
 		border-radius: 0.25em;
 	}
@@ -174,6 +174,7 @@
 		margin: 0 0.5em;
 		border-bottom: 0.25vw dotted var(--color-fg-dark);
 		opacity: 0.75;
+		transform: translateY(-0.25em);
 	}
 
 	.web .inner {
@@ -186,6 +187,7 @@
 		flex-direction: column;
 		justify-content: flex-start;
 		align-items: stretch;
+		margin-bottom: calc(var(--scale-name) * var(--padding) * 1);
 	}
 
 	.web .top {
@@ -199,15 +201,15 @@
 	}
 
 	.web .header .name {
-		border-radius: 0;
+		border-radius: 0.5rem;
 	}
 
 	.web .detail {
 		margin: 0;
-		margin-top: calc(var(--padding) * 0.5);
-		margin-bottom: calc(var(--padding) * 0.25);
-		margin-right: calc(var(--padding) * 2);
-		text-align: left;
+	}
+
+	.web .dots {
+		border-bottom: 2px dotted var(--color-fg-dark);
 	}
 
 	.web .note {
@@ -229,8 +231,4 @@
 	.web .price span.value {
 		color: var(--color-fg-dark);
 	}
-
-	/* :global(.web .price span) {
-		margin-top: calc(var(--padding) * 0.5);
-	} */
 </style>

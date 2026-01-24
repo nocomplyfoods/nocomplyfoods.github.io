@@ -1,5 +1,5 @@
 <div class="phone">
-	<h3>Phone</h3>
+	<h2>Phone</h2>
 	<p>(413) 645-3143</p>
 </div>
 

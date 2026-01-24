@@ -50,68 +50,60 @@
 	});
 </script>
 
-{#if hours}
-	<div class="info">
-		<div class="hours">
-			<h3>Hours</h3>
-			<ul>
-				{#each hours as { day, time, service }}
-					<li>
-						<span class="day">{day}:</span><span class="time">{time}</span><span
-							class="service">{service}</span
-						>
-					</li>
-				{/each}
-			</ul>
+<div class="c">
+	<h2>Hours</h2>
+	<div class="grid">
+		<div class="meal brunch">
+			<h3>Brunch</h3>
+			<p>Sat: 11 - 3</p>
+			<p>Sun: 10 - 2</p>
+		</div>
+		<div class="meal dinner">
+			<h3>Dinner</h3>
+			<p>Wed - Sat</p>
+			<p>5 - 9</p>
 		</div>
 	</div>
-{/if}
+</div>
 
 <style>
-	div.info {
-		padding: 16px;
-		margin-top: 32px;
+	.grid {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 1rem;
+		justify-items: center;
+		width: fit-content;
+		margin: 2rem auto;
+		position: relative;
 	}
 
-	ul {
-		list-style-type: none;
-		margin: 0;
-		padding: 0;
-		margin-top: 8px;
+	.meal {
+		position: relative;
+		padding: 0 1rem;
+		width: 100%;
 	}
 
-	li {
+	.meal:before {
+		content: "";
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: white;
+		opacity: 0.25;
+		z-index: 0;
+		border-radius: 1rem;
+	}
+
+	.meal p {
 		text-align: center;
 		text-transform: uppercase;
+		position: relative;
+		margin: 0.5rem auto;
 	}
 
-	span {
-		margin-left: 0.5em;
-	}
-
-	span:first-of-type {
-		margin-left: 0;
-	}
-
-	h3 {
-		text-align: center;
-	}
-
-	@media only screen and (min-width: 640px) {
-		div.info {
-			position: absolute;
-			top: 0;
-			right: 0;
-			text-align: right;
-			margin-top: 0;
-		}
-
-		h3 {
-			text-align: right;
-		}
-
-		li {
-			text-align: right;
-		}
+	.meal h3 {
+		position: relative;
 	}
 </style>

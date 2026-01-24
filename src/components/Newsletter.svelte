@@ -1,11 +1,11 @@
-<div>
-	<h3>
+<div class="c">
+	<h2>
 		<img
 			src="assets/images/koolaid.png"
 			alt="skateboarder"
 			aria="hidden"
 		/>Newsletter
-	</h3>
+	</h2>
 	<p>
 		Join our newsletter to stay up to date on special events and happenings.
 	</p>
@@ -21,12 +21,11 @@
 </div>
 
 <style>
-	div {
-		margin-top: 154px;
+	.c {
+		margin-top: 8rem;
 	}
 
-	h3 {
-		text-align: center;
+	h2 {
 		position: relative;
 	}
 
@@ -34,24 +33,24 @@
 		position: absolute;
 		bottom: 0;
 		left: 50%;
-		width: 128px;
-		transform: translate(-135%, 0);
+		width: 6rem;
+		transform: translate(-175%, 0);
 	}
 
 	p {
 		text-align: center;
 		max-width: 25em;
-		margin: 16px auto;
 	}
 
 	p.join {
 		text-align: center;
-		margin: 32px auto;
+		margin: 2rem auto;
 	}
 
 	@media only screen and (min-width: 640px) {
 		img {
-			transform: translate(-150%, 0);
+			width: 8rem;
+			transform: translate(-200%, 0);
 		}
 	}
 </style>

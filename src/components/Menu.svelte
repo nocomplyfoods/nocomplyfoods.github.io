@@ -67,7 +67,9 @@
 
 		// alternatively, bump down in size if the names/details are long
 		if (!web && maxNameLen > 30) scaleName -= 0.05;
+		if (!web && maxNameLen > 35) scaleName -= 0.075;
 		if (!web && maxDetailLen > 50) scaleDetail -= 0.05;
+		if (!web && maxDetailLen > 55) scaleDetail -= 0.075;
 
 		// scale down drinks menus more?
 		scaleName = web ? 1 : Math.max(scaleName, drinks ? 0.6 : 0.7);
@@ -87,7 +89,7 @@
 	</section>
 
 	{#if !web}
-		<section class="allergy">
+		<section class="warning">
 			{#if drinks}
 				<p>We are an alcohol free restaurant.</p>
 			{:else}
@@ -126,7 +128,8 @@
 		--fs-small: 2.15vw;
 		--padding: 2vw;
 		--color-fg-lighter: var(--color-pink-lighter);
-		--color-fg-light: var(--color-pink);
+		--color-fg-light: var(--color-pink-light);
+		--color-fg-regular: var(--color-pink);
 		--color-fg-medium: var(--color-pink-medium);
 		--color-fg-black: var(--color-pink-black);
 		--color-fg-dark: var(--color-pink-dark);
@@ -143,18 +146,18 @@
 	}
 
 	div.web {
-		--fs-big: clamp(16px, 1.5vw, 24px);
-		--fs-small: clamp(14px, 1.25vw, 20px);
+		--fs-big: clamp(20px, 2vw, 26px);
+		--fs-small: clamp(16px, 1.5vw, 22px);
 		--padding: 16px;
-		/* --font-family: var(--mono); */
 		width: auto;
 		height: auto;
 		background: transparent;
 	}
 
 	div.drinks {
-		--color-fg-lighter: var(--color-pink-lighter);
-		--color-fg-light: var(--color-yellow);
+		--color-fg-lighter: var(--color-yellow-lighter);
+		--color-fg-light: var(--color-yellow-light);
+		--color-fg-regular: var(--color-yellow);
 		--color-fg-medium: var(--color-yellow-medium);
 		--color-fg-dark: var(--color-yellow-dark);
 		--color-fg-black: var(--color-yellow-black);
@@ -186,11 +189,11 @@
 	}
 
 	.items:before {
-		background-color: var(--color-pink-lighter);
+		background-color: var(--color-pink-light);
 	}
 
 	.drinks .items:before {
-		background-color: var(--color-yellow-lighter);
+		background-color: var(--color-yellow-light);
 	}
 
 	.web section:before {
@@ -204,7 +207,7 @@
 		flex: 1;
 	}
 
-	.allergy {
+	.warning {
 		flex: 0;
 		position: absolute;
 		bottom: 0.75em;
@@ -214,8 +217,8 @@
 		padding: 0;
 	}
 
-	.allergy p {
-		font-size: 1.62vw;
+	.warning p {
+		font-size: 1.42vw;
 		line-height: 1;
 		margin: 0;
 		text-align: center;
