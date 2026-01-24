@@ -1,4 +1,5 @@
 <script>
+	import { onMount } from "svelte";
 	import Hours from "$components/Hours.svelte";
 	import Phone from "$components/Phone.svelte";
 	import WebsiteMenu from "$components/WebsiteMenu.svelte";
@@ -6,7 +7,39 @@
 	import Events from "$components/Events.svelte";
 	import Instagram from "$components/Instagram.svelte";
 	import Footer from "$components/Footer.svelte";
+	import loadMenu from "$utils/loadMenu.js";
+
+	let err = "";
 	let message = "";
+	let updated = "";
+	let brunch = [];
+	let dinner = [];
+	let drinks = [];
+
+	onMount(async () => {
+		try {
+			const { data, error } = await loadMenu();
+			console.log(data);
+			if (error) {
+				console.log(error);
+				err = true;
+			} else {
+				if (data?.items) {
+					updated = data.updated;
+					brunch = data.items.filter((d) => d.service === "brunch");
+					dinner = data.items.filter((d) => d.service === "dinner");
+					drinks = data.items.filter((d) => d.service === "drinks");
+				} else {
+					err = true;
+				}
+			}
+			if (data && data.custom)
+				message = data.custom?.find((d) => d.key === "message")?.value || "";
+		} catch (error) {
+			console.log(error?.message);
+			err = true;
+		}
+	});
 </script>
 
 <div class="c" class:has-message={!!message}>
@@ -30,7 +63,7 @@
 	</section>
 
 	<section id="menu">
-		<WebsiteMenu></WebsiteMenu>
+		<WebsiteMenu {updated} {err} {brunch} {dinner} {drinks}></WebsiteMenu>
 	</section>
 
 	<section id="newsletter">

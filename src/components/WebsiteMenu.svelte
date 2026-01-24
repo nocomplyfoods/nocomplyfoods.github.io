@@ -1,19 +1,21 @@
 <script>
-	import { onMount } from "svelte";
 	import { timeFormat } from "d3";
 	import loadMenu from "$utils/loadMenu.js";
 	import Menu from "$components/Menu.svelte";
 
-	let updated;
-	let error;
-	let brunch = [];
-	let dinner = [];
-	let drinks = [];
-	let items = [];
-	let active;
+	export let updated;
+	export let err;
+	export let brunch = [];
+	export let dinner = [];
+	export let drinks = [];
+	export let items = [];
+	export let active;
 
 	$: visible = !!updated;
 	$: dateDisplay = visible ? timeFormat("%B %e")(new Date(updated)) : "";
+	$: message = err
+		? "menu unavailable. please check back later."
+		: "loading menu...";
 
 	function toggle(a) {
 		active = a;
@@ -22,33 +24,21 @@
 		else if (a === "drinks") items = drinks;
 	}
 
-	onMount(async () => {
-		try {
-			const { data, error } = await loadMenu();
-			if (data?.items) {
-				updated = data.updated;
-				brunch = data.items.filter((d) => d.service === "brunch");
-				dinner = data.items.filter((d) => d.service === "dinner");
-				drinks = data.items.filter((d) => d.service === "drinks");
-
-				const hours = new Date().getHours();
-				const isBrunch = hours < 15;
-				if (isBrunch && brunch.length) toggle("brunch");
-				else if (!isBrunch && dinner.length) toggle("dinner");
-				else if (brunch.length) toggle("brunch");
-				else if (dinner.length) toggle("dinner");
-			} else {
-				// TODO
-				throw new Error("no data");
-			}
-		} catch (err) {
-			error = err?.message;
-		}
-	});
+	$: {
+		const hours = new Date().getHours();
+		const isBrunch = hours < 15;
+		if (isBrunch && brunch.length) toggle("brunch");
+		else if (!isBrunch && dinner.length) toggle("dinner");
+		else if (brunch.length) toggle("brunch");
+		else if (dinner.length) toggle("dinner");
+	}
 </script>
 
-<div class="menu" class:visible class:error={!!error}>
-	{#if visible}
+<div class="c">
+	{#if !visible}
+		<p class="msg"><small>{message}</small></p>
+	{/if}
+	<div class="menu" class:visible class:err>
 		<p class="alcohol"><small>alcohol-free restaurant</small></p>
 		<div class="ui">
 			<div class="buttons">
@@ -75,11 +65,11 @@
 
 		<img src="assets/images/keanu.png" alt="keanu eating" aria="hidden" />
 
-		<div class="c">
+		<div class="wrapper">
 			<Menu web={true} {items}></Menu>
 		</div>
-		{#if dateDisplay}<time><small>updated on {dateDisplay}</small></time>{/if}
-	{/if}
+		{#if dateDisplay}<p><small>updated on {dateDisplay}</small></p>{/if}
+	</div>
 </div>
 
 <style>
@@ -96,10 +86,6 @@
 
 	.visible {
 		opacity: 1;
-	}
-
-	.error {
-		display: none;
 	}
 
 	.buttons {
@@ -131,11 +117,11 @@
 		opacity: 1;
 	}
 
-	time {
+	p {
 		font-family: var(--mono);
 		font-weight: 700;
 		text-transform: uppercase;
-		margin: 0;
+		margin: 0.5rem auto;
 		opacity: 0.65;
 		text-align: center;
 		width: 100%;
@@ -153,17 +139,7 @@
 		transform: translate(-8px, -80%);
 	}
 
-	p.alcohol {
-		text-align: center;
-		line-height: 1;
-		text-transform: uppercase;
-		opacity: 0.65;
-		font-weight: 700;
-		letter-spacing: 0;
-		margin: 1rem auto;
-	}
-
-	.c {
+	.wrapper {
 		position: relative;
 		margin: 0;
 		padding: 0;
