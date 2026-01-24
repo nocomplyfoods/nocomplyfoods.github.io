@@ -5,9 +5,7 @@
 
 <style>
 	div {
-		padding: 16px;
-		margin-bottom: 0;
-		margin-top: 32px;
+		padding: 0 1rem;
 		text-align: center;
 	}
 </style>

@@ -32,7 +32,7 @@
 
 				// if (minutes === 0) menuComponent.egg();
 
-				if (!isFirstLoad && (hours === 10 || hours === 16) && minutes === 0)
+				if (!isFirstLoad && (hours === 9 || hours === 16) && minutes === 0)
 					window.location.reload();
 			} else {
 				// TODO

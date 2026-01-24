@@ -6,10 +6,11 @@
 	import Events from "$components/Events.svelte";
 	import Instagram from "$components/Instagram.svelte";
 	import Footer from "$components/Footer.svelte";
-	// import ig from "$svg/instagram.svg";
+	let message = "";
 </script>
 
-<div class="c">
+<div class="c" class:has-message={!!message}>
+	{#if message}<p class="message">{@html message}</p>{/if}
 	<h1>No<br />Comply<br />Foods</h1>
 
 	<section id="location">
@@ -54,6 +55,24 @@
 <style>
 	.c {
 		padding: 2rem 1rem;
+	}
+
+	.c.has-message {
+		padding-top: 4rem;
+	}
+
+	p.message {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		padding: 1rem;
+		margin: 0;
+		text-align: center;
+		font-size: 1rem;
+		background-color: var(--color-fg);
+		color: var(--color-bg);
+		z-index: var(--z-top);
 	}
 
 	#location {

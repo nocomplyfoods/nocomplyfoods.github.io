@@ -44,7 +44,7 @@
 
 	p.join {
 		text-align: center;
-		margin: 2rem auto;
+		margin: 0 auto;
 	}
 
 	@media only screen and (min-width: 640px) {

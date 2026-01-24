@@ -153,6 +153,7 @@ button, a[role="button"] {
 	text-transform: uppercase;
 	font-family: var(--sans);
 	border-radius: 0.5rem;
+	display: inline-block;
 }
 
 a {
