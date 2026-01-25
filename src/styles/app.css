@@ -135,10 +135,9 @@ h6 {
 }
 
 p, ul, button, input, select, textarea, time, a[role="button"] {
-	font-size: clamp(20px, 1.5vw, 28px);
+	font-size: clamp(18px, 1.5vw, 28px);
 	font-family: var(--mono);
 	font-weight: 500;
-	letter-spacing: 0.05em;
 }
 
 p { 

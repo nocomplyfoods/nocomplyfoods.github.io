@@ -76,8 +76,8 @@
 	.menu {
 		--border: 8px;
 		position: relative;
-		max-width: 720px;
-		min-height: 420px;
+		max-width: 640px;
+		min-height: 320px;
 		margin: 0 auto;
 		width: 100%;
 		opacity: 0;

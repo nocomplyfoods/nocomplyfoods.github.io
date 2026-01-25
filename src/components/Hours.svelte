@@ -73,7 +73,7 @@
 		gap: 1rem;
 		justify-items: center;
 		width: fit-content;
-		margin: 2rem auto;
+		margin: 1rem auto;
 		position: relative;
 	}
 

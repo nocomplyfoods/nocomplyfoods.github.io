@@ -111,7 +111,7 @@
 	}
 
 	#location {
-		margin-top: 2rem;
+		margin-top: 1rem;
 	}
 
 	#location p {
@@ -121,6 +121,16 @@
 
 	section {
 		width: 100%;
-		margin: 4rem auto;
+		margin: 3rem auto;
+	}
+
+	@media (min-width: 600px) {
+		section {
+			margin: 4rem auto;
+		}
+
+		#location {
+			margin-top: 2rem;
+		}
 	}
 </style>
