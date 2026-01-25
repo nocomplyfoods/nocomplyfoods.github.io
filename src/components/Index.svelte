@@ -43,7 +43,9 @@
 </script>
 
 <div class="c" class:has-message={!!message}>
-	{#if message}<p class="message">{@html message}</p>{/if}
+	{#if message}<p class="message">
+			<small>{@html message}</small>
+		</p>{/if}
 	<h1>No<br />Comply<br />Foods</h1>
 
 	<section id="location">
@@ -102,10 +104,10 @@
 		padding: 1rem;
 		margin: 0;
 		text-align: center;
-		font-size: 1rem;
 		background-color: var(--color-fg);
 		color: var(--color-bg);
 		z-index: var(--z-top);
+		font-weight: 700;
 	}
 
 	#location {

@@ -102,7 +102,7 @@
 
 	.note .name {
 		font-style: italic;
-		font-weight: normal;
+		font-weight: 400;
 	}
 
 	.name:empty {
