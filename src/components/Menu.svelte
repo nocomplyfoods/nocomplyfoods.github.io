@@ -73,7 +73,7 @@
 
 		// scale down drinks menus more?
 		scaleName = web ? 1 : Math.max(scaleName, drinks ? 0.6 : 0.7);
-		scaleDetail = web ? 1 : Math.max(scaleDetail, drinks ? 0.5 : 0.65);
+		scaleDetail = web ? 1 : Math.max(scaleDetail, drinks ? 0.6 : 0.65);
 	}
 
 	$: prepareMenu(items);
