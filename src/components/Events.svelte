@@ -48,20 +48,20 @@
 	<ul>
 		{#each events as { what, where, when, link, image }}
 			<li>
-				<img src={image} alt={what} />
+				<div class="img-container"><img src={image} alt={what} /></div>
 
 				<div class="info">
 					<div>
-						<h4>What</h4>
+						<h3>What</h3>
 						<p>{what}</p>
 					</div>
 					<div>
-						<h4>Where</h4>
+						<h3>Where</h3>
 						<p>{where}</p>
 					</div>
 					{#if when}
 						<div>
-							<h4>When</h4>
+							<h3>When</h3>
 							<p>
 								{@html when}
 							</p>
@@ -93,7 +93,7 @@
 
 	p {
 		text-align: left;
-		margin: 16px auto;
+		margin: 1rem auto;
 	}
 
 	h2 {
@@ -103,31 +103,34 @@
 	ul {
 		margin: 0;
 		padding: 0;
-		margin-top: 16px;
+		margin-top: 1rem;
 	}
 
 	li {
 		list-style-type: none;
 		display: flex;
 		flex-direction: column;
-		max-width: 720px;
-		margin: 32px auto;
+		max-width: 400px;
+		margin: 1rem auto 2rem auto;
 		align-items: flex-start;
 		justify-content: center;
 	}
 
-	img,
-	.info {
+	.img-container {
+		display: block;
 		width: 100%;
-		margin: 0 8px;
+		max-width: 400px;
+		background: rgba(255, 255, 255, 0.25);
+		border-radius: 1rem;
+		margin: 1rem auto;
+		padding: 1.5em;
 	}
 
 	img {
 		display: block;
 		width: 100%;
-		border: 8px solid var(--color-fg);
-		margin: 16px auto;
-		max-width: 420px;
+		border-radius: 0.75rem;
+		overflow: hidden;
 	}
 
 	.info {
@@ -138,10 +141,10 @@
 	}
 
 	.info div {
-		margin-bottom: 16px;
+		margin-bottom: 1rem;
 	}
 
-	h4 {
+	h3 {
 		font-family: var(--sans);
 		line-height: 1;
 		margin: 0;
@@ -151,39 +154,13 @@
 
 	p {
 		margin: 0;
+		text-align: center;
+		line-height: 1.25;
 	}
 
 	a {
 		display: inline-flex;
 		align-items: center;
 		line-height: 1;
-	}
-
-	a span {
-		margin-left: 8px;
-	}
-
-	@media only screen and (min-width: 640px) {
-		ul {
-			margin-top: 32px;
-		}
-
-		li {
-			flex-direction: row;
-		}
-
-		img {
-			width: 50%;
-			margin: 0 8px 0 0;
-		}
-
-		.info {
-			width: 50%;
-			display: block;
-		}
-
-		h4 {
-			text-align: left;
-		}
 	}
 </style>
