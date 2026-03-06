@@ -31,13 +31,12 @@
 
 	function prepareMenu(items) {
 		data = items
-			.filter(
-				(d) => d.type === "item" || d.type === "header" || d.type === "note"
-			)
+			.filter((d) => ["item", "header", "note", "dessert"].includes(d.type))
 			.map((d) => ({
 				...d,
 				header: d.type === "header",
 				note: d.type === "note",
+				dessert: d.type === "dessert",
 				price: d.price?.replace(
 					" per person",
 					"<span class=per>per person</span>"
@@ -85,7 +84,7 @@
 	style="--scale-name: {scaleName}; --scale-detail: {scaleDetail};"
 >
 	<section class="items">
-		<Items {web} {data}></Items>
+		<Items {web} {data} {drinks}></Items>
 	</section>
 
 	{#if !web}

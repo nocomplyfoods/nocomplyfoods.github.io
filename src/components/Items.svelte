@@ -4,21 +4,25 @@
 	import convertApostrophe from "$utils/convertApostrophe.js";
 	export let data;
 	export let web;
+	export let drinks;
 
 	let itemHeight = 0;
 
 	$: headers = data.filter((d) => (web ? false : d.header));
-	$: items = data.filter((d) => (web ? true : !d.header));
-
-	// $: console.log(drinks);
-	// $: console.log(headers);
+	$: items = data.filter((d) => (web ? !d.dessert : !d.header && !d.dessert));
+	$: desserts = data.filter((d) => d.dessert);
 
 	function clean(text) {
 		return convertApostrophe(convertToCurly(text.trim()));
 	}
 </script>
 
-<div class="items" class:web style="--item-height: {itemHeight}px;">
+<div
+	class="items"
+	class:drinks
+	class:web
+	style="--item-height: {itemHeight}px;"
+>
 	{#each headers as { name }, i}
 		<div class="item header" bind:clientHeight={itemHeight}>
 			<p class="name">{clean(name)}</p>
@@ -26,8 +30,14 @@
 	{/each}
 
 	<div class="inner">
-		{#each items as { name, detail, price, note, header }, i}
-			<div class="item" class:header class:note class:noDetail={!detail}>
+		{#each items as { name, detail, price, note, header, dessert }, i}
+			<div
+				class="item"
+				class:header
+				class:note
+				class:dessert
+				class:noDetail={!detail}
+			>
 				<div class="top">
 					<p class="name">{clean(name)}</p>
 					{#if price}
@@ -45,6 +55,35 @@
 			</div>
 		{/each}
 	</div>
+
+	{#if desserts.length}
+		<div class="inner inner-desserts">
+			{#each desserts as { name, detail, price, note, header, dessert }, i}
+				<div
+					class="item"
+					class:header
+					class:note
+					class:dessert
+					class:noDetail={!detail}
+				>
+					<div class="top">
+						<p class="name">{clean(name)}</p>
+						{#if price}
+							<p class="price">
+								<span class="dots"></span><span
+									class="value {web ? '' : 'text-outline'}"
+									>{@html price?.trim()}</span
+								>
+							</p>
+						{/if}
+					</div>
+					<div class="bottom">
+						<p class="detail">{@html clean(detail) || "&nbsp;"}</p>
+					</div>
+				</div>
+			{/each}
+		</div>
+	{/if}
 </div>
 
 <style>
@@ -52,10 +91,13 @@
 		position: relative;
 	}
 
+	/* left right */
 	.inner {
 		margin-top: calc(var(--item-height) * 1.25);
-		column-count: 2;
-		column-gap: calc(var(--padding) * 2);
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 0 calc(var(--padding) * 2);
+		align-items: start;
 	}
 
 	p {
@@ -179,8 +221,9 @@
 
 	.web .inner {
 		column-count: 1;
+		grid-template-columns: 1fr;
 		column-gap: 0;
-		margin-top: 0.5em;
+		margin-top: 0;
 	}
 
 	.web .item {
@@ -198,6 +241,10 @@
 	.web .name {
 		flex: none;
 		margin-right: 0;
+	}
+
+	.web .header {
+		margin-top: calc(var(--padding) * 0.5);
 	}
 
 	.web .header .name {
@@ -230,5 +277,32 @@
 
 	.web .price span.value {
 		color: var(--color-fg-dark);
+	}
+
+	.inner-desserts {
+		padding-top: calc(var(--padding) * 0.5);
+		margin-top: calc(var(--item-height) * 0.5);
+		background: var(--color-fg-lighter);
+		padding: calc(var(--padding) * 0.5);
+		padding-bottom: 0;
+		border-radius: 0.5rem;
+		width: calc(100% + var(--padding));
+		transform: translateX(calc(var(--padding) * -0.5));
+	}
+
+	.web .inner-desserts {
+		background: none;
+		padding: 0;
+		border-radius: 0;
+		width: 100%;
+		transform: translateX(0);
+	}
+
+	.dessert:nth-of-type(odd) {
+		/* padding-right: calc(var(--padding) * 0.5); */
+	}
+
+	.web .dessert:nth-of-type(odd) {
+		padding-left: 0;
 	}
 </style>
