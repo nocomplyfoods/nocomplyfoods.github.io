@@ -297,7 +297,6 @@
 		margin-top: calc(var(--item-height) * 0.5);
 		background: var(--color-fg-lighter);
 		padding: calc(var(--padding) * 0.5);
-		padding-bottom: 0;
 		border-radius: 0.5rem;
 		width: calc(100% + var(--padding));
 		transform: translateX(calc(var(--padding) * -0.5));
