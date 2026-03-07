@@ -10,6 +10,19 @@
 
 	$: headers = data.filter((d) => (web ? false : d.header));
 	$: items = data.filter((d) => (web ? !d.dessert : !d.header && !d.dessert));
+	// from 1,2,3,4,5,6 but we want 1,4,2,5,3,6
+	$: itemsOrdered =
+		web || drinks
+			? [...items]
+			: (() => {
+					const half = Math.ceil(items.length / 2);
+					const result = [];
+					for (let i = 0; i < half; i++) {
+						result.push(items[i]);
+						if (items[i + half] !== undefined) result.push(items[i + half]);
+					}
+					return result;
+				})();
 	$: desserts = data.filter((d) => d.dessert);
 
 	function clean(text) {
@@ -30,7 +43,7 @@
 	{/each}
 
 	<div class="inner">
-		{#each items as { name, detail, price, note, header, dessert }, i}
+		{#each itemsOrdered as { name, detail, price, note, header, dessert }, i}
 			<div
 				class="item"
 				class:header
