@@ -28,7 +28,7 @@
 				// const hours = 16;
 				// brunch ends at 3pm, dinner starts at 5pm
 				// show dinner from 3:30pm-12pm
-				const target = 12;
+				const target = 15;
 				const isBrunch = hours < target || (hours === target && minutes < 30);
 				const service = isBrunch ? "brunch" : "dinner";
 				items = data.items.filter((d) => d.name && d.service === service);
