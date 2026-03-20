@@ -11,10 +11,11 @@
 	$: headers = data.filter((d) => (web ? false : d.header));
 	$: items = data.filter((d) => (web ? !d.dessert : !d.header && !d.dessert));
 	// from 1,2,3,4,5,6 but we want 1,4,2,5,3,6
-	$: itemsOrdered =
-		web || drinks
-			? [...items]
-			: (() => {
+	$: itemsOrdered = web
+		? [...items]
+		: (() => {
+				if (!drinks) {
+					// Non-drinks: simple column-first interleave (1,2,3,4,5,6 → 1,4,2,5,3,6)
 					const half = Math.ceil(items.length / 2);
 					const result = [];
 					for (let i = 0; i < half; i++) {
@@ -22,7 +23,42 @@
 						if (items[i + half] !== undefined) result.push(items[i + half]);
 					}
 					return result;
-				})();
+				}
+
+				// Drinks: split items into groups by header position in the original data.
+				// Headers divide `data` into sections — items after header 1 go LEFT,
+				// items after header 2 go RIGHT.
+				const groups = []; // array of arrays, one per header section
+				let current = [];
+				for (const d of data) {
+					if (d.header) {
+						// Each header starts a new group
+						current = [];
+						groups.push(current);
+					} else if (!d.dessert) {
+						// Non-header, non-dessert items go into the current group
+						current.push(d);
+					}
+				}
+
+				const left = groups[0] || []; // items under first header
+				const right = groups[1] || []; // items under second header
+				const maxLen = Math.max(left.length, right.length);
+
+				// Interleave row by row: left[0], right[0], left[1], right[1], ...
+				// If one column is shorter, insert a placeholder { empty: true }
+				// so the grid cell is occupied but can be collapsed via CSS.
+				const result = [];
+				for (let i = 0; i < maxLen; i++) {
+					result.push(
+						left[i] || { empty: true, name: "", detail: "", price: "" }
+					);
+					result.push(
+						right[i] || { empty: true, name: "", detail: "", price: "" }
+					);
+				}
+				return result;
+			})();
 	$: desserts = data.filter((d) => d.dessert);
 
 	function clean(text) {
@@ -43,13 +79,14 @@
 	{/each}
 
 	<div class="inner">
-		{#each itemsOrdered as { name, detail, price, note, header, dessert }, i}
+		{#each itemsOrdered as { name, detail, price, note, header, dessert, empty }, i}
 			<div
 				class="item"
 				class:header
 				class:note
 				class:dessert
 				class:noDetail={!detail}
+				class:empty
 			>
 				<div class="top">
 					<p class="name">{clean(name)}</p>
@@ -184,6 +221,15 @@
 		flex: ;
 	} */
 
+	/* Placeholder items that pad the shorter column — collapse visually
+	   but still occupy a grid cell so the other column stays aligned */
+	.item.empty {
+		visibility: hidden;
+		margin: 0;
+		height: 0;
+		overflow: hidden;
+	}
+
 	.item:last-of-type {
 		margin-bottom: 0;
 	}
@@ -310,11 +356,11 @@
 		transform: translateX(0);
 	}
 
-	.dessert:nth-of-type(odd) {
-		/* padding-right: calc(var(--padding) * 0.5); */
-	}
-
 	.web .dessert:nth-of-type(odd) {
 		padding-left: 0;
+	}
+
+	.dessert.noDetail .bottom p {
+		display: none;
 	}
 </style>
