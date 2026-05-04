@@ -7,6 +7,7 @@
 	import Events from "$components/Events.svelte";
 	import Instagram from "$components/Instagram.svelte";
 	import Footer from "$components/Footer.svelte";
+	import Merch from "$components/Merch.svelte";
 	import loadMenu from "$utils/loadMenu.js";
 
 	let err = "";
@@ -72,6 +73,10 @@
 		<Newsletter></Newsletter>
 	</section>
 
+	<section id="merch">
+		<Merch></Merch>
+	</section>
+
 	<section id="events">
 		<Events></Events>
 	</section>
@@ -126,7 +131,7 @@
 
 	@media (min-width: 600px) {
 		section {
-			margin: 4rem auto;
+			margin: 5rem auto;
 		}
 
 		#location {
